@@ -16,6 +16,7 @@
 @endif
 
 <hr/>
+
 <a href="{{ route('unidad.create')}}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Nuevo</a>
 <div class="table-responsive">
 <table class="table table-hover table-striped table-bordered table-condensed">
@@ -35,7 +36,7 @@
     <td>{{$unidad->id_unidad_medida}}</td>
     <td>{{$unidad->nombre_unidadmedida}}</td>
     
-	<td>
+	<td class="col-md-3">
 	    <a class="btn btn-default btn-sm" href="{{route('delete_unidad',$unidad->id_unidad_medida)}}"><span class="glyphicon glyphicon-trash"></span>Eliminar</a>
 	    <a class="btn btn-default btn-sm" href="{{route('unidad.show',$unidad->id_unidad_medida)}}"><span class="glyphicon glyphicon-th-large"></span>Detalle</a>
 	    <a class="btn btn-default btn-sm" href="{{route('unidad.edit',$unidad->id_unidad_medida)}}"><span class="glyphicon glyphicon-pencil"></span>Actualizar</a>
@@ -49,7 +50,6 @@
 </table>
 </div>
 </div>
-
 
 @endsection
 
