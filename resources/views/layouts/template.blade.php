@@ -11,10 +11,10 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">   
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.min.css')}}">
+    <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
+    <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.css')}}">
 
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href=" {{ asset('bootstrap/css/bootstrap.css') }}">
@@ -29,26 +29,32 @@
   
   <body class="hold-transition skin-blue sidebar-mini">
    
-    <div class="wrapper" >
+    <div class="wrapper">
       <header class="main-header">
 
-        <!-- Logo -->
-        <a href="#" class="logo">                
+        <!-- Logo wrapper-->
+		        <!-- Header Navbar: style can be found in header.less -->
+                 
+        
+		 <a href="#" class="logo navbar-fixed-top">                
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg"><b>SIGinventario</b></span>
-        </a>
-
-        <!-- Header Navbar: style can be found in header.less -->
-
+		  
+         </a>
         <!-- barra titulo-->
-        <nav class="navbar navbar-static-top" role="navigation">
-          <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+		
+         <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+		 
+		 <!-- Sidebar toggle button-->
+		 
+         
+		 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
+		           
           <!-- Navbar Right Menu (menu derecho de mensajeria no estan necesario) -->
           <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav">
              
            
               <!-- User Account: style can be found in dropdown.less -->
@@ -69,10 +75,13 @@
              
             </ul>
           </div>
+		  
         </nav>
       </header>
       
       <!-- Left side column. contains the logo and sidebar -->
+	  
+	  
       <aside class="main-sidebar" >
         <!-- sidebar: style can be found in sidebar.less -->
 
@@ -115,22 +124,38 @@
         </section>
         <!-- /.sidebar -->
       </aside>
+	  
 
-      <!-- Content Wrapper. Contains page content -->
-    
-      <div class="content-wrapper">
-        <div class="container" id="contenido">          
-          @include('flash::message')        
+      <!-- Content Wrapper. Contains page content content-wrapper-->
+	  <div class="content-wrapper">
+	  <div class="container col-md-12">
+      <div class="col-md-12">
+        
+        @if (session()->has('flash_notification.message'))
+            <div class="alert alert-{{ session('flash_notification.level') }}">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {!! session('flash_notification.message') !!}
+            </div>
+        @endif		
+              
           @yield('content')
-        </div>
-      </div> <!-- /.content-wrapper -->
-    </div> 
-        <nav class="navbar navbar-inverse navbar-fixed-bottom">
-          <footer class="main-footer">               
-                <strong>Copyright &copy; 2016 <a href="http://almsaeedstudio.com">DSI115_G08</a>.</strong> Todos los derechos reservados.              
-          </footer>
-        </nav>
+        
+       <!-- /.content-wrapper -->
+	    
 
+    </div>
+	 <footer class="main-footer">               
+                <strong>Copyright &copy; 2016 <a href="http://almsaeedstudio.com">DSI115_G08</a>.</strong> Todos los derechos reservados.              
+    </footer>   
+    </div>
+	    
+    </div>
+	
+    	
+        <!--<nav class="navbar navbar-inverse navbar-fixed-bottom">
+          
+        </nav> -->
+		
      
 
     </div><!-- ./wrapper -->

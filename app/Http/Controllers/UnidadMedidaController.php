@@ -12,9 +12,8 @@ use sig\Models\UnidadMedida;
 class UnidadMedidaController extends Controller
 {
     public function index(){
-		$unidades = DB::table('unidad_medida')->orderBy('nombre_unidadmedida','asc')->get();
-		
-		return view('unidadmedida.index')->with('unidades',$unidades);
+		$unidades = UnidadMedida::orderBy('nombre_unidadmedida','asc')->get();		
+		return view('unidadmedida.index',['unidades'=>$unidades]);
 	}
 	
 	public function create()
@@ -25,29 +24,27 @@ class UnidadMedidaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-		    'nombre_unidadmedida' => 'required|regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:unidad_medida,nombre_unidadmedida',
-			
+		    'nombre_unidadmedida' => 'required|regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:unidad_medida,nombre_unidadmedida',			
 		]);
 		
 		UnidadMedida::create([
 		           'nombre_unidadmedida' =>$request->input('nombre_unidadmedida')
 		           ]);
-		        return redirect()->route('unidad.index')->with('success','Unidad de medida creado exitosamente');
+		flash('Unidad de medida guardada exitosamente','success');	   
+		return redirect()->route('unidad.index');
 	     
     }
 
-    public function show($id)
+    public function show($idUnidadMedida)
     {
-       $unidad = DB::table('unidad_medida')->where('id_unidad_medida',$id)->first();
-	   
-	   return view('unidadmedida.details')->with('unidad',$unidad);
-	}
-    
+       $unidad = UnidadMedida::findOrFail($idUnidadMedida);	   
+	   return view('unidadmedida.details',['unidad'=>$unidad]);
+	}    
  
-    public function edit($id)
+    public function edit($idUnidadMedida)
 	{
-       $unidad = DB::table('unidad_medida')->where('id_unidad_medida',$id)->first();
-	   return view('unidadmedida.edit')->with('unidad',$unidad); 
+       $unidad = UnidadMedida::findOrFail($idUnidadMedida);
+	   return view('unidadmedida.edit',['unidad'=>$unidad]); 
     }
 
     public function update(Request $request, $id)
@@ -60,26 +57,32 @@ class UnidadMedidaController extends Controller
 			$unidad ->update([
 			  'nombre_unidadmedida' => $request->input('nombre_unidadmedida')
 			  ]);
-		return redirect()->route('unidad.index')->with('success','Unidad de medida actualizado exitosamente');
-			
+	    flash('Unidad de medida actualizado exitosamente','success');
+		return redirect()->route('unidad.index');			
 		}else{
-			return redirect()->route('unidad.index')->with('error','Error al actualizar unidad de medida');
+			flash('Error: no se pudo actualizar la unidad de medida','danger');
+			return redirect()->route('unidad.index');
 		}
 				    
     }
     
-	public function delete($id){
-		$unidad = DB::table('unidad_medida')->where('id_unidad_medida',$id)->first();
-		
-	    return view('unidadmedida.delete')->with('unidad',$unidad);
-		
-		
-	}
+	public function delete($idUnidadMedida){
+			$unidad =UnidadMedida::findOrFail($idUnidadMedida);
+			return view('unidadmedida.delete',['unidad'=>$unidad]);
+		}
     
-    public function destroy($id)
+    public function destroy($idUnidadMedida)
     {
-        DB::table('unidad_medida')->where('id_unidad_medida',$id)->delete();
-		return redirect()->route('unidad.index')->with('success','Unidad de medida eliminada correctamente');
+        $unidad = UnidadMedida::findOrFail($idUnidadMedida);
+		if($unidad->articulo->count()>0){			
+			flash('Error: No puede eliminarse la unidad de medida porque esta siendo usada por articulos','danger');
+			return redirect()->back();
+		}else{
+			$unidad->delete();
+			flash('Unidad de medida eliminada exitosamente','success');
+		    return redirect()->route('unidad.index');
     }
 	
 }
+}
+

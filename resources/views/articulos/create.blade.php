@@ -1,27 +1,13 @@
 @extends('layouts.template')
 
 @section('content')
-<br/>
+
 <div class="col-md-offset-2">
 <h3>Nuevo Articulo</h3>
 </div>
+<hr/>      
 
-<hr/>
-      @if($error = Session::get('flash_message'))
-         <div class="alert alert-danger">
-         {{$error}}
-        </div>	
-@endif
-      @if($errors->any())
-           <div class="alert alert-danger">
-              @foreach($errors->all() as $error)
-                   <p>{{ $error }}</p>
-              @endforeach
-           </div>
-      @endif
-
-{!! Form::open(array('route' => 'articulo.store','class' => 'form-horizontal','method' => 'post')) !!}
-                
+{!! Form::open(array('route' => 'articulo.store','class' => 'form-horizontal','method' => 'post')) !!}                
         
             <div class="form-group">
                 {!!Form::label('Codigo', 'Codigo', array('class' =>'col-md-2 control-label' )) !!}
@@ -53,17 +39,14 @@
 				</select>
 				
 				</div>
-            </div>
-        
-        
-		
+            </div>        
+		<div class="form-group">
         <div class="col-md-offset-2 col-md-7">
                 <button type="submit" class="btn btn-primary">Guardar</button>
 				<a href="{{route('articulo.index')}}" class="btn btn-primary">Cancelar</a>
         </div>
+		</div>
     
 {!! Form::close() !!}
-
-
 
 @endsection

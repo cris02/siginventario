@@ -1,18 +1,11 @@
 @extends('layouts.template')
 
 @section('content')
-<br/>
+
 <div class="col-md-offset-2">
-<h3>Nuevo Especifico</h3>
+    <h3>Nuevo Especifico</h3>
 </div>
-<hr/>
-      @if($errors->any())
-           <div class="alert alert-danger">
-              @foreach($errors->all() as $error)
-                   <p>{{ $error }}</p>
-              @endforeach
-           </div>
-      @endif
+<hr/>      
 
 {!! Form::open(array('route' => 'especifico.store','class' => 'form-horizontal','method' => 'post')) !!}
        
@@ -43,9 +36,7 @@
 				<a href="{{ route('especifico.index')}}" class="btn btn-primary">Cancelar</a>
             </div>
 		</div>
-
     
 {!! Form::close() !!}
-
 
 @endsection
