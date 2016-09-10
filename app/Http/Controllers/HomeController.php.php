@@ -12,6 +12,6 @@ class HomeController.php extends Controller
      public function index()
     {
         	
-        return view('layouts\template');
+        return view('home');
     }
 }
