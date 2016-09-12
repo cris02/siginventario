@@ -11,15 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+
+Route::get('/', 'HomeController@index');
+
 
 Route::group(['middleware'=>['web']], function(){
 
-	Route::get('home', 'HomeController@index');
+Route::get('home', 'HomeController@index');
 
 Route:: resource('menu','Menu\MenuController');
+Route:: resource('articulo','Article\ArticleController');
+Route:: resource('proveedor','Article\ProviderController');
+
 
 });
 

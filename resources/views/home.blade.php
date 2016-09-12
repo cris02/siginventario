@@ -10,9 +10,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">BIENVENIDO/A.</div>
 
-                <div class="panel-body">
-                    Ingreso al SISTEMA correctamente!!!
+                <div class="panel-body">                
+                
+
                 </div>
+
             </div>
         </div>
     </div>

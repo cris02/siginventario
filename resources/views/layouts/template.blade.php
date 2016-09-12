@@ -284,7 +284,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i>Insertar Proveedor</a></li>  
+                <li><a href="{{url('menu/create')}}">
+                <i class="fa fa-circle-o text-aqua"></i>Insertar Proveedor</a></li>  
                 <li><a href="#"><i class="fa fa-circle-o text-aqua"></i>Editar Proveedor</a></li> 
                 <li><a href="#"><i class="fa fa-circle-o text-aqua"></i>Eliminar Proveedor</a></li> 
                 <li><a href="#"><i class="fa fa-circle-o text-aqua"></i>Lista de Proveedores</a></li>              
