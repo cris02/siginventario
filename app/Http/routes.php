@@ -21,6 +21,8 @@ Route::get('home', 'HomeController@index');
 
 Route:: resource('menu','Menu\MenuController');
 Route:: resource('articulo','Article\ArticleController');
+
+Route::post('proveedor/store', 'Article\ProviderController@store');
 Route:: resource('proveedor','Article\ProviderController');
 
 
