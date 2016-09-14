@@ -28,7 +28,7 @@
     <td class="info col-md-3">{{$p->direction}}</td>
     <td class="info col-md-2">{{$p->phone}}</td>
     <td class="info col-md-3">{{$p->seller}}</td>
-    <td><a href="{{url('proveedor.edit'),$p->id}}"><button type="button" class="btn btn-primary">Editar</button></a></td>    
+    <td><a href="{{route('proveedor.edit',$p->id)}}"><button type="button" class="btn btn-primary">Editar</button></a></td>    
     <td><button type="button" class="btn btn-danger">Eliminar</button></td>
 
   </tr>
