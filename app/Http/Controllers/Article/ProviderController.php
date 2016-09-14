@@ -63,7 +63,8 @@ class ProviderController extends Controller
      */
     public function edit($id)
     {
-       return view('Provider\actualizar');
+       $provider = Provider::FindOrFail($id);
+       return view('Provider.actualizar')->with('provider',$provider);
     }
 
     /**
@@ -75,7 +76,11 @@ class ProviderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $p = Provider::FindOrFail($id);
+       $input = $request->all();
+       $provider->fill($input)->save();
+
+       return redirect()->route('provider.index');
     }
 
     /**
