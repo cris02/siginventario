@@ -77,10 +77,10 @@ class ProviderController extends Controller
     public function update(Request $request, $id)
     {
        $p = Provider::FindOrFail($id);
-       $input = $request->all();
-       $provider->fill($input)->save();
+       
+       $p->update($request->all());
 
-       return redirect()->route('provider.index');
+       return redirect()->route('proveedor.index');
     }
 
     /**

@@ -48,9 +48,11 @@
                       </div>
                     </div>            
                   </div><!-- /.box-body -->
-                  <div class="box-footer">
+                  <div class="row">
+                   <div class="col-sm-offset-2">
                   	<a href="{{url('proveedor/index')}}"><button class="btn btn-default">Cancelar</button></a>
-                    <button type="submit" class="btn btn-info pull-right">Aceptar</button>
+                    <button type="submit" class="btn btn-info ">Aceptar</button>
+                    </div>
                   </div><!-- /.box-footer -->
                 </form>
               </div><!-- /.box -->

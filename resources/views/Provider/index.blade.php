@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container" style="margin-left: 25%">
 	<hr>
 		 <td><a href="{{url('proveedor/create')}}"><button type="button" class="btn btn-success col-md-6">Ingresar Nuevo Proveedor</button></a></td>
 	
