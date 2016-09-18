@@ -9,6 +9,8 @@ use sig\Http\Controllers\Controller;
 use sig\Models\Article\Provider;
 use DB;
 use Session;
+use sig\Http\Requests\Provider\ProviderCreateRequest;
+use sig\Http\Requests\Provider\ProviderUpdateRequest;
 
 class ProviderController extends Controller
 {
@@ -39,7 +41,7 @@ class ProviderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProviderCreateRequest $request)
     {
        Provider::create($request->all());
        Session::flash('save','Se ha guardado exitosamente!!!');
@@ -77,7 +79,7 @@ class ProviderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProviderUpdateRequest $request, $id)
     {
        $p = Provider::FindOrFail($id);       
        $p->update($request->all());

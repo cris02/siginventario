@@ -124,11 +124,14 @@
      
 
     </div><!-- ./wrapper -->
+     <!-- jQuery-->
      <script type="text/javascript" src="{{asset('plugins/jQuery/jQuery.js')}}"></script>
-    <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+        <!-- js de bootstrap-->
+     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
         <!-- AdminLTE App pone el foother al final de la pagina-->
-    <script src="{{asset('dist/js/app.min.js')}}"></script>  
-    <script type="text/javascript" src="{{asset('plugins/input-mask/jquery.inputmask.js')}}"></script>
+     <script src="{{asset('dist/js/app.min.js')}}"></script>  
+        <!-- para poner mascaras a los input-->
+     <script type="text/javascript" src="{{asset('plugins/input-mask/jquery.inputmask.js')}}"></script>
    
   </body>
 </html>

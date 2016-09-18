@@ -7,6 +7,9 @@
                 <div class="box-header with-border container">
                   <h3 class="box-title">INGRESAR NUEVO PROVEEDOR</h3>
                 </div><!-- /.box-header -->
+                
+                  @include('Msj.messages')
+
                 <!-- form start -->
                 <div class="form-horizontal">
                   {!!Form::open(['route'=>'proveedor.store','method'=>'POST'])!!}           
