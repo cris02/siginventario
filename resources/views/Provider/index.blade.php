@@ -2,12 +2,12 @@
 
 @section('content')
 
-@include('Msj.messages')
+
 
 <div class="box-header with-border container">
               <h3 class="box-title">PROVEEDORES</h3>
 </div><!-- /.box-header -->
-
+        @include('Msj.messages')
 <table class="table table-bordered table-hover">
 <tbody>
  <tr>
