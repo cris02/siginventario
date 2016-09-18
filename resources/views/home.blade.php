@@ -1,8 +1,5 @@
 @extends('layouts.template')
 
-@section('name','nombre')
-
-
 @section('content')
 <div class="container">
     <div class="row">

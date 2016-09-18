@@ -8,6 +8,7 @@ use sig\Http\Requests;
 use sig\Http\Controllers\Controller;
 use sig\Models\Article\Provider;
 use DB;
+use Session;
 
 class ProviderController extends Controller
 {
@@ -18,7 +19,7 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = DB::table('providers')->get();
+        $providers = DB::table('providers')->paginate(5);
        return view('Provider\index')->with('proveedores',$providers);
     }
 
@@ -41,6 +42,7 @@ class ProviderController extends Controller
     public function store(Request $request)
     {
        Provider::create($request->all());
+       Session::flash('save','Se ha guardado exitosamente!!!');
        return redirect()->route('proveedor.index');
     }
 
@@ -52,7 +54,8 @@ class ProviderController extends Controller
      */
     public function show($id)
     {
-        //
+        $provider= Provider::FindOrFail($id);
+        return view('Provider.eliminar')->with('provider',$provider);
     }
 
     /**
@@ -76,9 +79,9 @@ class ProviderController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $p = Provider::FindOrFail($id);
-       
+       $p = Provider::FindOrFail($id);       
        $p->update($request->all());
+        Session::flash('update','Se ha Actualizado correctamente!!!');
 
        return redirect()->route('proveedor.index');
     }
@@ -91,6 +94,9 @@ class ProviderController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $p=Provider::FindOrFail($id);
+       $p->delete();
+    Session::flash('delete','Se ha Eliminado correctamente!!!');
+       return redirect()->route('proveedor.index');
     }
 }
