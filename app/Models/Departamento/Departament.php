@@ -11,6 +11,6 @@ class Departament extends Model
     protected $primarykey = 'code';
 
     protected $fillable=[
-    	'code' ,'depto/Unidad','Jefe de departamento', 'telefono' 
+    	'code' ,'depto/Unidad','Jdepto', 'telefono' 
     ];
 }
