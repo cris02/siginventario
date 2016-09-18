@@ -27,5 +27,15 @@ Route:: resource('proveedor','Article\ProviderController');
 
 
 });
+Route::group(['middleware'=>['web']], function(){
+
+	Route::get('home', 'HomeController@index');
+	Route:: resource('menu','Menu\MenuController');
+	Route:: resource('articulo','Article\ArticleController');
+
+	Route::post('departamento/store', 'Article\DepartmentController@store');
+	Route::resource('departamento', 'Article\DepartmentController');
+	
+});
 
 
