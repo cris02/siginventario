@@ -12,17 +12,17 @@
 */
 
 
-Route::get('/', 'HomeController@index');
+
 
 
 Route::group(['middleware'=>['web']], function(){
 
+Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 
 Route:: resource('menu','Menu\MenuController');
 Route:: resource('articulo','Article\ArticleController');
 
-Route::post('proveedor/store', 'Article\ProviderController@store');
 Route:: resource('proveedor','Article\ProviderController');
 
 
@@ -46,6 +46,16 @@ Route::get('unidad/delete/{id_unidad_medida}','UnidadMedidaController@delete')->
 
 
 
+});
+Route::group(['middleware'=>['web']], function(){
+
+	Route::get('home', 'HomeController@index');
+	Route:: resource('menu','Menu\MenuController');
+	Route:: resource('articulo','Article\ArticleController');
+
+	Route::post('departamento/store', 'Article\DepartmentController@store');
+	Route::resource('departamento', 'Article\DepartmentController');
+	
 });
 
 
