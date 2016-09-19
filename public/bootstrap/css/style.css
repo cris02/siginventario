@@ -2,3 +2,8 @@
 textarea,input,select{
 	max-width: 500px;
 }
+
+.table{ 
+    margin-top: 7px; 
+}
+

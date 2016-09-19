@@ -31,6 +31,23 @@ Route::post('departamento/store', 'Departamento\DepartamentController@store');
 	Route::resource('departamento', 'Departamento\DepartamentController');
 
 
+Route::resource('especifico','EspecificoController');
+Route::get('especifico/delete/{id}','EspecificoController@delete')->name('yes');
+	
+Route::resource('unidad','UnidadMedidaController');
+Route::get('unidad/delete/{id_unidad_medida}','UnidadMedidaController@delete')->name('delete_unidad');
+
+
 });
+
+
+
+
+
+
+
+
+
+
 
 
