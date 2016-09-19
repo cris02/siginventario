@@ -8,7 +8,7 @@
               <h3 class="box-title">DEPARTAMENTO/UNIDAD</h3>
 </div><!-- /.box-header -->
 
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover ">
 <tbody>
  <tr>
   
