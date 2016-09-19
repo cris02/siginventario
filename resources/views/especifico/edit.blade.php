@@ -9,7 +9,7 @@
     @if($especifico)
 	    {!! Form::open(array('route' => ['especifico.update','id' => $especifico->id],'class' => 'form-horizontal','method' => 'put')) !!}
 
-           <div class="col-xs-12 col-sm-12 col-md-12">
+           <div class="col-xs-12 col-sm-9 col-md-12">
             <div class="form-group">
                 {!!Form::label('Titulo', 'Titulo', array('class' =>'col-md-2' )) !!}
                 {!!Form::text('titulo_especifico', $especifico->titulo_especifico, array('placeholder' => 'Titulo','class' => 'form-control')) !!}
