@@ -26,6 +26,26 @@ Route::post('proveedor/store', 'Article\ProviderController@store');
 Route:: resource('proveedor','Article\ProviderController');
 
 
+
+
+
+
+
+
+
+
+Route::resource('especifico','EspecificoController');
+Route::get('especifico/delete/{id}','EspecificoController@delete')->name('yes');
+
+
+Route::resource('unidad','UnidadMedidaController');
+Route::get('unidad/delete/{id_unidad_medida}','UnidadMedidaController@delete')->name('delete_unidad');
+
+
+
+
+
+
 });
 
 

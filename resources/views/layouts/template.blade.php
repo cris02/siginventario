@@ -281,10 +281,14 @@
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper" >
+	  
+      <div class="content-wrapper">
+	    <div class="container">
         
         @yield('content')
-      </div><!-- /.content-wrapper -->
+      </div> <!-- /.content-wrapper -->
+	  </div>
+	  
 
       <footer class="main-footer">        
         <strong>Copyright &copy; 2016 <a href="http://almsaeedstudio.com">DSI115_G08</a>.</strong> Todos los derechos reservados.
