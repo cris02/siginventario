@@ -93,7 +93,7 @@
             </li> 
 
             <li class="treeview">
-              <a href="#">
+              <a href="{{url('departamento')}}">
                 <i class="fa fa-edit"></i> <span>Departamentos</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>             
