@@ -1,12 +1,15 @@
 <?php
 
-namespace sig\Http\Controllers;
+namespace sig\Http\Controllers\Department;
 
 use Illuminate\Http\Request;
 
 use sig\Http\Requests;
+use sig\Http\Controllers\Controller;
+use sig\Models\Departamento\Department;
+use DB;
 
-class Departament extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +19,8 @@ class Departament extends Controller
     public function index()
     {
         //
+        $departaments = DB::table('departaments')->get();
+       return view('Departament\index')->with('departamentos',$departaments);
     }
 
     /**
@@ -26,6 +31,7 @@ class Departament extends Controller
     public function create()
     {
         //
+        return view('Departament\insertar');
     }
 
     /**
@@ -37,6 +43,8 @@ class Departament extends Controller
     public function store(Request $request)
     {
         //
+        Provider::create($request->all());
+       return redirect()->route('departamento.index');
     }
 
     /**
@@ -45,7 +53,7 @@ class Departament extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($code)
     {
         //
     }
@@ -56,9 +64,11 @@ class Departament extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($code)
     {
-        //
+        // 
+            $departament = Departament::FindOrFail($code);
+       return view('Departament.actualizar')->with('departament',$departament);
     }
 
     /**
@@ -68,9 +78,15 @@ class Departament extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $codede)
     {
         //
+
+       $d = Departament::FindOrFail($code);
+       
+       $d->update($request->all());
+
+       return redirect()->route('departamento.index');
     }
 
     /**
@@ -79,7 +95,7 @@ class Departament extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($code)
     {
         //
     }
