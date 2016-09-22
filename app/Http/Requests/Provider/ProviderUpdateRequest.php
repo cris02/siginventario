@@ -30,7 +30,7 @@ class ProviderUpdateRequest extends Request
     public function rules()
     {
         return [
-          // 'name'=>'required|unique:providers,name,'.$this->route->getparameter('provider'),
+          'name'=>'required|unique:providers,'.$this->route->getparameter('provider'),
         ];
     }
 }

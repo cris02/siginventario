@@ -14,21 +14,37 @@
 
 
 
-
-Route::group(['middleware'=>['web']], function(){
-
 Route::get('/', 'HomeController@index');
+
 Route::get('home', 'HomeController@index');
 
 Route:: resource('menu','Menu\MenuController');
 Route:: resource('articulo','Article\ArticleController');
 
+Route::post('proveedor/store', 'Article\ProviderController@store');
 Route:: resource('proveedor','Article\ProviderController');
 
-Route::post('departamento/store', 'Departamento\DepartmentController@store');
-Route::resource('departamento', 'Departamento\DepartmentController');
+Route::post('departamento/store', 'Departamento\DepartamentController@store');
+Route::resource('departamento', 'Departamento\DepartamentController');
+
+Route::resource('especifico','EspecificoController');
+Route::get('especifico/delete/{id}','EspecificoController@delete')->name('yes');
+	
+Route::resource('unidad','UnidadMedidaController');
+Route::get('unidad/delete/{id_unidad_medida}','UnidadMedidaController@delete')->name('delete_unidad');
 
 
-});
+
+
+
+
+
+
+
+
+
+
+
+
 
 

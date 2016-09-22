@@ -7,7 +7,7 @@
                 <div class="box-header with-border container">
                   <h3 class="box-title">INGRESAR NUEVO PROVEEDOR</h3>
                 </div><!-- /.box-header -->
-                
+              
                   @include('Msj.messages')
 
                 <!-- form start -->
@@ -18,13 +18,13 @@
                       <div class="form-group">
                           <label for="id" class="col-sm-2 control-label">Numero</label>
                           <div class="col-sm-6">
-                            <input type="number" min="0" class="form-control" id="id" name="id" placeholder="Ingrese Numero de Proveedor" autofocus="on" required>
+                            <input type="number" min="0" class="form-control" id="id" name="id" placeholder="Ingrese Numero de Proveedor" autofocus="on" >
                           </div>
                       </div>
                       <div class="form-group">
                           <label for="name" class="col-sm-2 control-label">Nombre</label>
                           <div class="col-sm-6">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Digite nombre del nuevo proveedor" required>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Digite nombre del nuevo proveedor" >
                           </div>
                       </div>   
                       <div class="form-group">
@@ -36,7 +36,7 @@
                       <div class="form-group">
                           <label for="phone" class="col-sm-2 control-label">Telefono</label>
                           <div class="col-sm-6">
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="ejemplo 9999-9999" required>
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="ejemplo 9999-9999" >
                           </div>
                       </div>   
                        <div class="form-group">
@@ -61,22 +61,19 @@
                 </div>
               </div><!-- /.box -->
             
-<!-- scrip -->
-<script type="text/javascript" src="{{asset('plugins/jQuery/jQuery.js')}}"></script>
+
 
 <script type="text/javascript">
 
-   $(document).ready(function(){
-
-           $('#phone').mask('9999-9999');    
-
-    });
+window.onload = function() {
+   $('#phone').mask('9999-9999'); 
+};
 
 </script>
 
-
-
  @endsection
+
+
 
 
 
