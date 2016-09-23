@@ -14,9 +14,6 @@
 
 
 
-
-Route::group(['middleware'=>['web']], function(){
-
 Route::get('/', 'HomeController@index');
 
 Route::get('home', 'HomeController@index');
@@ -24,8 +21,16 @@ Route::get('home', 'HomeController@index');
 Route:: resource('menu','Menu\MenuController');
 
 
+
 Route::post('proveedor/store', 'Article\ProviderController@store');
 Route:: resource('proveedor','Article\ProviderController');
+
+Route::get('proveedor/detail/{id}', 'Article\ProviderController@detail');
+Route:: resource('proveedor','Article\ProviderController');
+
+
+
+
 
 Route::resource('especifico','EspecificoController');
 Route::get('especifico/delete/{id}','EspecificoController@delete')->name('yes');
@@ -36,9 +41,18 @@ Route::get('unidad/delete/{id_unidad_medida}','UnidadMedidaController@delete')->
 Route::post('departamento/store', 'Departamento\DepartamentController@store');
 Route::resource('departamento', 'Departamento\DepartamentController');
 
+
+
+
+
+
 Route::resource('articulo','ArticuloController');
 Route::get('articulo/delete/{codigoArticulo}','ArticuloController@delete')->name('delete_articulo');
 });
+
+
+
+
 
 
 

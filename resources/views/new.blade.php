@@ -19,8 +19,6 @@
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href=" {{ asset('bootstrap/css/bootstrap.css') }}">
 
-	
-
      <!-- our styles -->
     <link rel="stylesheet" href=" {{ asset('bootstrap/css/style.css') }}">
     
@@ -117,33 +115,30 @@
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-    
+	  
       <div class="content-wrapper">
-        <div class="container" id="contenido">          
-          @include('flash::message')        
-          @yield('content')
-        </div>
+	    <div class="container">
+        
+        @yield('content')
       </div> <!-- /.content-wrapper -->
-    </div> 
-        <nav class="navbar navbar-inverse navbar-fixed-bottom">
-          <footer class="main-footer">               
-                <strong>Copyright &copy; 2016 <a href="http://almsaeedstudio.com">DSI115_G08</a>.</strong> Todos los derechos reservados.              
-          </footer>
-        </nav>
+	  </div>
+	  
+
+      <footer class="main-footer">        
+        <strong>Copyright &copy; 2016 <a href="http://almsaeedstudio.com">DSI115_G08</a>.</strong> Todos los derechos reservados.
+      </footer>
 
      
 
     </div><!-- ./wrapper -->
      <!-- jQuery-->
-     <script src="{{asset('plugins/jQuery/jQuery.js')}}"></script>
+     <script type="text/javascript" src="{{asset('plugins/jQuery/jQuery.js')}}"></script>
         <!-- js de bootstrap-->
      <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
- 
+        <!-- AdminLTE App pone el foother al final de la pagina-->
+     <script src="{{asset('dist/js/app.min.js')}}"></script>  
         <!-- para poner mascaras a los input-->
-     <script src="{{asset('plugins/input-mask/jquery.inputmask.js')}}"></script>
-
-         <!-- AdminLTE App-->
-     <script src="{{asset('dist/js/app.min.js')}}"></script> 
+     <script type="text/javascript" src="{{asset('plugins/input-mask/jquery.inputmask.js')}}"></script>
    
   </body>
 </html>

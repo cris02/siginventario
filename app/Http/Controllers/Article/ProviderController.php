@@ -11,6 +11,7 @@ use DB;
 use Session;
 use sig\Http\Requests\Provider\ProviderCreateRequest;
 use sig\Http\Requests\Provider\ProviderUpdateRequest;
+use Laracasts\Flash\Flash;
 
 class ProviderController extends Controller
 {
@@ -21,7 +22,7 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = DB::table('providers')->paginate(5);
+        $providers = DB::table('providers')->orderBy('name','asc')->paginate(5);
        return view('Provider\index')->with('proveedores',$providers);
     }
 
@@ -32,7 +33,7 @@ class ProviderController extends Controller
      */
     public function create()
     {
-        return view('Provider\insertar');
+        return view('Provider.insertar');
     }
 
     /**
@@ -43,8 +44,8 @@ class ProviderController extends Controller
      */
     public function store(ProviderCreateRequest $request)
     {
-       Provider::create($request->all());
-       Session::flash('save','Se ha guardado exitosamente!!!');
+       Provider::create($request->all());  
+       Flash::success('Guardado correctamente!!!');    
        return redirect()->route('proveedor.index');
     }
 
@@ -83,9 +84,10 @@ class ProviderController extends Controller
     {
        $p = Provider::FindOrFail($id);       
        $p->update($request->all());
-        Session::flash('update','Se ha Actualizado correctamente!!!');
+       Flash::success('Se ha Actualizado correctamente!!!');
 
        return redirect()->route('proveedor.index');
+
     }
 
     /**
@@ -100,5 +102,11 @@ class ProviderController extends Controller
        $p->delete();
     Session::flash('delete','Se ha Eliminado correctamente!!!');
        return redirect()->route('proveedor.index');
+    }
+
+     public function detail($id)
+    {
+        $provider= Provider::FindOrFail($id);
+        return view('Provider.detail')->with('provider',$provider);
     }
 }

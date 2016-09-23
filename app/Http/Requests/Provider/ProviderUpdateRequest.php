@@ -12,7 +12,7 @@ class ProviderUpdateRequest extends Request
      *
      * @return bool
      */
-    public function _construct(Route $route)
+    public function __construct(Route $route)
     {
         $this->route = $route;
     }
@@ -30,7 +30,7 @@ class ProviderUpdateRequest extends Request
     public function rules()
     {
         return [
-          // 'name'=>'required|unique:providers,name,'.$this->route->getparameter('provider'),
+          //'name'=>'required|unique:providers,name,'.$this->route->getparameter('id'),
         ];
     }
 }

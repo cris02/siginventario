@@ -4,11 +4,9 @@
 
         <div class="box box-info container">
                 <div class="box-header with-border">
-                  <h3 class="box-title">CONFIRMA ELIMINAR EL SIGUIENTE PROVEEDOR</h3>
+                  <h3 class="box-title">DETALLE DE PROVEEDOR</h3>
                 </div><!-- /.box-header -->
-                <!-- form start -->
-                <div class="form-horizontal">
-	               {!!Form::open(['route'=>['proveedor.destroy',$provider->id],'method'=>'DELETE'])!!}
+            
 
 	               		<div class="container">
 							<table class="table table-hover table-striped">							
@@ -44,10 +42,10 @@
 						</div>
 	            
 	                  <div class="box-footer">
-	                  		<a href="{{Route('proveedor.index')}}"><button type="button" id="cancelar" class="btn btn-default m-t-10">Cancelar</button></a>
-	                        <button type="submit" class="btn btn-danger">Eliminar</button>
+	                  		<a href="{{Route('proveedor.index')}}"><button type="button" id="cancelar" class="btn btn-default m-t-10">Regresar</button></a>
+	                      
 	                  </div><!-- /.box-footer -->
-	               {!!Form::close()!!}
+	              
                </div>
         </div><!-- /.box -->
 

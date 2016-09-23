@@ -24,8 +24,8 @@ class ProviderCreateRequest extends Request
     public function rules()
     {
         return [
-            'id'=>'unique:providers,id',
-            'name'=>'required|unique:providers,name',
+            'id'=>'required|unique:providers',
+            'name'=>'required|unique:providers',
         ];
     }
 }

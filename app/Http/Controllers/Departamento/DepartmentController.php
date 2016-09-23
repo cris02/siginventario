@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 
 use sig\Http\Requests;
 use sig\Http\Controllers\Controller;
-use sig\Models\Departamento\Departament;
+use sig\Models\Department;
 use DB;
+use Session;
+use Laracasts\Flash\Flash;
 
-class DepartamentController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +20,8 @@ class DepartamentController extends Controller
      */
     public function index()
     {
-        //
-        $departaments = DB::table('departaments')->paginate(5);
-       return view('Departament.index')->with('departamentos',$departaments);
+         $departments = DB::table('departments')->get();
+       return view('Department.index')->with('departamentos',$departments);
     }
 
     /**
@@ -30,8 +31,7 @@ class DepartamentController extends Controller
      */
     public function create()
     {
-        //
-        return view('Departament.insertar');
+        return view('Department.insertar');
     }
 
     /**
@@ -42,8 +42,8 @@ class DepartamentController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        Provider::create($request->all());
+        Department::create($request->all());  
+       Flash::success('Guardado correctamente!!!');    
        return redirect()->route('departamento.index');
     }
 
@@ -53,9 +53,10 @@ class DepartamentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($code)
+    public function show($id)
     {
-        //
+        $department= Department::FindOrFail($id);
+        return view('Department.eliminar')->with('department',$department);
     }
 
     /**
@@ -64,11 +65,11 @@ class DepartamentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($code)
+    public function edit($id)
     {
-        // 
-            $departament = Departament::FindOrFail($code);
-       return view('Departament.actualizar')->with('departament',$departament);
+
+        $department= Department::where('code', '=' ,$id)->firstOrFail();
+       return view('Department.actualizar')->with('department',$department);
     }
 
     /**
@@ -78,13 +79,14 @@ class DepartamentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $codede)
+    public function update(Request $request, $id)
     {
-        //
-
-       $d = Departament::FindOrFail($code);
-       
-       $d->update($request->all());
+        //$d = $department= Department::where('code', '=' ,$id)->firstOrFail();  
+        DB::table('departments')
+            ->where('code', $id)
+            ->update(['name' => $request->name]);     
+       // $d->update($request->all());
+        Flash::success('Se ha Actualizado correctamente!!!');
 
        return redirect()->route('departamento.index');
     }
@@ -95,8 +97,11 @@ class DepartamentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($code)
+    public function destroy($id)
     {
-        //
+        $p=Department::FindOrFail($id);
+        $p->delete();
+        Session::flash('delete','Se ha Eliminado correctamente!!!');
+       return redirect()->route('departamento.index');
     }
 }
