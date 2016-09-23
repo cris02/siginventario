@@ -27,6 +27,7 @@ Route:: resource('articulo','Article\ArticleController');
 Route::post('proveedor/store', 'Article ProviderController@store');
 Route:: resource('proveedor','Article\ProviderController');
 
+     
 Route::post('departamento/store', 'Departamento\DepartamentController@store');
 	Route::resource('departamento', 'Departamento\DepartamentController');
 
