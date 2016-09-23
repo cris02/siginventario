@@ -22,7 +22,7 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = DB::table('providers')->paginate(5);
+        $providers = DB::table('providers')->orderBy('name','asc')->paginate(5);
        return view('Provider\index')->with('proveedores',$providers);
     }
 
@@ -87,6 +87,7 @@ class ProviderController extends Controller
        Flash::success('Se ha Actualizado correctamente!!!');
 
        return redirect()->route('proveedor.index');
+
     }
 
     /**
@@ -101,5 +102,11 @@ class ProviderController extends Controller
        $p->delete();
     Session::flash('delete','Se ha Eliminado correctamente!!!');
        return redirect()->route('proveedor.index');
+    }
+
+     public function detail($id)
+    {
+        $provider= Provider::FindOrFail($id);
+        return view('Provider.detail')->with('provider',$provider);
     }
 }

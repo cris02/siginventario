@@ -2,9 +2,6 @@
 
 @section('content')
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-
-<link rel="stylesheet" href="http://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 
 <div class="box-header with-border container">
               <h3 class="box-title">PROVEEDORES</h3>
@@ -23,11 +20,12 @@
             <tr class="danger">
                  <div class="row">
                   
-                    <th>NUMERO</th>
-                    <th>NOMBRE</th>                    
-                    <th>TELEFONO</th>                  
-                    <th></th>
-                    <th></th>
+                    <th class="col-xs-1">NUMERO</th>
+                    <th class="col-xs-3">NOMBRE</th>                    
+                    <th class="col-xs-1">TELEFONO</th>                  
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
 
 
                   </div>
@@ -35,11 +33,14 @@
          @foreach ($proveedores as $p)
             <tr>
                 <div class="row">
-                    <td>{{$p->id}}</td>
-                    <td>{{$p->name}}</td>               
-                    <td>{{$p->phone}}</td>              
-                    <td><a class="btn btn-default" href="{{route('proveedor.edit',$p->id)}}"><span class="glyphicon glyphicon-pencil col-xs-1"></span>Editar</a></td>    
-                    <td><a class="btn btn-default" href="{{route('proveedor.show',$p->id)}}"><span class="glyphicon glyphicon-trash col-xs-1"></span>Eliminar</a></td>
+                    <td class="col-xs-1">{{$p->id}}</td>
+                    <td class="col-xs-3">{{$p->name}}</td>               
+                    <td class="col-xs-1">{{$p->phone}}</td>  
+                    <td ><a class="btn btn-default" href="{{url('proveedor/detail',$p->id)}}"><span class="glyphicon glyphicon-th-large col-xs-1"></span>Detalle</a></td>
+
+                    <td ><a class="btn btn-default" href="{{route('proveedor.edit',$p->id)}}"><span class="glyphicon glyphicon-pencil col-xs-1"></span>Editar</a></td>    
+
+                    <td ><a class="btn btn-default" href="{{route('proveedor.show',$p->id)}}"><span class="glyphicon glyphicon-trash col-xs-1"></span>Eliminar</a></td>
                 </div>
             </tr>
          @endforeach        
@@ -53,15 +54,8 @@
             
         </div>
 </div>
-  
-<script type="text/javascript" src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
-<script type="text/javascript">
 
-$(document).ready(function(){
 
-     $('#tabla').DataTable();
-});
-</script>
 
 @endsection

@@ -117,18 +117,17 @@
       <!-- Content Wrapper. Contains page content -->
     
       <div class="content-wrapper">
-        <div class="container" id="contenido">
-
+        <div class="container" id="contenido">          
           @include('flash::message')        
           @yield('content')
         </div>
       </div> <!-- /.content-wrapper -->
     </div> 
-
+        <nav class="navbar navbar-inverse navbar-fixed-bottom">
           <footer class="main-footer">               
                 <strong>Copyright &copy; 2016 <a href="http://almsaeedstudio.com">DSI115_G08</a>.</strong> Todos los derechos reservados.              
           </footer>
-     
+        </nav>
 
      
 

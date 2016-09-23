@@ -15,7 +15,7 @@
 	                    <div class="form-group">
 	                      <label for="name" class="col-sm-2 control-label">Nombre</label>
 	                      <div class="col-sm-6">
-	                        <input type="text" class="form-control" id="name" name="name" value="{{$provider->name}}">
+	                        <input type="text" class="form-control" id="name" name="name" value="{{$provider->name}}" required>
 	                      </div>
 	                    </div>   
 	                    <div class="form-group">
@@ -51,16 +51,13 @@
                </div>
               </div><!-- /.box -->
 
-<!-- scrip -->
-<script type="text/javascript" src="{{asset('plugins/jQuery/jQuery.js')}}"></script>
+
 
 <script type="text/javascript">
 
-   $(document).ready(function(){
-
-           $('#phone').mask('9999-9999');    
-
-    });
+window.onload = function() {
+   $('#phone').mask('9999-9999'); 
+};
 
 </script>
 
