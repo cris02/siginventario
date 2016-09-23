@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use sig\Http\Requests;
 use sig\Http\Controllers\Controller;
 use sig\Models\Departamento\Departament;
+use DB;
 
 class DepartamentController extends Controller
 {
@@ -18,8 +19,8 @@ class DepartamentController extends Controller
     public function index()
     {
         //
-        $departaments = DB::table('departaments')->get();
-       return view('Departament\index')->with('departamentos',$departaments);
+        $departaments = DB::table('departaments')->paginate(5);
+       return view('Departament.index')->with('departamentos',$departaments);
     }
 
     /**
@@ -30,7 +31,7 @@ class DepartamentController extends Controller
     public function create()
     {
         //
-        return view('Departament\insertar');
+        return view('Departament.insertar');
     }
 
     /**

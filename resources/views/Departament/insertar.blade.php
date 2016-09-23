@@ -13,7 +13,7 @@
                 
                     <div class="box-body">
                       <div class="form-group">
-                          <label for="code" class="col-sm-2 control-label">Numero</label>
+                          <label for="code" class="col-sm-2 control-label">Codigo</label>
                           <div class="col-sm-6">
                             <input type="number" min="0" class="form-control" id="code" name="code" placeholder="Ingrese el codigo del departamento" autofocus="on" required>
                           </div>

@@ -27,8 +27,8 @@ class EspecificoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-		    'numero_especifico' => 'required',
-			'titulo_especifico' => 'required',
+		    'numero_especifico' => 'required |digits:4',
+			'titulo_especifico' => 'required|unique:especificos,titulo_especifico',
 			'descripcion_especifico' => 'required',
 		]);
 		
@@ -62,7 +62,7 @@ class EspecificoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-		   'titulo_especifico'=>'required'
+		   'titulo_especifico'=>'required | unique:especificos,titulo_especifico'
 		]);
 		$especifico = Especifico::FindOrFail($id);
 		if($especifico){

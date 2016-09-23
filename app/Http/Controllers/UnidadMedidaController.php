@@ -25,12 +25,12 @@ class UnidadMedidaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-		    'nombre_unidadmedida' => 'required',
+		    'nombre_unidadmedida' => 'required|unique:unidad_medida,nombre_unidadmedida',
 			
 		]);
 		
 		    //valida si exite el especifico antes de guardar
-			if(DB::table('unidad_medida')->where('nombre_unidadmedida',$request->input('nombre_unidadmedida'))->first()){
+			/*if(DB::table('unidad_medida')->where('nombre_unidadmedida',$request->input('nombre_unidadmedida'))->first()){
 				//Session::flash('flash_message', 'Unidad de medida ya existe!');
 				return redirect()->back()->with('error','Unidad de medida ya existe');
 			}else{
@@ -38,7 +38,11 @@ class UnidadMedidaController extends Controller
 		           'nombre_unidadmedida' =>$request->input('nombre_unidadmedida')
 		           ]);
 		        return redirect()->route('unidad.index')->with('success','Unidad de medida creado exitosamente');
-		}
+		} */
+		UnidadMedida::create([
+		           'nombre_unidadmedida' =>$request->input('nombre_unidadmedida')
+		           ]);
+		        return redirect()->route('unidad.index')->with('success','Unidad de medida creado exitosamente');
 	     
     }
 
@@ -59,7 +63,7 @@ class UnidadMedidaController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-		   'nombre_unidadmedida'=>'required'
+		   'nombre_unidadmedida'=>'required|unique:unidad_medida,nombre_unidadmedida'
 		]);
 		$unidad = UnidadMedida::FindOrFail($id);
 		if($unidad){
