@@ -24,8 +24,8 @@ Route:: resource('articulo','Article\ArticleController');
 Route::post('proveedor/store', 'Article\ProviderController@store');
 Route:: resource('proveedor','Article\ProviderController');
 
-Route::post('departamento/store', 'Departamento\DepartamentController@store');
-Route::resource('departamento', 'Departamento\DepartamentController');
+Route::post('departamento/store', 'Departamento\DepartmentController@store');
+Route::resource('departamento', 'Departamento\DepartmentController');
 
 Route::resource('especifico','EspecificoController');
 Route::get('especifico/delete/{id}','EspecificoController@delete')->name('yes');
