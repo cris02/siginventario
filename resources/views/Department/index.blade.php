@@ -26,9 +26,9 @@
   <tr>
     <div class="row">
         <td class=" col-xs-1">{{$d->code}}</td>
-        <td class=" col-xs-2">{{$d->depto/Unidad}}</td>      
-        <td><a class="btn btn-default" href="{{route('departamento.edit',$p->id)}}"><span class="glyphicon glyphicon-pencil col-xs-1"></span>Editar</a></td>    
-        <td><a class="btn btn-default" href="{{route('departamento.show',$p->id)}}"><span class="glyphicon glyphicon-trash col-xs-1"></span>Eliminar</a></td>
+        <td class=" col-xs-2">{{$d->name}}</td>      
+        <td><a class="btn btn-default" href="{{route('departamento.edit',$d->code)}}"><span class="glyphicon glyphicon-pencil col-xs-1"></span>Editar</a></td>    
+        <td><a class="btn btn-default" href="{{route('departamento.show',$d->code)}}"><span class="glyphicon glyphicon-trash col-xs-1"></span>Eliminar</a></td>
                 </div>
        
     </td>

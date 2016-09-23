@@ -67,7 +67,8 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        $department= Department::FindOrFail($id);
+
+        $department= Department::where('code', '=' ,$id)->firstOrFail();
        return view('Department.actualizar')->with('department',$department);
     }
 
@@ -80,11 +81,14 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $d = Department::FindOrFail($id);       
-        $d->update($request->all());
+        //$d = $department= Department::where('code', '=' ,$id)->firstOrFail();  
+        DB::table('departments')
+            ->where('code', $id)
+            ->update(['name' => $request->name]);     
+       // $d->update($request->all());
         Flash::success('Se ha Actualizado correctamente!!!');
 
-       return redirect()->route('department.index');
+       return redirect()->route('departamento.index');
     }
 
     /**
@@ -98,6 +102,6 @@ class DepartmentController extends Controller
         $p=Department::FindOrFail($id);
         $p->delete();
         Session::flash('delete','Se ha Eliminado correctamente!!!');
-       return redirect()->route('department.index');
+       return redirect()->route('departamento.index');
     }
 }

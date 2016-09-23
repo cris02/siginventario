@@ -21,7 +21,7 @@
                       <div class="form-group">
                           <label for="depto/Unidad" class="col-sm-2 control-label">Depto/Unidad</label>
                           <div class="col-sm-6">
-                            <input type="text" class="form-control" id="depto/Unidad" name="depto/Unidad" placeholder="Digite nombre del Departamento/Unidad" required>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Digite nombre del Departamento/Unidad" required>
                           </div>
                       </div>   
                  
