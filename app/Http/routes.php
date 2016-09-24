@@ -48,7 +48,7 @@ Route::resource('departamento', 'Departamento\DepartamentController');
 
 Route::resource('articulo','ArticuloController');
 Route::get('articulo/delete/{codigoArticulo}','ArticuloController@delete')->name('delete_articulo');
-});
+
 
 
 
