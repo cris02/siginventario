@@ -38,9 +38,13 @@
 </tbody>
   
 </table>
+
+<div class="text-center">
+             {!!$departamentos->links()!!}
+        </div>
+        <div class=" container">
+            
+        </div>
   
-
-
-
-
 @endsection
+

@@ -19,6 +19,8 @@
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href=" {{ asset('bootstrap/css/bootstrap.css') }}">
 
+	
+
      <!-- our styles -->
     <link rel="stylesheet" href=" {{ asset('bootstrap/css/style.css') }}">
     

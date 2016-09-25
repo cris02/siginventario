@@ -15,31 +15,34 @@
       @endif
 
 {!! Form::open(array('route' => 'especifico.store','class' => 'form-horizontal','method' => 'post')) !!}
-
        
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-			    {!!Form::label('Numero', 'Numero', array('class' =>'col-md-2' )) !!}
-                {!!Form::number('numero_especifico',null, array('placeholder' => 'Numero','class' => 'form-control')) !!}
+			    {!!Form::label('Numero', 'Numero', array('class' =>'control-label col-md-2' )) !!}
+				<div class="col-md-7">
+                    {!!Form::number('numero_especifico',null, array('placeholder' => 'Numero','class' => 'form-control')) !!}
+				</div>
             </div>
-        </div>
+                    
+            <div class="form-group">
+                {!!Form::label('Titulo', 'Titulo', array('class' =>'control-label col-md-2' )) !!}
+				<div class="col-md-7">
+                    {!!Form::text('titulo_especifico', null, array('placeholder' => 'Titulo','class' => 'form-control')) !!}
+				</div>
+            </div>
         
-        <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                {!!Form::label('Titulo', 'Titulo', array('class' =>'col-md-2' )) !!}
-                {!!Form::text('titulo_especifico', null, array('placeholder' => 'Titulo','class' => 'form-control')) !!}
+                {!!Form::label('Descripcion', 'Descripcion', array('class' =>'control-label col-md-2' )) !!}
+				<div class="col-md-7">
+                    {!!Form::textarea('descripcion_especifico','prueba',array( 'class' => 'form-control' )) !!}
+				</div>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                {!!Form::label('Descripcion', 'Descripcion', array('class' =>'col-md-2' )) !!}
-                {!!Form::textarea('descripcion_especifico','prueba' ) !!}
-            </div>
-        </div>
-        <div class="col-md-offset-2">
+			
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-7">
                 <button type="submit" class="btn btn-primary">Guardar</button>
-        </div>
+				<a href="{{ route('especifico.index')}}" class="btn btn-primary">Cancelar</a>
+            </div>
+		</div>
 
     
 {!! Form::close() !!}
