@@ -1,19 +1,17 @@
 <?php
 
-namespace sig\Http\Controllers\Article;
+namespace sig\Http\Controllers\Departamento;
 
 use Illuminate\Http\Request;
 
 use sig\Http\Requests;
 use sig\Http\Controllers\Controller;
-use sig\Models\Article\Provider;
+use sig\Models\Department;
 use DB;
 use Session;
-use sig\Http\Requests\Provider\ProviderCreateRequest;
-use sig\Http\Requests\Provider\ProviderUpdateRequest;
 use Laracasts\Flash\Flash;
 
-class ProviderController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,8 +20,8 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = DB::table('providers')->orderBy('name','asc')->paginate(5);
-       return view('Provider\index')->with('proveedores',$providers);
+         $departments = DB::table('departments')->get();
+       return view('Department.index')->with('departamentos',$departments);
     }
 
     /**
@@ -33,7 +31,7 @@ class ProviderController extends Controller
      */
     public function create()
     {
-        return view('Provider.insertar');
+        return view('Department.insertar');
     }
 
     /**
@@ -42,11 +40,11 @@ class ProviderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProviderCreateRequest $request)
+    public function store(Request $request)
     {
-       Provider::create($request->all());  
+        Department::create($request->all());  
        Flash::success('Guardado correctamente!!!');    
-       return redirect()->route('proveedor.index');
+       return redirect()->route('departamento.index');
     }
 
     /**
@@ -57,8 +55,8 @@ class ProviderController extends Controller
      */
     public function show($id)
     {
-        $provider= Provider::FindOrFail($id);
-        return view('Provider.eliminar')->with('provider',$provider);
+        $department= Department::FindOrFail($id);
+        return view('Department.eliminar')->with('department',$department);
     }
 
     /**
@@ -69,8 +67,9 @@ class ProviderController extends Controller
      */
     public function edit($id)
     {
-       $provider = Provider::FindOrFail($id);
-       return view('Provider.actualizar')->with('provider',$provider);
+
+        $department= Department::where('code', '=' ,$id)->firstOrFail();
+       return view('Department.actualizar')->with('department',$department);
     }
 
     /**
@@ -80,14 +79,16 @@ class ProviderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProviderUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-       $p = Provider::FindOrFail($id);       
-       $p->update($request->all());
-       Flash::success('Se ha Actualizado correctamente!!!');
+        //$d = $department= Department::where('code', '=' ,$id)->firstOrFail();  
+        DB::table('departments')
+            ->where('code', $id)
+            ->update(['name' => $request->name]);     
+       // $d->update($request->all());
+        Flash::success('Se ha Actualizado correctamente!!!');
 
-       return redirect()->route('proveedor.index');
-
+       return redirect()->route('departamento.index');
     }
 
     /**
@@ -98,15 +99,9 @@ class ProviderController extends Controller
      */
     public function destroy($id)
     {
-       $p=Provider::FindOrFail($id);
-       $p->delete();
-    Session::flash('delete','Se ha Eliminado correctamente!!!');
-       return redirect()->route('proveedor.index');
-    }
-
-     public function detail($id)
-    {
-        $provider= Provider::FindOrFail($id);
-        return view('Provider.detail')->with('provider',$provider);
+        $p=Department::FindOrFail($id);
+        $p->delete();
+        Session::flash('delete','Se ha Eliminado correctamente!!!');
+       return redirect()->route('departamento.index');
     }
 }
