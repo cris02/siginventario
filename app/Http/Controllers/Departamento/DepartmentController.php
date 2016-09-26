@@ -9,6 +9,9 @@ use sig\Http\Controllers\Controller;
 use sig\Models\Department;
 use DB;
 use Session;
+use sig\Http\Requests\Department\DepartmentCreateRequest;
+use sig\Http\Requests\Department\DepartmentUpdateRequest;
+
 use Laracasts\Flash\Flash;
 
 class DepartmentController extends Controller
@@ -40,7 +43,7 @@ class DepartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DepartmentCreateRequest $request)
     {
         Department::create($request->all());  
        Flash::success('Guardado correctamente!!!');    
@@ -79,7 +82,7 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DepartmentUpdateRequest $request, $id)
     {
         //$d = $department= Department::where('code', '=' ,$id)->firstOrFail();  
         DB::table('departments')
