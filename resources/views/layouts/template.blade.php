@@ -91,10 +91,15 @@
             </li>    
                 
             <li class="treeview">
-              <a href="{{url('articulo')}}">
+              <a href="#">
                 <i class="glyphicon glyphicon-list-alt"></i> <span>Articulos</span>
                 <i class="fa fa-angle-left pull-right"></i>
-              </a>            
+              </a>  
+               <ul class="treeview-menu">
+                <li><a href="{{url('articulo')}}"><i class="fa fa-circle-o"></i>Productos</a></li>
+                <li><a href="{{url('unidad')}}"><i class="fa fa-circle-o"></i>Unidad de Medida</a></li>
+                <li><a href="{{url('especifico')}}"><i class="fa fa-circle-o"></i>Especificos</a></li>               
+              </ul>          
             </li> 
 
             <li class="treeview">

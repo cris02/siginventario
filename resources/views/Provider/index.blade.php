@@ -36,11 +36,12 @@
                     <td class="col-xs-1">{{$p->id}}</td>
                     <td class="col-xs-3">{{$p->name}}</td>               
                     <td class="col-xs-1">{{$p->phone}}</td>  
-                    <td ><a class="btn btn-default" href="{{url('proveedor/detail',$p->id)}}"><span class="glyphicon glyphicon-th-large col-xs-1"></span>Detalle</a></td>
+                    <td ><a class="btn btn-default" href="{{url('proveedor/detail',$p->id)}}"><span class="glyphicon glyphicon-th-large col-xs-1"></span>Detalle</a>
 
-                    <td ><a class="btn btn-default" href="{{route('proveedor.edit',$p->id)}}"><span class="glyphicon glyphicon-pencil col-xs-1"></span>Editar</a></td>    
+                    <a class="btn btn-default" href="{{route('proveedor.edit',$p->id)}}"><span class="glyphicon glyphicon-pencil col-xs-1"></span>Editar</a>   
 
-                    <td ><a class="btn btn-default" href="{{route('proveedor.show',$p->id)}}"><span class="glyphicon glyphicon-trash col-xs-1"></span>Eliminar</a></td>
+                    <a class="btn btn-default" href="{{route('proveedor.show',$p->id)}}"><span class="glyphicon glyphicon-trash col-xs-1"></span>Eliminar</a>
+                    </td>
                 </div>
             </tr>
          @endforeach        
