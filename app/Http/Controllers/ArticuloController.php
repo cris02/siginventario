@@ -28,7 +28,7 @@ class ArticuloController extends Controller
 		    'codigo' => 'required | alpha_num',
 			'unidad' => 'required | integer',
 			'especifico' => 'required | digits:4',
-			'nombre' => 'required | unique:articulo,nombre_articulo'
+			'nombre' => 'required |regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:articulo,nombre_articulo'
 		]);
 		
 		    //valida si exite el nombre del producto antes de guardar
@@ -70,9 +70,9 @@ class ArticuloController extends Controller
     public function update(Request $request, $codigoArticulo)
     {
         $this->validate($request,[
-		   'nombre'=>'required | unique:articulo,nombre_articulo',
+		   'nombre'=>'required |regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:articulo,nombre_articulo,'.$codigoArticulo.',codigo_articulo',
 		   'unidad' => 'required | integer',
-		   'especifico' => 'required |digits:4'
+		   'especifico' => 'required |digits:4 | exists:especificos,id'
 		]);
 		$articulo = Articulo::FindOrFail($codigoArticulo);
 		if($articulo){

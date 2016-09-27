@@ -6,12 +6,20 @@
                 <div class="box-header with-border">
                   <h3 class="box-title">MODIFICAR DATOS DEL PROVEEDOR</h3>
                 </div><!-- /.box-header -->
-                <!-- form start -->
+            
+                        @include('Msj.messages')
+
                 <div class="form-horizontal">
 	               {!!Form::model($provider,['route'=>['proveedor.update',$provider->id],'method'=>'patch'])!!}
 	                <input type="hidden" name="_token" value="{{ csrf_token() }}">
 	                  <div class="box-body">
-	                    
+
+	                   <div class="form-group">
+	                      <label for="name" class="col-sm-2 control-label">Numero</label>
+	                      <div class="col-sm-6">
+	                        <input type="text" class="form-control" id="id" name="id" value="{{$provider->id}}" readonly>
+	                      </div>
+	                    </div> 	                    
 	                    <div class="form-group">
 	                      <label for="name" class="col-sm-2 control-label">Nombre</label>
 	                      <div class="col-sm-6">

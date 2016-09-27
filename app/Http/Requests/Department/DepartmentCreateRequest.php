@@ -1,22 +1,16 @@
 <?php
 
-namespace sig\Http\Requests\Provider;
+namespace sig\Http\Requests\Department;
 
 use sig\Http\Requests\Request;
-use Illuminate\Routing\Route;
 
-class ProviderUpdateRequest extends Request
+class DepartmentCreateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function __construct(Route $route)
-    {
-        $this->route = $route;
-    }
-
     public function authorize()
     {
         return true;
@@ -30,7 +24,9 @@ class ProviderUpdateRequest extends Request
     public function rules()
     {
         return [
-          //'name'=>'required|unique:providers,name,'.$this->route->getparameter('id'),
+            //
+        'code'=>'required|unique:departments',
+            'name'=>'required|unique:departments',
         ];
     }
 }
