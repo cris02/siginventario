@@ -9,6 +9,9 @@ use sig\Http\Controllers\Controller;
 use sig\Models\Department;
 use DB;
 use Session;
+use sig\Http\Requests\Department\DepartmentCreateRequest;
+use sig\Http\Requests\Department\DepartmentUpdateRequest;
+
 use Laracasts\Flash\Flash;
 
 class DepartmentController extends Controller
@@ -20,7 +23,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-         $departments = DB::table('departments')->get();
+         $departments = DB::table('departments')->paginate(5);
        return view('Department.index')->with('departamentos',$departments);
     }
 
@@ -40,7 +43,7 @@ class DepartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DepartmentCreateRequest $request)
     {
         Department::create($request->all());  
        Flash::success('Guardado correctamente!!!');    
@@ -55,7 +58,7 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        $department= Department::FindOrFail($id);
+        $department= Department::where('code', '=' ,$id)->firstOrFail();
         return view('Department.eliminar')->with('department',$department);
     }
 
@@ -79,7 +82,7 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DepartmentUpdateRequest $request, $id)
     {
         //$d = $department= Department::where('code', '=' ,$id)->firstOrFail();  
         DB::table('departments')
@@ -99,8 +102,8 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        $p=Department::FindOrFail($id);
-        $p->delete();
+        $department= Department::where('code', '=' ,$id)->firstOrFail();
+         Department::where('code', '=', $department->code)->delete();
         Session::flash('delete','Se ha Eliminado correctamente!!!');
        return redirect()->route('departamento.index');
     }

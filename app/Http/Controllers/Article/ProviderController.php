@@ -80,9 +80,14 @@ class ProviderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProviderUpdateRequest $request, $id)
+    public function update(Request $request, $codigo)
     {
-       $p = Provider::FindOrFail($id);       
+         $this->validate($request,[
+           'nombre'=>'unique:providers,name,'.$codigo.',id',
+
+        ]);
+
+       $p = Provider::FindOrFail($codigo);       
        $p->update($request->all());
        Flash::success('Se ha Actualizado correctamente!!!');
 
