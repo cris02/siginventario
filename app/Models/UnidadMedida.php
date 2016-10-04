@@ -3,6 +3,7 @@
 namespace sig\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use sig\Models\Articulo;
 
 class UnidadMedida extends Model
 {
@@ -11,5 +12,8 @@ class UnidadMedida extends Model
 	
 	protected $fillable = ['nombre_unidadmedida'];
 	
-	
+	//Relacion uno a muchos con articulo
+	public function articulo(){
+		return $this->hasMany('sig\Models\Articulo','id_unidad_medida');
+	}
 }

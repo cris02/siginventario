@@ -56,7 +56,7 @@
 .skin-blue .content-header {
   background: transparent;
 }
-.skin-blue .wrapper,
+/*.skin-blue .wrapper, Color al wrapper*/
 .skin-blue .main-sidebar,
 .skin-blue .left-side {
   background-color: #222d32;
@@ -385,7 +385,7 @@
   background: transparent;
   box-shadow: none;
 }
-.skin-black .wrapper,
+/*.skin-black .wrapper, color al wrapper*/
 .skin-black .main-sidebar,
 .skin-black .left-side {
   background-color: #222d32;
@@ -539,7 +539,7 @@
   background: transparent;
   box-shadow: none;
 }
-.skin-black-light .wrapper,
+/*.skin-black-light .wrapper, color al wrapper*/
 .skin-black-light .main-sidebar,
 .skin-black-light .left-side {
   background-color: #f9fafc;
@@ -695,7 +695,8 @@
 .skin-green .content-header {
   background: transparent;
 }
-.skin-green .wrapper,
+/* .skin-green .wrapper, color al wrapper*/
+
 .skin-green .main-sidebar,
 .skin-green .left-side {
   background-color: #222d32;
@@ -931,6 +932,10 @@
  * Skin: Red
  * ---------
  */
+.skin-red .content-wrapper,
+.skin-red .main-footer {
+  border-left: 1px solid #d2d6de;
+}
 .skin-red .main-header .navbar {
   background-color: #dd4b39;
 }
@@ -985,9 +990,11 @@
 .skin-red .content-header {
   background: transparent;
 }
-.skin-red .wrapper,
+/*.skin-red .wrapper, esto le da  color al wrapper*/ 
+
 .skin-red .main-sidebar,
-.skin-red .left-side {
+.skin-red .left-side
+ {
   background-color: #222d32;
 }
 .skin-red .user-panel > .info,

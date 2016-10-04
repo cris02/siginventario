@@ -11,15 +11,14 @@ use sig\Models\UnidadMedida;
 class ArticuloController extends Controller
 {
     public function index(){
-		$articulos = DB::table('articulo')->orderBy('nombre_articulo','asc')->get();
-		
-		return view('articulos.index')->with('articulos',$articulos);
+		$articulos = Articulo::orderBy('nombre_articulo','asc')->get();		
+		return view('articulos.index',['articulos'=>$articulos]);
 	}
 	
 	public function create()
     {
-		$unidades = DB::table('unidad_medida')->orderBy('nombre_unidadmedida','asc')->get();
-        return view('articulos.create')->with('unidades',$unidades);
+		$unidades = UnidadMedida::orderBy('nombre_unidadmedida','asc')->get();
+        return view('articulos.create',['unidades'=>$unidades]);
     }
 
     public function store(Request $request)
@@ -29,41 +28,31 @@ class ArticuloController extends Controller
 			'unidad' => 'required | integer',
 			'especifico' => 'required | digits:4',
 			'nombre' => 'required |regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:articulo,nombre_articulo'
-		]);
-		
-		    //valida si exite el nombre del producto antes de guardar
-			if(DB::table('articulo')->where('nombre_articulo',$request->input('nombre'))->first()){
-				//Session::flash('flash_message', 'Unidad de medida ya existe!');
-				return redirect()->back()->with('error','Articulo ya existe');
-			}else{
-				$especifico = DB::table('especificos')->where('id',$request->input('especifico'))->first();
-				if($especifico){
+		]);	    
+											
 				    Articulo::create([
 				        'codigo_articulo' =>$request->input('codigo'),		    
 		                'nombre_articulo' =>$request->input('nombre'),
 				        'id_unidad_medida' =>$request->input('unidad'),
 				        'id_especifico' =>$request->input('especifico')				  				   
 				    ]);
-		            return redirect()->route('articulo.index')->with('success','Articulo creado exitosamente');
-				}else{
-					return redirect()->back()->with('error','Especifco ya existe');
-				}
-		    }
+					flash('Articulo guardado exitosamente','success');
+		            return redirect()->route('articulo.index');
+				
+		    
 	}
 
     public function show($codigoArticulo)
     {
-       $articulo = DB::table('articulo')->where('codigo_articulo',$codigoArticulo)->first();
-	   
-	   return view('articulos.details')->with('articulo',$articulo);
-	}
-    
+       $articulo = Articulo::findOrFail($codigoArticulo);	   
+	   return view('articulos.details',['articulo'=>$articulo]);
+	}    
  
     public function edit($codigoArticulo)
 	{
-       $articulo = DB::table('articulo')->where('codigo_articulo',$codigoArticulo)->first();
-	   $unidades = DB::table('unidad_medida')->orderBy('nombre_unidadmedida','asc')->get();
-	   //return view('articulos.edit')->with('articulo',$articulo); 
+       $articulo = Articulo::findOrFail($codigoArticulo);
+	   $unidades = UnidadMedida::orderBy('nombre_unidadmedida','asc')->get();
+	   
 	   return view('articulos.edit',['articulo' => $articulo,'unidades' =>$unidades]);
     }
 
@@ -81,25 +70,26 @@ class ArticuloController extends Controller
 			  'id_unidad_medida' => $request->input('unidad'),
 			  'id_especifico' => $request->input('especifico')
 			  ]);
-		return redirect()->route('articulo.index')->with('success','Articulo actualizado exitosamente');
+	    flash('Articulo actualizado exitosamente','success');
+		return redirect()->route('articulo.index');
 			
 		}else{
-			return redirect()->route('articulo.index')->with('error','Error al actualizar Articulo');
+			flash('Error ala actualizar articulo','danger');
+			return redirect()->route('articulo.edit');
 		}
 				    
     }
     
 	public function delete($codigoArticulo){
-		$articulo = DB::table('articulo')->where('codigo_articulo',$codigoArticulo)->first();
+		$articulo = Articulo::findOrFail($codigoArticulo);
 	   
-	    return view('articulos.delete')->with('articulo',$articulo);
-		
-		
+	    return view('articulos.delete',['articulo'=>$articulo]);		
 	}
     
     public function destroy($codigoArticulo)
     {
-        DB::table('articulo')->where('codigo_articulo',$codigoArticulo)->delete();
-		return redirect()->route('articulo.index')->with('success','Articulo eliminado correctamente');
+        Articulo::findOrFail($codigoArticulo)->delete();
+		flash('Articulo eliminado exitosamente','success');
+		return redirect()->route('articulo.index');
     }
 }

@@ -1,7 +1,6 @@
 @extends('layouts.template')
 @section('content')
-
-    <br/>
+    
     <div class="col-md-offset-2">
         <h3>Editar</h3>
     </div>
@@ -44,26 +43,19 @@
 					   @endif
 					 
 				     @endforeach
-				</select>
-				
+				</select>				
 				</div>
-            </div>
-        
-        
-		
+            </div>  
+        <div class="form-group">		
         <div class="col-md-offset-2 col-md-7">
+		    
                 <button type="submit" class="btn btn-primary">Actualizar</button>
 				<a href="{{route('articulo.index')}}" class="btn btn-primary">Cancelar</a>
+			
         </div>
+		</div>
 
-        {!! Form::close() !!}
-
-            
-    @else
-	 <div class="alert alert-info">
-       Unidad de medida no encontrado
-	   <br/><br/>
-	   <a href="{{ route('unidad.index')}}" class="btn btn-primary">Volver</a>
-     </div>
-    @endif
+    {!! Form::close() !!}    
+  @endif	
+    
 @endsection
