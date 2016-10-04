@@ -33,10 +33,10 @@
       <header class="main-header">
 
         <!-- Logo -->
-        <a href="#" class="logo">                
+        <div class="logo">                
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg"><b>SIGinventario</b></span>
-        </a>
+        </div>
 
         <!-- Header Navbar: style can be found in header.less -->
 
