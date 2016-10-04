@@ -146,19 +146,17 @@
           @yield('content')
 
         </div>
-      </div> <!-- /.content-wrapper -->
-    </div> 
-       
-          <footer class="main-footer">               
+		<footer class="main-footer">               
                 <strong>Copyright &copy; 2016 <a href="http://almsaeedstudio.com">DSI115_G08</a>.</strong> Todos los derechos reservados.              
           </footer>
-       
+      </div> <!-- /.content-wrapper -->
+	  
+    </div>  
+          
 
 
     </div>
-	 <footer class="main-footer">               
-                <strong>Copyright &copy; 2016 <a href="http://almsaeedstudio.com">DSI115_G08</a>.</strong> Todos los derechos reservados.              
-    </footer>   
+	    
     </div>
 	    
     </div>

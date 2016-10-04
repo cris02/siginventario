@@ -27,15 +27,15 @@ class EspecificoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-		    'numero_especifico' => 'required |digits:4 |unique:especificos,id',
-			'titulo_especifico' => 'required|regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:especificos,titulo_especifico',
-			'descripcion_especifico' => 'required',
+		    'numero' => 'required |integer|min:1|digits:4 |unique:especificos,id',
+			'titulo' => 'required|regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:especificos,titulo_especifico',
+			
 		]);		
 		    
 				Especifico::create([
-		           'id' =>$request->input('numero_especifico'),
-		           'titulo_especifico' =>$request->input('titulo_especifico'),
-		           'descripcion_epecifico' =>$request->input('descripcion_especifico')
+		           'id' =>$request->input('numero'),
+		           'titulo_especifico' =>$request->input('titulo'),
+		           'descripcion_epecifico' =>$request->input('descripcion')
 		        ]);
 				flash('Especifico guardado exitosamente','success');
 		        return redirect()->route('especifico.index');		
@@ -57,13 +57,13 @@ class EspecificoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-		   'titulo_especifico'=>'required |regex: /^[a-zA-Záéíóúñ\s]*$/ | unique:especificos,titulo_especifico,'.$id.',id'
+		   'titulo'=>'required |regex: /^[a-zA-Záéíóúñ\s]*$/ | unique:especificos,titulo_especifico,'.$id.',id'
 		]);
 		$especifico = Especifico::FindOrFail($id);
 		if($especifico){
 			$especifico ->update([
-			  'titulo_especifico' => $request->input('titulo_especifico'), 
-			  'descripcion_epecifico' =>$request->input('descripcion_especifico')
+			  'titulo_especifico' => $request->input('titulo'), 
+			  'descripcion_epecifico' =>$request->input('descripcion')
 			]);
 		flash('Especifico actualizado exitosamente','success');
 		return redirect()->route('especifico.index');
