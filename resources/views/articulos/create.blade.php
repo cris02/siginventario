@@ -13,18 +13,27 @@
                 {!!Form::label('Codigo', 'Codigo', array('class' =>'col-md-2 control-label' )) !!}
 				<div class="col-md-7">
                     {!!Form::text('codigo', null, array('placeholder' => 'ES001','class' => 'form-control')) !!}
+					<div class="error">
+					    <ul>@foreach($errors->get('codigo') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+				    </div>
 				</div>
             </div>
 			<div class="form-group">
                 {!!Form::label('Nombre', 'Nombre', array('class' =>'col-md-2 control-label' )) !!}
 				<div class="col-md-7">
                     {!!Form::text('nombre', null, array('placeholder' => 'Escoba, Azucar','class' => 'form-control')) !!}
+					<div class="error">
+					    <ul>@foreach($errors->get('nombre') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+				    </div>
 				</div>
             </div>
 			<div class="form-group">
                 {!!Form::label('Especifico', 'Especifico', array('class' =>'col-md-2 control-label' )) !!}
 				<div class="col-md-7">
-                    {!!Form::text('especifico', null, array('placeholder' => '7845','class' => 'form-control')) !!}
+                    {!!Form::number('especifico', null, array('placeholder' => '7845','class' => 'form-control')) !!}
+					<div class="error">
+					    <ul>@foreach($errors->get('especifico') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+				    </div>
 				</div>
             </div>
 			<div class="form-group">
@@ -37,7 +46,9 @@
 					</option>
 				     @endforeach
 				</select>
-				
+				<div class="error">
+					    <ul>@foreach($errors->get('unidad') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+				    </div>
 				</div>
             </div>        
 		<div class="form-group">

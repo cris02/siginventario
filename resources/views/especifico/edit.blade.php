@@ -11,21 +11,30 @@
 	        <div class="form-group">
                 {!!Form::label('Especifico', 'Especifico', array('class' =>'control-label col-md-2' )) !!}
 				<div class="col-md-7">
-                    {!!Form::text('id_especifico', $especifico->id, array('placeholder' => 'Titulo','class' => 'form-control','disabled')) !!}
+                    {!!Form::text('numero', $especifico->id, array('placeholder' => '1234','class' => 'form-control','disabled')) !!}
+					<div class="error">
+					    <ul>@foreach($errors->get('numero') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+				    </div>
 				</div>
             </div>
            
             <div class="form-group">
                 {!!Form::label('Titulo', 'Titulo', array('class' =>'control-label col-md-2' )) !!}
 				<div class="col-md-7">
-                    {!!Form::text('titulo_especifico', $especifico->titulo_especifico, array('placeholder' => 'Titulo','class' => 'form-control')) !!}
+                    {!!Form::text('titulo', $especifico->titulo_especifico, array('placeholder' => 'Quimicos','class' => 'form-control')) !!}
+					<div class="error">
+					    <ul>@foreach($errors->get('titulo') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+				    </div>
 				</div>
             </div>
                       
             <div class="form-group">
                 {!!Form::label('Descripcion', 'Descripcion', array('class' =>'control-label col-md-2' )) !!}
 				<div class="col-md-7">
-                    {!!Form::textarea('descripcion_especifico',$especifico->descripcion_epecifico, array('class' => 'form-control')) !!}
+                    {!!Form::textarea('descripcion',$especifico->descripcion_epecifico, array('class' => 'form-control')) !!}
+					<div class="error">
+					    <ul>@foreach($errors->get('descripcion') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+				    </div>
 				</div>
             </div>
 			

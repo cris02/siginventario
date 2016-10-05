@@ -13,7 +13,7 @@
 
 <table class="table table-bordered table-hover ">
 <tbody>
- <tr class="danger">
+ <tr class="success">
   
     <th class="col-xs-1">Codigo</th>
     <th class="col-xs-2">Depto/Unidad</th>

@@ -25,8 +25,8 @@ class ArticuloController extends Controller
     {
         $this->validate($request,[
 		    'codigo' => 'required | alpha_num',
-			'unidad' => 'required | integer',
-			'especifico' => 'required | digits:4',
+			'unidad' => 'required | integer|min:1',
+			'especifico' => 'required | digits:4|min:1| exists:especificos,id',
 			'nombre' => 'required |regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:articulo,nombre_articulo'
 		]);	    
 											
@@ -60,8 +60,8 @@ class ArticuloController extends Controller
     {
         $this->validate($request,[
 		   'nombre'=>'required |regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:articulo,nombre_articulo,'.$codigoArticulo.',codigo_articulo',
-		   'unidad' => 'required | integer',
-		   'especifico' => 'required |digits:4 | exists:especificos,id'
+		   'unidad' => 'required | integer |min:1',
+		   'especifico' => 'required |digits:4 |min:1| exists:especificos,id'
 		]);
 		$articulo = Articulo::FindOrFail($codigoArticulo);
 		if($articulo){

@@ -12,6 +12,9 @@
                 {!! Form::label('Unidad de medida', 'Unidad de medida', array('class' =>'control-label col-md-2' )) !!}
 				<div class="col-md-7">
                     {!!Form::text('nombre_unidadmedida', $unidad->nombre_unidadmedida, array('placeholder' => 'Gramo,Litro','class' => 'form-control')) !!}
+				<div class="error">
+					<ul>@foreach($errors->get('nombre_unidadmedida') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+				</div>
 				</div>
             </div>        
         

@@ -62,14 +62,23 @@ body {
  * Content Wrapper - contains the main content
  * ```.right-side has been deprecated as of v2.0.0 in favor of .content-wrapper  ```
  */
+ .main-footer{
+   -webkit-transition: -webkit-transform 0.01s ease-in-out, margin 0.01s ease-in-out;
+  -moz-transition: -moz-transform 0.01s ease-in-out, margin 0.01s ease-in-out;
+  -o-transition: -o-transform 0.01s ease-in-out, margin 0.01s ease-in-out;
+  transition: transform 0.01s ease-in-out, margin 0.01s ease-in-out;
+  margin-left: 220px;
+  margin-right:0px;
+  z-index: 820;
+ }
 .content-wrapper,
 .right-side /*.main-footer  */
 
 {
-  -webkit-transition: -webkit-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
-  -moz-transition: -moz-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
-  -o-transition: -o-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+  -webkit-transition: -webkit-transform 0.1s ease-in-out, margin 0.1s ease-in-out;
+  -moz-transition: -moz-transform 0.1s ease-in-out, margin 0.1s ease-in-out;
+  -o-transition: -o-transform 0.1s ease-in-out, margin 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, margin 0.1s ease-in-out;
   margin-left: 214px;
   margin-right:0px;
   z-index: 820;
@@ -114,15 +123,13 @@ body {
 /*Esto le da color al wrapper*/
 .wrapper{
 	background:#ecf0f5;
-	
-	
+		
 }
 
 .main-footer {
   background: #ecf0f5;
   padding: 15px;
   color: #444;
-  margin-top:15px;
   border-top: 1px solid #d2d6de;
 }
 /* Fixed layout */
