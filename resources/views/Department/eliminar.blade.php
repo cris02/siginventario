@@ -2,42 +2,24 @@
 
 @section('content')
 
-              <div class="box box-info container">
-                <div class="box-header with-border">
-                  <h3 class="box-title">CONFIRMA ELIMINAR EL SIGUIENTE DEPARTAMENTO</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                <div class="form-horizontal">
-	               {!!Form::open(['route'=>['departamento.destroy',$department->code],'method'=>'DELETE'])!!}
-	                <div class="container">
-							<table class="table table-hover table-striped">							
-							  
-							    <tr class="row">
-							    <th class="col-xs-1">CODIGO</th>
-							    <td class="col-xs-6">{{$department->code}}</td>
-							    <td class="col-xs-5"></td>
-							    </tr>
-							    <tr class="row">
-							    <th class="col-xs-1">DEPARTAMENTO/UNIDAD</th>
-							    <td class="col-xs-6">{{$department->name}}</td>
-							    
-													         
-												  
-							</table>
-	                                 
-	                  </div><!-- /.box-body -->
-	                  <div class="box-footer">
-	                  		<a href="{{Route('departamento.index')}}"><button type="button" id="cancelar" class="btn btn-default m-t-10">Cancelar</button></a>
-	                        <button type="submit" class="btn btn-danger">Eliminar</button>
-	                  </div><!-- /.box-footer -->
-	               {!!Form::close()!!}
-               </div>
-              </div><!-- /.box -->
-
-
- @endsection
-
-
-
-
-
+<div class="col-md-offset-1">
+    <h3>Eliminar Departamento</h3>
+</div>
+<hr/>
+    @if($unidad)
+	 
+	    <div class="col-md-offset-1">
+	        <h4>Esta seguro que desea eliminar la departamento?</h4>
+	    </div>
+        <dl class="dl-horizontal col-md-offset-1"> 
+	        <dt>Departamento: </dt> 
+		    <dd>{{ $departamento->name}}</dd>			   	   
+	    <dl>
+	    {!! Form::open(['method' => 'DELETE','route' => ['departamento.destroy', $departamento->name],'style'=>'display:inline']) !!}
+	        <div>
+                {!! Form::submit('Eliminar', ['class' => 'btn btn-primary']) !!}
+			    <a href="{{ route('departamento.index')}}" class="btn btn-primary">Cancelar</a>
+		    </div>
+        {!! Form::close() !!}
+    @endif
+@endsection

@@ -43,11 +43,17 @@ class DepartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DepartmentCreateRequest $request)
+    public function store(Request $request)
     {
-        Department::create($request->all());  
-       Flash::success('Guardado correctamente!!!');    
-       return redirect()->route('departamento.index');
+        $this->validate($request,[
+            'name' => 'required|regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:departamento,name',            
+        ]);
+        
+        Departamento::create([
+                   'name' =>$request->input('Departamento')
+                   ]);
+        flash('Departamento guardada exitosamente','success');     
+        return redirect()->route('departamento.index');
     }
 
     /**
@@ -82,16 +88,23 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DepartmentUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        //$d = $department= Department::where('code', '=' ,$id)->firstOrFail();  
-        DB::table('departments')
-            ->where('code', $id)
-            ->update(['name' => $request->name]);     
-       // $d->update($request->all());
-        Flash::success('Se ha Actualizado correctamente!!!');
-
-       return redirect()->route('departamento.index');
+       
+        $this->validate($request,[
+           'name'=>'required|regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:Ni idea ,name,'.$ id.'pdate(Request $request, $id)'
+        ]);
+        $departament = name::FindOrFail($id);
+        if($departamento){
+            $deparatamento  ->update([
+              'nombre_unidadmedida' => $request->input('nombre_unidadmedida')
+              ]);
+        flash('Unidad de medida actualizado exitosamente','success');
+        return redirect()->route('departamento.index');         
+        }else{
+            flash('Error: no se pudo actualizar la unidad de medida','danger');
+            return redirect()->route('departamento.index');
+        }
     }
 
     /**
@@ -102,9 +115,12 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        $department= Department::where('code', '=' ,$id)->firstOrFail();
-         Department::where('code', '=', $department->code)->delete();
-        Session::flash('delete','Se ha Eliminado correctamente!!!');
-       return redirect()->route('departamento.index');
+        $name = Depar::findOrFail($code);
+        if($unidad->articulo->count()>0){           
+            flash('Error: No puede eliminarse el departamentode medida porque esta siendo usada por articulos','danger');
+            return redirect()->back();
+        }else{
+            $unidad->delete();
+            flash('Departamento eliminada exitosamente','success');
+            return redirect()->route('departamento .index');
     }
-}
