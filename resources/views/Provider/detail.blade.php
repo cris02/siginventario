@@ -2,46 +2,55 @@
 
 @section('content')
 
-        <div class="box box-info container">
+        <div class="table-responsive">
                 <div class="box-header with-border">
                   <h3 class="box-title">DETALLE DE PROVEEDOR</h3>
                 </div><!-- /.box-header -->
             
 
-	               		<div class="container">
-							<table class="table table-hover table-striped">							
+	               		<div class="panel panel-default">
+							<table class="table table-hover table-bordered table-condensed">							
 							  
-							    <tr class="row">
+							    <tr >
 							    <th class="col-xs-1">Numero</th>
-							    <td class="col-xs-6">{{$provider->id}}</td>
-							    <td class="col-xs-5"></td>
+							    <td class="col-xs-6">{{$provider->id}}</td>							   
 							    </tr>
-							    <tr class="row">
+
+							    <tr >
 							    <th class="col-xs-1">Nombre</th>
-							    <td class="col-xs-6">{{$provider->name}}</td>
-							    <td class="col-xs-5 "></td>
+							    <td class="col-xs-6">{{$provider->nombre}}</td>							   
 							    </tr>  
-							     <tr class="row">
+
+							     <tr >
 							    <th class="col-xs-1">Direccion</th>
-							    <td class="col-xs-6">{{$provider->direction}}</td>
-							    <td class="col-xs-5"></td>
-							    </tr>  
-							     <tr class="row">
+							    <td class="col-xs-6">{{$provider->direccion}}</td>							    
+							    </tr>
+
+							    <tr >
 							    <th class="col-xs-1">Telefono</th>
-							    <td class="col-xs-6">{{$provider->phone}}</td>
-							    <td class="col-xs-5"></td>
-							    </tr>  
-							     <tr class="row">
+							    <td class="col-xs-6">{{$provider->telefono}}</td>							   
+							    </tr> 
+
+							    <tr >
+							    <th class="col-xs-1">Fax</th>
+							    <td class="col-xs-6">{{$provider->fax}}</td>							
+							    </tr> 
+
+							    <tr >
+							    <th class="col-xs-1">Correo</th>
+							    <td class="col-xs-6">{{$provider->email}}</td>							
+							    </tr>    
+
+							     <tr >
 							    <th class="col-xs-1">Vendedor</th>
-							    <td class="col-xs-6">{{$provider->seller}}</td>
-							    <td class="col-xs-5"></td>
+							    <td class="col-xs-6">{{$provider->vendedor}}</td>							
 							    </tr>  
 													         
 												  
 							</table>
 						</div>
 	            
-	                  <div class="box-footer">
+	                  <div class="">
 	                  		<a href="{{Route('proveedor.index')}}"><button type="button" id="cancelar" class="btn btn-default m-t-10">Regresar</button></a>
 	                      
 	                  </div><!-- /.box-footer -->

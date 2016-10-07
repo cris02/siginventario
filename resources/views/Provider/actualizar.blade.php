@@ -2,13 +2,12 @@
 
 @section('content')
 
-              <div class="box box-info container">
+              <div class="panel panel-default">
                 <div class="box-header with-border">
                   <h3 class="box-title">MODIFICAR DATOS DEL PROVEEDOR</h3>
                 </div><!-- /.box-header -->
             
-                        @include('Msj.messages')
-
+                       
                 <div class="form-horizontal">
 	               {!!Form::model($provider,['route'=>['proveedor.update',$provider->id],'method'=>'patch'])!!}
 	                <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -21,33 +20,48 @@
 	                      </div>
 	                    </div> 	                    
 	                    <div class="form-group">
-	                      <label for="name" class="col-sm-2 control-label">Nombre</label>
+	                      <label for="nombre" class="col-sm-2 control-label">Nombre</label>
 	                      <div class="col-sm-6">
-	                        <input type="text" class="form-control" id="name" name="name" value="{{$provider->name}}" >
+	                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{$provider->nombre}}" >
+	                            <div class="error">
+                                    <ul>@foreach($errors->get('nombre') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+                                </div>
 	                      </div>
 	                    </div>   
 	                    <div class="form-group">
-	                      <label for="direction" class="col-sm-2 control-label">Direccion</label>
+	                      <label for="direccion" class="col-sm-2 control-label">Direccion</label>
 	                      <div class="col-sm-6">
-	                        <input type="text" class="form-control" id="direction" name="direction" value="{{$provider->direction}}">
+	                        <input type="text" class="form-control" id="direccion" name="direccion" value="{{$provider->direccion}}">
+	                            <div class="error">
+                                    <ul>@foreach($errors->get('direccion') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+                                </div>
 	                      </div>
 	                    </div>
 	                    <div class="form-group">
-	                      <label for="phone" class="col-sm-2 control-label">Telefono</label>
+	                      <label for="telefono" class="col-sm-2 control-label">Telefono</label>
 	                      <div class="col-sm-6">
-	                        <input type="text" class="form-control" id="phone" name="phone" value="{{$provider->phone}}">
+	                        <input type="text" class="form-control" id="telefono" name="telefono" value="{{$provider->telefono}}">
+	                        	<div class="error">
+                                    <ul>@foreach($errors->get('telefono') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+                                </div>
 	                      </div>
 	                    </div>   
 	                     <div class="form-group">
 	                      <label for="fax" class="col-sm-2 control-label">Fax</label>
 	                      <div class="col-sm-6">
 	                        <input type="text" class="form-control" id="fax" name="fax" value="{{$provider->fax}}">
+	                            <div class="error">
+                                    <ul>@foreach($errors->get('fax') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+                                </div>
 	                      </div>
 	                    </div> 
 	                    <div class="form-group">
-	                      <label for="seller" class="col-sm-2 control-label">Vendedor</label>
+	                      <label for="vendedor" class="col-sm-2 control-label">Vendedor</label>
 	                      <div class="col-sm-6">
-	                        <input type="text" class="form-control" id="seller" name="seller" value="{{$provider->seller}}">
+	                        <input type="text" class="form-control" id="vendedor" name="vendedor" value="{{$provider->vendedor}}">
+	                            <div class="error">
+                                    <ul>@foreach($errors->get('vendedor') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+                                </div>
 	                      </div>
 	                    </div>            
 	                  </div><!-- /.box-body -->
@@ -64,7 +78,7 @@
 <script type="text/javascript">
 
 window.onload = function() {
-   $('#phone').mask('9999-9999'); 
+   $('#telefono').mask('9999-9999'); 
     $('#fax').mask('9999-9999'); 
 };
 

@@ -9,20 +9,24 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">   
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/font-awesome.css') }}">   
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.css')}}">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
+  
     <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.css')}}">
 
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href=" {{ asset('bootstrap/css/bootstrap.css') }}">
-
 	
 
      <!-- our styles -->
     <link rel="stylesheet" href=" {{ asset('bootstrap/css/style.css') }}">
+    <!-- estilo para datatables -->
+    <link rel="stylesheet" href="{{asset('plugins/datatables/jquery.dataTables.min.css')}}">  
+
+     <!-- jQuery-->
+     <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+     <script src="{{asset('plugins/jQuery/jQuery.js')}}"></script>
     
 
   </head>
@@ -150,16 +154,17 @@
       
              
     </div><!-- ./wrapper -->
-     <!-- jQuery-->
-     <script src="{{asset('plugins/jQuery/jQuery.js')}}"></script>
-        <!-- js de bootstrap-->
-     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+
+       <!-- AdminLTE App-->
+     <script src="{{asset('dist/js/app.js')}}"></script> 
  
         <!-- para poner mascaras a los input-->
-     <script src="{{asset('plugins/input-mask/jquery.inputmask.js')}}"></script>
+     <script src="{{asset('plugins/input-mask/jquery.inputmask.js')}}"></script>      
 
-         <!-- AdminLTE App-->
-     <script src="{{asset('dist/js/app.js')}}"></script> 
+     <script src="{{asset('plugins/datatables/jquery.dataTables.js')}}"></script>
+
+        <!-- js de bootstrap-->
+     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
    
   </body>
 </html>

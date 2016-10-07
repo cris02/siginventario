@@ -22,7 +22,7 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = Provider::orderBy('name','asc')->paginate(10);
+        $providers = Provider::all();
        return view('Provider\index')->with('proveedores',$providers);
     }
 
@@ -42,9 +42,18 @@ class ProviderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProviderCreateRequest $request)
+    public function store(Request $request)
     {
-       Provider::create($request->all());  
+        $this->validate($request,[
+            'nombre'=>'required|unique:providers|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ ',
+            'direccion'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ ',
+            'vendedor'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s]*$/',
+            'telefono'=>'required',
+        ]);         
+
+
+       Provider::create($request->all());
+    
        Flash::success('Guardado correctamente!!!');    
        return redirect()->route('proveedor.index');
     }
@@ -83,9 +92,10 @@ class ProviderController extends Controller
     public function update(Request $request, $id)
     {
          $this->validate($request,[
-            'name'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ |unique:providers,name,'.$id.',id',
-            'direction'=>'regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ ',
-            'seller'=>'regex: /^[a-zA-Z0-9áéíóúñÑ,\s]*$/ ',
+            'nombre'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ |unique:providers,nombre,'.$id.',id',
+            'direccion'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ ',
+            'vendedor'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s]*$/',
+            'telefono'=>'required',
          
         ]);
 

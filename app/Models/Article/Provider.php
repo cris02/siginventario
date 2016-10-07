@@ -10,7 +10,7 @@ class Provider extends Model
     protected $primarykey = 'id';
 
     protected $fillable=[
-    	'id' ,'name','direction', 'phone', 'fax', 'seller' 
+    	'id' ,'nombre','direccion', 'telefono', 'fax','correo', 'vendedor' 
     ];
 
    
