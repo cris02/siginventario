@@ -25,7 +25,9 @@ class ProviderCreateRequest extends Request
     {
         return [
             'id'=>'required|unique:providers',
-            'name'=>'required|unique:providers',
+            'name'=>'required|unique:providers|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ ',
+            'direction'=>'regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ ',
+            'seller'=>'regex: /^[a-zA-Z0-9áéíóúñÑ,\s]*$/',
         ];
     }
 }

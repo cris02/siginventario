@@ -28,12 +28,12 @@
                           <div class="row">
                               <td class="col-xs-1">{{$p->id}}</td>
                               <td class="col-xs-5">{{$p->name}}</td>               
-                              <td class="col-xs-1">{{$p->phone}}</td>  
-                              <td ><a class="btn btn-default" href="{{url('proveedor/detail',$p->id)}}"><span class="glyphicon glyphicon-th-large col-xs-1"></span>Detalle</a>
+                              <td class="col-xs-2">{{$p->phone}}</td>  
+                              <td ><a class="btn btn-default btn-sm" href="{{url('proveedor/detail',$p->id)}}"><span class="glyphicon glyphicon-th-large col-xs-1"></span>Detalle</a>
 
-                              <a class="btn btn-default" href="{{route('proveedor.edit',$p->id)}}"><span class="glyphicon glyphicon-pencil col-xs-1"></span>Editar</a>   
+                              <a class="btn btn-default btn-sm" href="{{route('proveedor.edit',$p->id)}}"><span class="glyphicon glyphicon-pencil col-xs-1"></span>Editar</a>   
 
-                              <a class="btn btn-default" href="{{route('proveedor.show',$p->id)}}"><span class="glyphicon glyphicon-trash col-xs-1"></span>Eliminar</a>
+                              <a class="btn btn-default btn-sm" href="{{route('proveedor.show',$p->id)}}"><span class="glyphicon glyphicon-trash col-xs-1"></span>Eliminar</a>
                               </td>
                           </div>
                       </tr>

@@ -80,14 +80,16 @@ class ProviderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $codigo)
+    public function update(Request $request, $id)
     {
          $this->validate($request,[
-           'nombre'=>'unique:providers,name,'.$codigo.',id',
-
+            'name'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ |unique:providers,name,'.$id.',id',
+            'direction'=>'regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ ',
+            'seller'=>'regex: /^[a-zA-Z0-9áéíóúñÑ,\s]*$/ ',
+         
         ]);
 
-       $p = Provider::FindOrFail($codigo);       
+       $p = Provider::FindOrFail($id);       
        $p->update($request->all());
        Flash::success('Se ha Actualizado correctamente!!!');
 
@@ -95,7 +97,9 @@ class ProviderController extends Controller
 
     }
 
-    /**
+    /**,
+ \s
+
      * Remove the specified resource from storage.
      *
      * @param  int  $id

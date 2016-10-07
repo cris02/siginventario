@@ -23,8 +23,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-         $departments = DB::table('departments')->paginate(5);
-       return view('Department.index')->with('departamentos',$departments);
+         $departamento = Department::orderBy('name','asc')->get();
+       return view('Department.index',['departamento'=>$departamento]);
     }
 
     /**
@@ -46,11 +46,13 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required|regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:departamento,name',            
+            'code' => 'required|alpha_num|unique:departments,code',
+            'name' => 'required|regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:departments,name',            
         ]);
         
-        Departamento::create([
-                   'name' =>$request->input('Departamento')
+        Department::create([
+                   'code' =>$request->input('code'),
+                   'name' =>$request->input('name')
                    ]);
         flash('Departamento guardada exitosamente','success');     
         return redirect()->route('departamento.index');
@@ -64,8 +66,8 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        $department= Department::where('code', '=' ,$id)->firstOrFail();
-        return view('Department.eliminar')->with('department',$department);
+        $department= Department::FindOrFail($id);
+        return view('Department.eliminar',['department'=>$department]);
     }
 
     /**
@@ -77,8 +79,8 @@ class DepartmentController extends Controller
     public function edit($id)
     {
 
-        $department= Department::where('code', '=' ,$id)->firstOrFail();
-       return view('Department.actualizar')->with('department',$department);
+       $department= Department::findOrFail($id);
+       return view('Department.actualizar',['department'=>$department]);
     }
 
     /**
@@ -88,21 +90,21 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $code)
     {
        
         $this->validate($request,[
-           'name'=>'required|regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:Ni idea ,name,'.$ id.'pdate(Request $request, $id)'
+           'name'=>'required|regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:departments,name,'.$code.',code',
         ]);
-        $departament = name::FindOrFail($id);
-        if($departamento){
-            $deparatamento  ->update([
-              'nombre_unidadmedida' => $request->input('nombre_unidadmedida')
+        $departament = Department::FindOrFail($code);
+        if($departament){
+            $departament->update([
+              'name' => $request->input('name')
               ]);
-        flash('Unidad de medida actualizado exitosamente','success');
+        flash('Departamento actualizado exitosamente','success');
         return redirect()->route('departamento.index');         
         }else{
-            flash('Error: no se pudo actualizar la unidad de medida','danger');
+            flash('Error: no se pudo actualizar el Departamento','danger');
             return redirect()->route('departamento.index');
         }
     }
@@ -113,14 +115,12 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($code)
     {
-        $name = Depar::findOrFail($code);
-        if($unidad->articulo->count()>0){           
-            flash('Error: No puede eliminarse el departamentode medida porque esta siendo usada por articulos','danger');
-            return redirect()->back();
-        }else{
-            $unidad->delete();
-            flash('Departamento eliminada exitosamente','success');
-            return redirect()->route('departamento .index');
+        $departament = Department::findOrFail($code);
+        
+        $departament->delete();
+        flash('Departamento eliminado exitosamente','success');
+        return redirect()->route('departamento.index');
     }
+}

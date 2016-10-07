@@ -23,7 +23,6 @@ Route:: resource('menu','Menu\MenuController');
 Route::get('proveedor/detail/{id}', 'Article\ProviderController@detail');
 Route:: resource('proveedor','Article\ProviderController');
 
-Route::post('departamento/store', 'Departamento\DepartmentController@store');
 Route::resource('departamento', 'Departamento\DepartmentController');
 
 Route::resource('especifico','EspecificoController');

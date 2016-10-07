@@ -5,13 +5,21 @@
         <h3>Editar</h3>
     </div>
     
-    @if($unidad)
-	    {!! Form::open(array('route' => ['unidad.update','mane' => $unidad->id_unidad_medida],'class' => 'form-horizontal','method' => 'put')) !!}
+    @if($department)
+	    {!! Form::open(array('route' => ['departamento.update','code' => $department->code],'class' => 'form-horizontal','method' => 'put')) !!}
+        <div class="form-group">
+                {!! Form::label('Departamento', 'Departamento', array('class' =>'control-label col-md-2' )) !!}
+                <div class="col-md-7">
+                    {!!Form::text('name', $department->code, array('placeholder' => '','class' => 'form-control','disabled')) !!}
+                
+                </div>
+            </div>
+
            
             <div class="form-group">
-                {!! Form::label('Unidad de medida', 'Unidad de medida', array('class' =>'control-label col-md-2' )) !!}
+                {!! Form::label('Departamento', 'Departamento', array('class' =>'control-label col-md-2' )) !!}
 				<div class="col-md-7">
-                    {!!Form::text('nombre_unidadmedida', $unidad->nnome, array('placeholder' => '','class' => 'form-control')) !!}
+                    {!!Form::text('name', $department->name, array('placeholder' => '','class' => 'form-control')) !!}
 				<div class="error">
 					<ul>@foreach($errors->get('name') as $msg)<li>{{$msg}}</li> @endforeach</ul>
 				</div>

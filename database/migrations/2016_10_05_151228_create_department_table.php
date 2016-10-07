@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Schema\Blueprint;
@@ -12,9 +13,8 @@ class CreateDepartmentTable extends Migration
      */
     public function up()
     {
-        //
-         Schema::create('departments', function (Blueprint $table) {
-            $table->integer('code');
+        Schema::create('departments', function (Blueprint $table) {
+            $table->string('code');
             $table->string('name',100);
          
         
@@ -31,7 +31,6 @@ class CreateDepartmentTable extends Migration
      */
     public function down()
     {
-        //
         Schema::drop('departments');
     }
 }

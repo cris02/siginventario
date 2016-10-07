@@ -23,7 +23,7 @@
 	                    <div class="form-group">
 	                      <label for="name" class="col-sm-2 control-label">Nombre</label>
 	                      <div class="col-sm-6">
-	                        <input type="text" class="form-control" id="name" name="name" value="{{$provider->name}}" required>
+	                        <input type="text" class="form-control" id="name" name="name" value="{{$provider->name}}" >
 	                      </div>
 	                    </div>   
 	                    <div class="form-group">
@@ -65,6 +65,7 @@
 
 window.onload = function() {
    $('#phone').mask('9999-9999'); 
+    $('#fax').mask('9999-9999'); 
 };
 
 </script>

@@ -8,7 +8,7 @@
                   <h3 class="box-title">INGRESAR NUEVO PROVEEDOR</h3>
                 </div><!-- /.box-header -->
               
-                  @include('Msj.messages')
+               
 
                 <!-- form start -->
                 <div class="form-horizontal">
@@ -25,12 +25,19 @@
                           <label for="name" class="col-sm-2 control-label">Nombre</label>
                           <div class="col-sm-6">
                             <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="Digite nombre del nuevo proveedor" required>
-                          </div>
+                          
+                                <div class="error">
+                                   <ul>@foreach($errors->get('name') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+                              </div>
+                          </div>                         
                       </div>   
                       <div class="form-group">
                           <label for="direction" class="col-sm-2 control-label">Direccion</label>
                           <div class="col-sm-6">
-                            <input type="text" class="form-control" id="direction" name="direction" value="{{ old('direction') }}" placeholder="Digite La Direccion del nuevo proveedor">
+                            <input type="text" class="form-control" id="direction" name="direction" value="{{ old('direction') }}" placeholder="Digite La Direccion del nuevo proveedor" >
+                                 <div class="error">
+                                    <ul>@foreach($errors->get('direction') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+                                </div>
                           </div>
                       </div>
                       <div class="form-group">
@@ -49,6 +56,9 @@
                           <label for="seller" class="col-sm-2 control-label">Vendedor</label>
                           <div class="col-sm-6">
                             <input type="text" class="form-control" id="seller" name="seller" value="{{ old('seller') }}" placeholder="Ingrese vendedor del nuevo proveedor">
+                                  <div class="error">
+                                        <ul>@foreach($errors->get('seller') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+                                  </div>
                           </div>
                       </div>            
                     </div><!-- /.box-body -->                    
@@ -67,6 +77,7 @@
 
 window.onload = function() {
    $('#phone').mask('9999-9999'); 
+   $('#fax').mask('9999-9999'); 
 };
 
 </script>
