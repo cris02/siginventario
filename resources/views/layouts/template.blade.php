@@ -62,13 +62,13 @@
                     <li class="dropdown user user-menu">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <!-- Nombre del usuario en barra de menu -->
                         <img src="{{asset('dist/img/icono_persona.png')}}" class="user-image" alt="User Image">
-                        <span class="hidden-xs">NameUser</span>
+                        <span class="hidden-xs">{{Auth::user()->name}}</span>
                       </a>
                       <ul class="dropdown-menu">            
                         <!-- Menu Footer-->
                         <li class="user-footer">                   
                           <div class="pull-right">
-                            <a href="#" class="btn btn-default btn-flat">Salir</a>
+                            <a href="{{url('logout')}}" class="btn btn-default btn-flat">Salir</a>
                           </div>
                         </li>
                       </ul>
@@ -95,33 +95,22 @@
                 <i class="fa fa-home"></i> <span>INICIO</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>            
-            </li>    
-                
-            <li class="treeview">
-              <a href="#">
-                <i class="glyphicon glyphicon-list-alt"></i> <span>Articulos</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>  
-               <ul class="treeview-menu">
-                <li><a href="{{url('articulo')}}"><i class="fa fa-circle-o"></i>Productos</a></li>
-                <li><a href="{{url('unidad')}}"><i class="fa fa-circle-o"></i>Unidad de Medida</a></li>
-                <li><a href="{{url('especifico')}}"><i class="fa fa-circle-o"></i>Especificos</a></li>               
-              </ul>          
-            </li> 
-
-            <li class="treeview">
-              <a href="{{url('departamento')}}">
-                <i class="glyphicon glyphicon-object-align-vertical"></i> <span>Departamentos</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>             
-            </li> 
-
-            <li class="treeview">
-              <a href="{{url('proveedor')}}">
-                <i class="glyphicon glyphicon-shopping-cart"></i> <span>Proveedores</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>             
-            </li>                  
+            </li>
+                @if (Auth::user()->perfil_id==2)
+                  @include('layouts.menus.admin_bodega')
+                @else
+                      @if (Auth::user()->perfil_id==4)
+                        @include('layouts.menus.depto')
+                      @else
+                          @if (Auth::user()->perfil_id==3)
+                            @include('layouts.menus.admin_financiero')
+                          @else
+                              @if (Auth::user()->perfil_id==1)
+                                @include('layouts.menus.admin_sistema')                    
+                              @endif                        
+                          @endif
+                      @endif
+                @endif                              
         
           </ul>
         </section>
@@ -135,7 +124,7 @@
               <div class="col-md-12">
               
                   @if (session()->has('flash_notification.message'))
-                      <div class="alert alert-{{ session('flash_notification.level') }}">
+                      <div class="alert alert-{{ session('flash_notification.level') }} " id="msj">
                           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                           {!! session('flash_notification.message') !!}
                       </div>
@@ -165,6 +154,10 @@
 
         <!-- js de bootstrap-->
      <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+     <script >
+       $('#msj').delay(1500).fadeOut(800);;
+     </script>
+     @yield('script')
    
   </body>
 </html>

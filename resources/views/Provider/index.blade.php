@@ -27,11 +27,11 @@
                               <td>{{$p->id}}</td>
                               <td>{{$p->nombre}}</td>               
                               <td>{{$p->telefono}}</td>  
-                              <td ><a class="btn btn-default btn-sm" href="{{url('proveedor/detail',$p->id)}}"><span class="glyphicon glyphicon-th-large "></span>Detalle</a>
+                              <td ><a class="btn btn-default btn-sm" title="detalles" href="{{url('proveedor/detail',$p->id)}}"><span class="glyphicon glyphicon-th-large "></span></a>
 
-                              <a class="btn btn-default btn-sm" href="{{route('proveedor.edit',$p->id)}}"><span class="glyphicon glyphicon-pencil "></span>Editar</a>   
+                              <a class="btn btn-default btn-sm" title="editar" href="{{route('proveedor.edit',$p->id)}}"><span class="glyphicon glyphicon-pencil "></span></a>   
 
-                              <a class="btn btn-default btn-sm" href="{{route('proveedor.show',$p->id)}}"><span class="glyphicon glyphicon-trash "></span>Eliminar</a>
+                              <a class="btn btn-default btn-sm" title="eliminar" href="{{route('proveedor.show',$p->id)}}"><span class="glyphicon glyphicon-trash "></span></a>
                               </td>
                          
                       </tr>

@@ -22,4 +22,6 @@ img{
 body{
 	background-color: #ecf0f5;
 }
-
+#div_pass{
+	display: none;
+}

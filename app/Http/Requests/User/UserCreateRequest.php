@@ -1,0 +1,34 @@
+<?php
+
+namespace sig\Http\Requests\User;
+
+use sig\Http\Requests\Request;
+
+class UserCreateRequest extends Request
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'nombre'=>'required|max:100|unique:providers|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-\_]*$/ ',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6',
+            'perfil'=>'required|not_in:0',                        
+        ];
+    }
+   
+}
