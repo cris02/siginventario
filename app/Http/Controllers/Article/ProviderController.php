@@ -45,7 +45,7 @@ class ProviderController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'nombre'=>'required|unique:providers|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ ',
+            'nombre'=>'required|unique:providers|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-\.]*$/ ',
             'direccion'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ ',
             'vendedor'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s]*$/',
             'telefono'=>'required',
@@ -92,7 +92,7 @@ class ProviderController extends Controller
     public function update(Request $request, $id)
     {
          $this->validate($request,[
-            'nombre'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ |unique:providers,nombre,'.$id.',id',
+            'nombre'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-\.]*$/ |unique:providers,nombre,'.$id.',id',
             'direccion'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ ',
             'vendedor'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s]*$/',
             'telefono'=>'required',

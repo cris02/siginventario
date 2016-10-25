@@ -42,11 +42,12 @@
 
 </div>
 
+ @endsection
+@section('script')
 <script type="text/javascript">
   $(document).ready(function(){
   
     $('#TablaProveedores').DataTable();
-});  
+  });  
 </script>
-
- @endsection
+@endsection

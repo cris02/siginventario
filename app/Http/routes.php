@@ -18,11 +18,12 @@ Route::get('/', 'UsersController@showLoginForm');
 Route::post('login','UsersController@authenticate');
 Route::get('logout','UsersController@logout');
 
-Route::get('usuario','UsersController@index');
+
 Route::get('register','UsersController@getRegister');
 Route::post('register','UsersController@postRegister');
 Route::get('{id}/edit','UsersController@getEdit');
-Route::post('edit','UsersController@postEdit');
+Route::resource('usuario','UsersController');
+
 
 //ruta hacia home
 Route::get('home', 'HomeController@index');

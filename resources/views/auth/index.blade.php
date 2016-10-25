@@ -10,13 +10,13 @@
 
 
 
-            <table class="table table-hover table-striped table-bordered table-condensed" id="TablaUsuarios">       
+            <table id="TablaUsuarios" class="table table-hover table-striped table-bordered table-condensed">       
                 <thead>
                
                       
                         <th >NUMERO</th>
-                        <th >NOMBRE</th>                    
-                                           
+                        <th >NOMBRE</th>               
+                        <th >PERFIL</th>               
 
                  
                 </thead>
@@ -24,11 +24,13 @@
                    @foreach ($usuarios as $u)
                       <tr>
                               <td>{{$u->id}}</td>
-                              <td>{{$u->name}}</td>           
-                              <td>                       
+                              <td>{{$u->name}}</td>               
+                              <td>{{$u->perfil}}</td> 
+                              <td >
+
                               <a class="btn btn-default btn-sm" title="editar" href="{{url($u->id,'edit')}}"><span class="glyphicon glyphicon-pencil "></span></a>   
 
-                              <a class="btn btn-default btn-sm" title="eliminar" href="{{route('proveedor.show',$u->id)}}"><span class="glyphicon glyphicon-trash "></span></a>
+                              <a class="btn btn-default btn-sm" title="eliminar" href="{{route('usuario.show',$u->id)}}"><span class="glyphicon glyphicon-trash "></span></a>
                               </td>
                          
                       </tr>
@@ -38,12 +40,5 @@
             </table>
 
 </div>
-
-<script >
-  $(document).ready(function(){
-  
-    $('#TablaUsuarios').DataTable();
-});  
-</script>
 
  @endsection

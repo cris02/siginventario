@@ -68,6 +68,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">                   
                           <div class="pull-right">
+                            <a href="{{route('usuario.edit',Auth::user()->id)}}" class="btn btn-default btn-flat">EditarPerfil</a>
                             <a href="{{url('logout')}}" class="btn btn-default btn-flat">Salir</a>
                           </div>
                         </li>

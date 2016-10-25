@@ -56,6 +56,15 @@
 	                      </div>
 	                    </div> 
 	                    <div class="form-group">
+	                      <label for="fax" class="col-sm-2 control-label">Correo</label>
+	                      <div class="col-sm-6">
+	                        <input type="email" class="form-control" id="email" name="fax" value="{{$provider->email}}" required>
+	                            <div class="error">
+                                    <ul>@foreach($errors->get('email') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+                                </div>
+	                      </div>
+	                    </div> 
+	                    <div class="form-group">
 	                      <label for="vendedor" class="col-sm-2 control-label">Vendedor</label>
 	                      <div class="col-sm-6">
 	                        <input type="text" class="form-control" id="vendedor" name="vendedor" value="{{$provider->vendedor}}">

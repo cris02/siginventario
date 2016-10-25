@@ -7,18 +7,18 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Registrar Usuario</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('register') }}" autocomplete="off">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Nombre</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" required>
+                                <input type="text" class="form-control" name="name" value="{{ old('name') }}" required>
 
-                                @if ($errors->has('nombre'))
+                                @if ($errors->has('name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('nombre') }}</strong>
+                                        <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
                             </div>

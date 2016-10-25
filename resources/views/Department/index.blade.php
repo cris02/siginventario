@@ -3,8 +3,8 @@
 @section('content')
 
 <a href="{{ route('departamento.create')}}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Nuevo</a>
-<div class="table-responsive">
-<table class="table table-hover table-striped table-bordered table-condensed">
+<div class="panel-body table-responsive ">
+<table class="table table-hover table-striped table-bordered table-condensed" id="TablaDeptos">
 <thead>
     <tr class="success">
         <th>codigo</th>
@@ -28,6 +28,15 @@
 </table>
 </div>
      
+@endsection
+
+@section('script')
+<script type="text/javascript">
+  $(document).ready(function(){
+  
+    $('#TablaDeptos').DataTable();
+  });  
+</script>
 @endsection
 
 

@@ -24,7 +24,7 @@ class UserCreateRequest extends Request
     public function rules()
     {
         return [
-            'nombre'=>'required|max:100|unique:providers|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-\_]*$/ ',
+            'name'=>'required|max:100|unique:users|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-\_\.]*$/ ',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
             'perfil'=>'required|not_in:0',                        

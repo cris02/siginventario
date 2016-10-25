@@ -26,7 +26,7 @@ class ArticuloController extends Controller
         $this->validate($request,[
 		    'codigo' => 'required | alpha_num',
 			'unidad' => 'required | integer|min:1',
-			'especifico' => 'required | digits:4|min:1| exists:especificos,id',
+			'especifico' => 'required | digits:5|min:1| exists:especificos,id',
 			'nombre' => 'required |regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:articulo,nombre_articulo'
 		]);	    
 											
@@ -74,7 +74,7 @@ class ArticuloController extends Controller
 		return redirect()->route('articulo.index');
 			
 		}else{
-			flash('Error ala actualizar articulo','danger');
+			flash('Error a la actualizar articulo','danger');
 			return redirect()->route('articulo.edit');
 		}
 				    

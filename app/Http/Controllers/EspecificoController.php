@@ -27,7 +27,7 @@ class EspecificoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-		    'numero' => 'required |integer|min:1|digits:4 |unique:especificos,id',
+		    'numero' => 'required |integer|min:1|digits:5 |unique:especificos,id',
 			'titulo' => 'required|regex: /^[a-zA-Zαινσϊρ\s]*$/ |unique:especificos,titulo_especifico',
 			
 		]);		
