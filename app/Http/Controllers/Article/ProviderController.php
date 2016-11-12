@@ -15,6 +15,10 @@ use Laracasts\Flash\Flash;
 
 class ProviderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +27,7 @@ class ProviderController extends Controller
     public function index()
     {
         $providers = Provider::all();
-       return view('Provider\index')->with('proveedores',$providers);
+        return view('Provider\index')->with('proveedores',$providers);
     }
 
     /**
@@ -126,6 +130,6 @@ class ProviderController extends Controller
      public function detail($id)
     {
         $provider= Provider::FindOrFail($id);
-        return view('Provider.detail')->with('provider',$provider);
+        return response()->json($provider);
     }
 }

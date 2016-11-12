@@ -10,6 +10,11 @@ use sig\Models\UnidadMedida;
 
 class ArticuloController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(){
 		$articulos = Articulo::orderBy('nombre_articulo','asc')->get();		
 		return view('articulos.index',['articulos'=>$articulos]);

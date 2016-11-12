@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row">
@@ -32,7 +31,7 @@
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="contraseña" required>
 
-                                @if ($errors->has('password'))
+                                @if ($errors->has('contraseña'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('contraseña') }}</strong>
                                     </span>

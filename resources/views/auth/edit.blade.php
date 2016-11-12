@@ -37,7 +37,20 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>                    
+                        </div> 
+                        <div class="form-group{{ $errors->has('usuario') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">usuario</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="usuario" value="{{$usuario->usuario}}" required>
+
+                                @if ($errors->has('usuario'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('usuario') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group">
                             {!!Form::label('Perfil', 'perfil', array('class' =>'col-md-4 control-label' )) !!}
                             <div class="col-md-6">

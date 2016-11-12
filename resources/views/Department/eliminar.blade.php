@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div class="col-md-offset-1">
     <h3>Eliminar Departamento</h3>
 </div>
@@ -13,12 +14,16 @@
 	    </div>
         <dl class="dl-horizontal col-md-offset-1"> 
 	        <dt>Departamento: </dt> 
-		    <dd>{{ $department->name}}</dd>			   	   
+		    <dd>{{ $department->name}}</dd>	
+		    <dt>Descripcion: </dt> 
+		    <dd>{{ $department->descripcion}}</dd>
+		    <dt>Encargado: </dt> 
+		    <dd>{{ $department->encargado}}</dd>		   	   
 	    <dl>
-	    {!! Form::open(['method' => 'DELETE','route' => ['departamento.destroy', $department->code],'style'=>'display:inline']) !!}
+	    {!! Form::open(['method' => 'DELETE','route' => ['departamento.destroy', $department->id],'style'=>'display:inline']) !!}
 	        <div>
                 {!! Form::submit('Eliminar', ['class' => 'btn btn-primary']) !!}
-			    <a href="{{ route('departamento.index')}}" class="btn btn-primary">Cancelar</a>
+			    <a href="javascript:window.history.back();" class="btn btn-primary">Cancelar</a>
 		    </div>
         {!! Form::close() !!}
     @endif

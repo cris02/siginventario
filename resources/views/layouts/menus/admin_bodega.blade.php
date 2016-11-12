@@ -4,9 +4,9 @@
       <i class="fa fa-angle-left pull-right"></i>
     </a>  
        <ul class="treeview-menu">
-        <li><a href="{{url('articulo')}}"><i class="fa fa-circle-o"></i>Productos</a></li>
-        <li><a href="{{url('unidad')}}"><i class="fa fa-circle-o"></i>Unidad de Medida</a></li>
-        <li><a href="{{url('especifico')}}"><i class="fa fa-circle-o"></i>Especificos</a></li>               
+        <li><a href="{{url('articulo')}}"><i class="glyphicon glyphicon-chevron-right"></i>Productos</a></li>
+        <li><a href="{{url('unidad')}}"><i class="glyphicon glyphicon-chevron-right"></i>Unidad de Medida</a></li>
+        <li><a href="{{url('especifico')}}"><i class="fglyphicon glyphicon-chevron-right"></i>Especificos</a></li>               
       </ul>          
   </li> 
 

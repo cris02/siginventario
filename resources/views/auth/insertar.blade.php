@@ -1,6 +1,7 @@
 @extends('layouts.template')
 
 @section('content')
+  @include('Msj.messages')  
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -79,17 +80,12 @@
                                 @endif
                             </div>
                         </div>
-                         <div class="form-group {{ $errors->has('perfil') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Perfil</label>
-
+                         <div class="form-group {{ $errors->has('perfil') ? ' has-error' : '' }}">                   
                             <div class="col-md-6">
-                                {!! Form::select('perfil',$roles,null,['name'=>'perfil','class'=>'form-control'])!!}  
-                                
-                                @if ($errors->has('perfil'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('perfil') }}</strong>
-                                    </span>
-                                @endif
+                                <input type="hidden" class="form-control" name="perfil" value="perfil">   
+                            </div>
+                            <div class="col-md-6">
+                                <input type="hidden" class="form-control" name="depto" value="{{$departamento}}">   
                             </div>
                         </div>
                                             

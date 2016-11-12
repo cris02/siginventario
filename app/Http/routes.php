@@ -10,11 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/', function () {
+       return view('Auth.login');
+   });
 
-
-
-//rutas para usuarios
-Route::get('/', 'UsersController@showLoginForm');
+	//rutas para usuarios
+Route::get('login','UsersController@showLoginForm');
 Route::post('login','UsersController@authenticate');
 Route::get('logout','UsersController@logout');
 
@@ -22,6 +23,7 @@ Route::get('logout','UsersController@logout');
 Route::get('register','UsersController@getRegister');
 Route::post('register','UsersController@postRegister');
 Route::get('{id}/edit','UsersController@getEdit');
+Route::get('usuario/create/{id}','UsersController@create');
 Route::resource('usuario','UsersController');
 
 
@@ -47,7 +49,7 @@ Route::get('unidad/delete/{id_unidad_medida}','UnidadMedidaController@delete')->
 Route::resource('articulo','ArticuloController');
 Route::get('articulo/delete/{codigoArticulo}','ArticuloController@delete')->name('delete_articulo');
 
-
+Route::resource('roles','RolesController');
 
 
 

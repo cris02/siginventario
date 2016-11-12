@@ -83,15 +83,14 @@
               </div><!-- /.box -->
 
 
-
+ @endsection
+@section('script')
 <script type="text/javascript">
 
 window.onload = function() {
    $('#telefono').mask('9999-9999'); 
     $('#fax').mask('9999-9999'); 
 };
-
 </script>
 
-
- @endsection
+@endsection

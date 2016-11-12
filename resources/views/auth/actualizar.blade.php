@@ -1,20 +1,21 @@
 @extends('layouts.template')
 
 @section('content')
+  @include('Msj.messages')  
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Actualizar Usuario</div>
                 <div class="panel-body">
-                    {!!Form::model($usuario,['url'=>['edit',$usuario->id],'method'=>'patch'])!!}                   
+                    {!!Form::model($usuario,['route'=>['usuario.update',$usuario->id],'method'=>'patch'])!!}                   
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Nombre</label>
 
                             <div class="col-md-6">
-                                <input type="text" readonly class="form-control" name="nombre" value="{{$usuario->name}}" required>
+                                <input type="text" class="form-control" name="nombre" value="{{$usuario->name}}" required>
 
                                 @if ($errors->has('nombre'))
                                     <span class="help-block">
@@ -36,6 +37,19 @@
                                     </span>
                                 @endif
                             </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('usuario') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">usuario</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="usuario" value="{{$usuario->usuario}}" required>
+
+                                @if ($errors->has('usuario'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('usuario') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>                    
                         
                         <div id="btn_pass" onclick="mostrarPass()">
@@ -46,7 +60,7 @@
                                     <label class="col-md-4 control-label">contraseña</label>
 
                                     <div class="col-md-6">
-                                        <input type="password" class="form-control" name="password" required>
+                                        <input type="password" class="form-control" name="password" >
 
                                         @if ($errors->has('password'))
                                             <span class="help-block">
@@ -60,7 +74,7 @@
                                     <label class="col-md-4 control-label">Confirmar contraseña</label>
 
                                     <div class="col-md-6">
-                                        <input type="password" class="form-control" name="password_confirmation" required>
+                                        <input type="password" class="form-control" name="password_confirmation">
 
                                         @if ($errors->has('password_confirmation'))
                                             <span class="help-block">
@@ -69,6 +83,10 @@
                                         @endif
                                     </div>
                                 </div>
+                        </div>
+                        <div class="">
+                                        <input type="hidden" class="" name="depto" value="1">
+                                       
                         </div>
 
                         <div class="form-group">

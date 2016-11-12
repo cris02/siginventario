@@ -12,6 +12,10 @@ use Session;
 
 class EspecificoController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //lista los especificos
 	public function index(){
 		$especificos = Especifico::orderBy('id','asc')->get();

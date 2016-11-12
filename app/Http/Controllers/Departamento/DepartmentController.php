@@ -16,6 +16,10 @@ use Laracasts\Flash\Flash;
 
 class DepartmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +27,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-         $departamento = Department::orderBy('name','asc')->get();
+        $departamento = Department::orderBy('name','asc')->get();
        return view('Department.index',['departamento'=>$departamento]);
     }
 
@@ -46,15 +50,16 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'code' => 'required|alpha_num|unique:departments,code',
-            'name' => 'required|regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:departments,name',            
+            'name' => 'required|regex: /^[a-zA-Z0-9áéíóúñ\s]*$/ |unique:departments,name',
+            'descripcion'=>'required',                       
         ]);
         
         Department::create([
-                   'code' =>$request->input('code'),
-                   'name' =>$request->input('name')
-                   ]);
-        flash('Departamento guardada exitosamente','success');     
+                   'name' =>$request->input('name'),
+                   'descripcion' =>$request->input('descripcion'),
+                   'encargado'=>'No Definido',
+                            ]);
+        flash('Departamento guardado exitosamente','success');     
         return redirect()->route('departamento.index');
     }
 
@@ -90,16 +95,20 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $code)
+    public function update(Request $request, $id)
     {
        
         $this->validate($request,[
-           'name'=>'required|regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:departments,name,'.$code.',code',
+           'name'=>'required|regex: /^[a-zA-Z0-9áéíóúñ\s]*$/ |unique:departments,name,'.$id.',id',
+           'descripcion'=>'required',
+           
         ]);
-        $departament = Department::FindOrFail($code);
+        $departament = Department::FindOrFail($id);
         if($departament){
             $departament->update([
-              'name' => $request->input('name')
+              'name' => $request->input('name'),
+              'descripcion' => $request->input('descripcion'),
+             
               ]);
         flash('Departamento actualizado exitosamente','success');
         return redirect()->route('departamento.index');         
@@ -115,12 +124,23 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($code)
+    public function destroy($id)
     {
-        $departament = Department::findOrFail($code);
-        
-        $departament->delete();
+        $departamento = Department::findOrFail($id);
+        $usuario=User::where('departamento_id','=',$departamento->id)->get();
+
+        if($usuario->count()>0)
+       {
+            flash('Error: no puede eliminarse el DEPARTAMENTO porque hay Registros asociados','danger');
+            return redirect()->back();
+        }
+        else
+        {
+             $departament->delete();
         flash('Departamento eliminado exitosamente','success');
         return redirect()->route('departamento.index');
-    }
+        }
+       
+    }    
+       
 }

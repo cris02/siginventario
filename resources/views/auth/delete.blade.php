@@ -24,6 +24,12 @@
 								    <th class="col-xs-1">Nombre</th>
 								    <td class="col-xs-6">{{$usuario->name}}</td>
 								    <td class="col-xs-5 "></td>
+							    </tr> 
+							    </tr>
+								    <tr class="row">
+								    <th class="col-xs-1">Usuario</th>
+								    <td class="col-xs-6">{{$usuario->usuario}}</td>
+								    <td class="col-xs-5 "></td>
 							    </tr> 							   
 							    <tr class="row">
 								    <th class="col-xs-1">Perfil</th>

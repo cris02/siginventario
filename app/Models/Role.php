@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     protected $fillable = [
-        'name', 'descripcion', 
+       'name', 'description', 
     ];
+
+     //relacion con los usuarios
+   public function usuarios(){
+		return $this->hasMany('sig\User','perfil_id');
+	}
 }

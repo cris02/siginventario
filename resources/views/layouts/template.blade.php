@@ -41,8 +41,13 @@
             
     		    <div class="logo navbar-fixed-top">                
               <!-- logo for regular state and mobile devices -->
-              <span class="logo-lg"><b>SIGinventario</b></span>
-    		  
+              <div class="pull-right">
+                <img src="{{asset('dist/img/logo.png')}}" class="logo" alt="logo Image" id='logo'>
+              </div>
+              <div >
+                <span class="logo-lg"><b>SIGinventario</b></span>   
+              </div>
+
             </div>
             <!-- barra titulo-->
     		

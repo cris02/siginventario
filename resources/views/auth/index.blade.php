@@ -14,7 +14,7 @@
                 <thead>
                
                       
-                        <th >NUMERO</th>
+                        <th >Usuario</th>
                         <th >NOMBRE</th>               
                         <th >PERFIL</th>               
 
@@ -23,9 +23,9 @@
                 <tbody>
                    @foreach ($usuarios as $u)
                       <tr>
-                              <td>{{$u->id}}</td>
+                              <td>{{$u->usuario}}</td>
                               <td>{{$u->name}}</td>               
-                              <td>{{$u->perfil}}</td> 
+                              <td>{{$u->perfil["name"]}}</td> 
                               <td >
 
                               <a class="btn btn-default btn-sm" title="editar" href="{{url($u->id,'edit')}}"><span class="glyphicon glyphicon-pencil "></span></a>   
