@@ -35,6 +35,11 @@ Route::get('unidad/delete/{id_unidad_medida}','UnidadMedidaController@delete')->
 Route::resource('articulo','ArticuloController');
 Route::get('articulo/delete/{codigoArticulo}','ArticuloController@delete')->name('delete_articulo');
 
+Route::resource('ingreso','IngresoController');
+Route::get('ingreso/delete/{idIngreso}','IngresoController@delete')->name('delete_ingreso');
+
+Route::resource('observacion','ObservacionController');
+Route::get('observacion/delete/{idObservacion}','ObservacionController@delete')->name('delete_observacion');
 
 
 

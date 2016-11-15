@@ -26,7 +26,7 @@ class ArticuloController extends Controller
         $this->validate($request,[
 		    'codigo' => 'required | alpha_num',
 			'unidad' => 'required | integer|min:1',
-			'especifico' => 'required | digits:4|min:1| exists:especificos,id',
+			'especifico' => 'required |integer | digits:4|min:1| exists:especificos,id',
 			'nombre' => 'required |regex: /^[a-zA-Zαινσϊρ\s]*$/ |unique:articulo,nombre_articulo'
 		]);	    
 											
