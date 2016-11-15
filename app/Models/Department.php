@@ -6,10 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model
 {
-     protected $table = 'departments';
-    protected $primarykey = 'code';
+    protected $table = 'departments';
+    protected $primaryKey = 'id';
+ 
 
     protected $fillable=[
-    	'code' ,'name' 
+    	'id' ,'name','descripcion','encargado',
     ];
+
+      //relacion con los usuarios
+   public function usuarios(){
+		return $this->hasOne('sig\User','departamento_id');
+	}
 }

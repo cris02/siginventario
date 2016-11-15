@@ -22,6 +22,7 @@ class Articulo extends Model
     }
 	//relacion uno a muchos con especifico
 	public function especifico(){
+		
         return $this->belongsTo('sig\Models\Especifico','id_especifico','id');
     }
 	

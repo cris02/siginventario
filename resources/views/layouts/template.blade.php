@@ -9,20 +9,24 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">   
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/font-awesome.css') }}">   
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.css')}}">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
+  
     <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.css')}}">
 
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href=" {{ asset('bootstrap/css/bootstrap.css') }}">
-
 	
 
      <!-- our styles -->
     <link rel="stylesheet" href=" {{ asset('bootstrap/css/style.css') }}">
+    <!-- estilo para datatables -->
+    <link rel="stylesheet" href="{{asset('plugins/datatables/jquery.dataTables.min.css')}}">  
+
+     <!-- jQuery-->
+     <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+     <script src="{{asset('plugins/jQuery/jQuery.js')}}"></script>
     
 
   </head>
@@ -30,58 +34,58 @@
   <body class="hold-transition skin-blue sidebar-mini">
    
     <div class="wrapper">
-      <header class="main-header">
+        <header class="main-header">
 
-        <!-- Logo wrapper-->
-		        <!-- Header Navbar: style can be found in header.less -->
+            <!-- Logo wrapper-->
+    		        <!-- Header Navbar: style can be found in header.less -->                     
+            
+    		    <div class="logo navbar-fixed-top">                
+              <!-- logo for regular state and mobile devices -->
+              <div class="pull-right">
+                <img src="{{asset('dist/img/logo.png')}}" class="logo" alt="logo Image" id='logo'>
+              </div>
+              <div >
+                <span class="logo-lg"><b>SIGinventario</b></span>   
+              </div>
+
+            </div>
+            <!-- barra titulo-->
+    		
+             <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+    		 
+    		      <!-- Sidebar toggle button-->  		 
+              <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+              </a>
+    		           
+              <!-- Navbar Right Menu (menu derecho de mensajeria no estan necesario) -->
+              <div class="navbar-custom-menu">
+                  <ul class="nav navbar-nav">
+                   
                  
-        
-		 <a href="#" class="logo navbar-fixed-top">                
-          <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>SIGinventario</b></span>
-		  
-         </a>
-        <!-- barra titulo-->
-		
-         <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
-		 
-		 <!-- Sidebar toggle button-->
-		 
-         
-		 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-          </a>
-		           
-          <!-- Navbar Right Menu (menu derecho de mensajeria no estan necesario) -->
-          <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-             
-           
-              <!-- User Account: style can be found in dropdown.less -->
-              <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <!-- Nombre del usuario en barra de menu -->
-                  <img src="{{asset('dist/img/icono_persona.png')}}" class="user-image" alt="User Image">
-                  <span class="hidden-xs">NameUser</span>
-                </a>
-                <ul class="dropdown-menu">            
-                  <!-- Menu Footer-->
-                  <li class="user-footer">                   
-                    <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Salir</a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-             
-            </ul>
-          </div>
-		  
-        </nav>
-      </header>
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <!-- Nombre del usuario en barra de menu -->
+                        <img src="{{asset('dist/img/icono_persona.png')}}" class="user-image" alt="User Image">
+                        <span class="hidden-xs">{{Auth::user()->name}}</span>
+                      </a>
+                      <ul class="dropdown-menu">            
+                        <!-- Menu Footer-->
+                        <li class="user-footer">                   
+                          <div class="pull-right">
+                            <a href="{{route('usuario.edit',Auth::user()->id)}}" class="btn btn-default btn-flat">EditarPerfil</a>
+                            <a href="{{url('logout')}}" class="btn btn-default btn-flat">Salir</a>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>                   
+                  </ul>
+              </div>
+    		  
+            </nav>
+        </header>
       
-      <!-- Left side column. contains the logo and sidebar -->
-	  
-	  
+      <!-- Left side column. contains the logo and sidebar --> 
       <aside class="main-sidebar" >
         <!-- sidebar: style can be found in sidebar.less -->
 
@@ -97,33 +101,22 @@
                 <i class="fa fa-home"></i> <span>INICIO</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>            
-            </li>    
-                
-            <li class="treeview">
-              <a href="#">
-                <i class="glyphicon glyphicon-list-alt"></i> <span>Articulos</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>  
-               <ul class="treeview-menu">
-                <li><a href="{{url('articulo')}}"><i class="fa fa-circle-o"></i>Productos</a></li>
-                <li><a href="{{url('unidad')}}"><i class="fa fa-circle-o"></i>Unidad de Medida</a></li>
-                <li><a href="{{url('especifico')}}"><i class="fa fa-circle-o"></i>Especificos</a></li>               
-              </ul>          
-            </li> 
-
-            <li class="treeview">
-              <a href="{{url('departamento')}}">
-                <i class="glyphicon glyphicon-object-align-vertical"></i> <span>Departamentos</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>             
-            </li> 
-
-            <li class="treeview">
-              <a href="{{url('proveedor')}}">
-                <i class="glyphicon glyphicon-shopping-cart"></i> <span>Proveedores</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>             
-            </li>                  
+            </li>
+                @if (Auth::user()->perfil_id==2)
+                  @include('layouts.menus.admin_bodega')
+                @else
+                      @if (Auth::user()->perfil_id==4)
+                        @include('layouts.menus.depto')
+                      @else
+                          @if (Auth::user()->perfil_id==3)
+                            @include('layouts.menus.admin_financiero')
+                          @else
+                              @if (Auth::user()->perfil_id==1)
+                                @include('layouts.menus.admin_sistema')                    
+                              @endif                        
+                          @endif
+                      @endif
+                @endif                              
         
           </ul>
         </section>
@@ -131,54 +124,46 @@
       </aside>
 	  
 
-      <!-- Content Wrapper. Contains page content content-wrapper-->
-	  <div class="content-wrapper">
-	  <div class="container col-md-12">
-      <div class="col-md-12">
-        
-        @if (session()->has('flash_notification.message'))
-            <div class="alert alert-{{ session('flash_notification.level') }}">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {!! session('flash_notification.message') !!}
-            </div>
-        @endif		
+            <!-- Content Wrapper. Contains page content content-wrapper-->
+      	  <div class="content-wrapper">
+      	    <div class="container col-md-12">
+              <div class="col-md-12">
               
-          @yield('content')
+                  @if (session()->has('flash_notification.message'))
+                      <div class="alert alert-{{ session('flash_notification.level') }} " id="msj">
+                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                          {!! session('flash_notification.message') !!}
+                      </div>
+                  @endif		
+                        
+                  @yield('content')
 
-        </div>
-		<footer class="main-footer">               
-                <strong>Copyright &copy; 2016 <a href="http://almsaeedstudio.com">DSI115_G08</a>.</strong> Todos los derechos reservados.              
-          </footer>
-      </div> <!-- /.content-wrapper -->
-	  
-    </div>  
-          
-
-
-    </div>
-	    
-    </div>
-	    
-    </div>
-	
-    	
-        <!--<nav class="navbar navbar-inverse navbar-fixed-bottom">
-          
-        </nav> -->
-		
-     
-
+              </div>
+            </div> 
+          </div> <!-- /.content-wrapper -->
+       
+      
+          <footer class="main-footer">               
+                <strong>Copyright &copy; 2016 DSI215_G08 Todos los derechos reservados.</strong>        
+          </footer>  
+      
+             
     </div><!-- ./wrapper -->
-     <!-- jQuery-->
-     <script src="{{asset('plugins/jQuery/jQuery.js')}}"></script>
-        <!-- js de bootstrap-->
-     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+
+       <!-- AdminLTE App-->
+     <script src="{{asset('dist/js/app.js')}}"></script> 
  
         <!-- para poner mascaras a los input-->
-     <script src="{{asset('plugins/input-mask/jquery.inputmask.js')}}"></script>
+     <script src="{{asset('plugins/input-mask/jquery.inputmask.js')}}"></script>      
 
-         <!-- AdminLTE App-->
-     <script src="{{asset('dist/js/app.min.js')}}"></script> 
+     <script src="{{asset('plugins/datatables/jquery.dataTables.js')}}"></script>
+
+        <!-- js de bootstrap-->
+     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+     <script >
+       $('#msj').delay(1500).fadeOut(800);;
+     </script>
+     @yield('script')
    
   </body>
 </html>

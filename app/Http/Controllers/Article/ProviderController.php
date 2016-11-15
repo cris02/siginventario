@@ -15,6 +15,10 @@ use Laracasts\Flash\Flash;
 
 class ProviderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -22,8 +26,8 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = DB::table('providers')->orderBy('name','asc')->paginate(5);
-       return view('Provider\index')->with('proveedores',$providers);
+        $providers = Provider::all();
+        return view('Provider\index')->with('proveedores',$providers);
     }
 
     /**
@@ -42,9 +46,18 @@ class ProviderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProviderCreateRequest $request)
+    public function store(Request $request)
     {
-       Provider::create($request->all());  
+        $this->validate($request,[
+            'nombre'=>'required|unique:providers|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-\.]*$/ ',
+            'direccion'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ ',
+            'vendedor'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s]*$/',
+            'telefono'=>'required',
+        ]);         
+
+
+       Provider::create($request->all());
+    
        Flash::success('Guardado correctamente!!!');    
        return redirect()->route('proveedor.index');
     }
@@ -80,14 +93,17 @@ class ProviderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $codigo)
+    public function update(Request $request, $id)
     {
          $this->validate($request,[
-           'nombre'=>'unique:providers,name,'.$codigo.',id',
-
+            'nombre'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-\.]*$/ |unique:providers,nombre,'.$id.',id',
+            'direccion'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s\-]*$/ ',
+            'vendedor'=>'required|regex: /^[a-zA-Z0-9áéíóúñÑ,\s]*$/',
+            'telefono'=>'required',
+         
         ]);
 
-       $p = Provider::FindOrFail($codigo);       
+       $p = Provider::FindOrFail($id);       
        $p->update($request->all());
        Flash::success('Se ha Actualizado correctamente!!!');
 
@@ -95,7 +111,9 @@ class ProviderController extends Controller
 
     }
 
-    /**
+    /**,
+ \s
+
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -105,13 +123,13 @@ class ProviderController extends Controller
     {
        $p=Provider::FindOrFail($id);
        $p->delete();
-    Session::flash('delete','Se ha Eliminado correctamente!!!');
+    Flash::success('El proveedor fue eliminado');
        return redirect()->route('proveedor.index');
     }
 
      public function detail($id)
     {
         $provider= Provider::FindOrFail($id);
-        return view('Provider.detail')->with('provider',$provider);
+        return response()->json($provider);
     }
 }

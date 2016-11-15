@@ -2,53 +2,40 @@
 
 @section('content')
 
-<!-- Horizontal Form -->
-              <div class="box box-info container">
-                <div class="box-header with-border container">
-                  <h3 class="box-title">INGRESAR NUEVO DEPARTAMENTO</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                <div class="form-horizontal">
-                  {!!Form::open(['route'=>'departamento.store','method'=>'POST'])!!}           
-                
-                    <div class="box-body">
-                      <div class="form-group">
-                          <label for="code" class="col-sm-2 control-label">Codigo</label>
-                          <div class="col-sm-6">
-                            <input type="text" class="form-control" id="code" name="code" placeholder="Ingrese el codigo del departamento" autofocus="on" required>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <label for="depto/Unidad" class="col-sm-2 control-label">Depto/Unidad</label>
-                          <div class="col-sm-6">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Digite nombre del Departamento/Unidad" required>
-                          </div>
-                      </div>   
-                 
-                       
-                    </div><!-- /.box-body -->                    
-                        <div class="box-footer col-sm-offset-2">
-                          	<a href="{{Route('departamento.index')}}"><button type="button" id="cancelar" class="btn btn-default m-t-10">Cancelar</button></a>
-                            {!!Form::submit('Aceptar',['name'=>'aceptar','id'=>'aceptar','content'=>'<span>Acpetar</span>','class'=>'btn btn-info'])!!}
-                           
-                        </div>   
-                  {!!Form::close()!!}              
+<div class="col-md-offset-2">
+    <h3>Nuevo departamento</h3>
+</div>
+<hr/>
+      
+{!! Form::open(array('route' => 'departamento.store','class' => 'form-horizontal','method' => 'post')) !!}              
+        
+        <div class="form-group">
+            {!!Form::label('Nombre', 'Nombre', array('class' =>'control-label col-md-2' )) !!}
+            <div class="col-md-7">
+                {!!Form::text('name', null, array('placeholder' => 'Nombre del Departamento','class' => 'form-control')) !!}
+                <div class="error">
+                    <ul>@foreach($errors->get('name') as $msg)<li>{{$msg}}</li> @endforeach</ul>
                 </div>
-              </div><!-- /.box -->
-            
-<!-- scrip -->
-<script type="text/javascript" src="{{asset('plugins/jQuery/jQuery.js')}}"></script>
+            </div>
+        </div> 
 
-<script type="text/javascript">
+         <div class="form-group">
+            {!!Form::label('Descripcion', 'Descripcion', array('class' =>'control-label col-md-2' )) !!}
+            <div class="col-md-7">
+                {!!Form::text('descripcion', null, array('placeholder' => 'Descripcion','class' => 'form-control')) !!}
+                <div class="error">
+                    <ul>@foreach($errors->get('descripcion') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+                </div>
+            </div>
+        </div>        
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-7">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="javascript:window.history.back();" class="btn btn-primary">Cancelar</a>
+            </div>
+        </div>
+    
+{!! Form::close() !!}
 
-   $(document).ready(function(){
-
-           $('#phone').mask('9999-9999');    
-
-    });
-
-</script>
-
-
-
- @endsection
+@endsection

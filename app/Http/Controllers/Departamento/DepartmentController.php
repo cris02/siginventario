@@ -16,6 +16,10 @@ use Laracasts\Flash\Flash;
 
 class DepartmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,8 +27,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-         $departments = DB::table('departments')->paginate(5);
-       return view('Department.index')->with('departamentos',$departments);
+        $departamento = Department::orderBy('name','asc')->get();
+       return view('Department.index',['departamento'=>$departamento]);
     }
 
     /**
@@ -43,11 +47,20 @@ class DepartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DepartmentCreateRequest $request)
+    public function store(Request $request)
     {
-        Department::create($request->all());  
-       Flash::success('Guardado correctamente!!!');    
-       return redirect()->route('departamento.index');
+        $this->validate($request,[
+            'name' => 'required|regex: /^[a-zA-Z0-9áéíóúñ\s]*$/ |unique:departments,name',
+            'descripcion'=>'required',                       
+        ]);
+        
+        Department::create([
+                   'name' =>$request->input('name'),
+                   'descripcion' =>$request->input('descripcion'),
+                   'encargado'=>'No Definido',
+                            ]);
+        flash('Departamento guardado exitosamente','success');     
+        return redirect()->route('departamento.index');
     }
 
     /**
@@ -58,8 +71,8 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        $department= Department::where('code', '=' ,$id)->firstOrFail();
-        return view('Department.eliminar')->with('department',$department);
+        $department= Department::FindOrFail($id);
+        return view('Department.eliminar',['department'=>$department]);
     }
 
     /**
@@ -71,8 +84,8 @@ class DepartmentController extends Controller
     public function edit($id)
     {
 
-        $department= Department::where('code', '=' ,$id)->firstOrFail();
-       return view('Department.actualizar')->with('department',$department);
+       $department= Department::findOrFail($id);
+       return view('Department.actualizar',['department'=>$department]);
     }
 
     /**
@@ -82,16 +95,27 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DepartmentUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        //$d = $department= Department::where('code', '=' ,$id)->firstOrFail();  
-        DB::table('departments')
-            ->where('code', $id)
-            ->update(['name' => $request->name]);     
-       // $d->update($request->all());
-        Flash::success('Se ha Actualizado correctamente!!!');
-
-       return redirect()->route('departamento.index');
+       
+        $this->validate($request,[
+           'name'=>'required|regex: /^[a-zA-Z0-9áéíóúñ\s]*$/ |unique:departments,name,'.$id.',id',
+           'descripcion'=>'required',
+           
+        ]);
+        $departament = Department::FindOrFail($id);
+        if($departament){
+            $departament->update([
+              'name' => $request->input('name'),
+              'descripcion' => $request->input('descripcion'),
+             
+              ]);
+        flash('Departamento actualizado exitosamente','success');
+        return redirect()->route('departamento.index');         
+        }else{
+            flash('Error: no se pudo actualizar el Departamento','danger');
+            return redirect()->route('departamento.index');
+        }
     }
 
     /**
@@ -102,9 +126,21 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        $department= Department::where('code', '=' ,$id)->firstOrFail();
-         Department::where('code', '=', $department->code)->delete();
-        Session::flash('delete','Se ha Eliminado correctamente!!!');
-       return redirect()->route('departamento.index');
-    }
+        $departamento = Department::findOrFail($id);
+        $usuario=User::where('departamento_id','=',$departamento->id)->get();
+
+        if($usuario->count()>0)
+       {
+            flash('Error: no puede eliminarse el DEPARTAMENTO porque hay Registros asociados','danger');
+            return redirect()->back();
+        }
+        else
+        {
+             $departament->delete();
+        flash('Departamento eliminado exitosamente','success');
+        return redirect()->route('departamento.index');
+        }
+       
+    }    
+       
 }

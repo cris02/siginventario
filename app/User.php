@@ -2,25 +2,23 @@
 
 namespace sig;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
+     protected $fillable = [
+        'name', 'email', 'usuario','password','activo','perfil_id','departamento_id'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function perfil(){
+    	return $this->hasOne('sig\Models\Role','id','perfil_id');		
+	}
+	public function departamento(){
+    	return $this->hasOne('sig\Models\Department','id','departamento_id');		
+	}
 }

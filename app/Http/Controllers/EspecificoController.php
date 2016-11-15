@@ -12,6 +12,10 @@ use Session;
 
 class EspecificoController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //lista los especificos
 	public function index(){
 		$especificos = Especifico::orderBy('id','asc')->get();
@@ -27,7 +31,7 @@ class EspecificoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-		    'numero' => 'required |integer|min:1|digits:4 |unique:especificos,id',
+		    'numero' => 'required |integer|min:1|digits:5 |unique:especificos,id',
 			'titulo' => 'required|regex: /^[a-zA-Zαινσϊρ\s]*$/ |unique:especificos,titulo_especifico',
 			
 		]);		

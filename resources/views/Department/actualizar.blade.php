@@ -1,34 +1,48 @@
 @extends('layouts.template')
-
 @section('content')
+    
+    <div class="col-md-offset-2">
+        <h3>Editar</h3>
+    </div>
+    
+    @if($department)
+	    {!! Form::open(array('route' => ['departamento.update','id' => $department->id],'class' => 'form-horizontal','method' => 'put')) !!}
+        <div class="form-group">
+                {!! Form::label('numero', 'Numero', array('class' =>'control-label col-md-2' )) !!}
+                <div class="col-md-7">
+                    {!!Form::text('numero', $department->id, array('placeholder' => '','class' => 'form-control','disabled')) !!}
+                
+                </div>
+            </div>
 
-              <div class="box box-info container">
-                <div class="box-header with-border">
-                  <h3 class="box-title">MODIFICAR DATOS DE DEPARTAMENTO/UNIDAD</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                <div class="form-horizontal">
-	               {!!Form::model($department,['route'=>['departamento.update',$department->code],'method'=>'patch'])!!}
-	                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-	                  <div class="box-body">
-	                    
-	                    <div class="form-group">
-	                      <label for="depto/Unidad" class="col-sm-2 control-label">Departamento/Unidad</label>
-	                      <div class="col-sm-6">
-	                        <input type="text" class="form-control" id="name" name="name" value="{{$department->name}}">
-	                      </div>
-	                    </div>  
-	              	                                
-	                  </div><!-- /.box-body -->
-	                  <div class="box-footer">
-	                  			<a href="{{Route('departamento.index')}}"><button type="button" id="cancelar" class="btn btn-default m-t-10">Cancelar</button></a>
-	                        <button type="submit" class="btn btn-info">Actualizar</button>
-	                  </div><!-- /.box-footer -->
-	               {!!Form::close()!!}
-               </div>
-              </div><!-- /.box -->
-
-
-
-
- @endsection
+           
+            <div class="form-group">
+                {!! Form::label('name', 'Nombre', array('class' =>'control-label col-md-2' )) !!}
+				<div class="col-md-7">
+                    {!!Form::text('name', $department->name, array('placeholder' => '','class' => 'form-control')) !!}
+				<div class="error">
+					<ul>@foreach($errors->get('name') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+				</div>
+				</div>
+            </div>  
+            <div class="form-group">
+                {!! Form::label('descripcion', 'Descripcion', array('class' =>'control-label col-md-2' )) !!}
+                <div class="col-md-7">
+                    {!!Form::text('descripcion', $department->descripcion, array('placeholder' => '','class' => 'form-control')) !!}
+                <div class="error">
+                    <ul>@foreach($errors->get('descripcion') as $msg)<li>{{$msg}}</li> @endforeach</ul>
+                </div>
+                </div>
+            </div>                 
+        
+		    <div class="form-group">
+                <div class="col-md-offset-2 col-md-7">
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+				<a href="javascript:window.history.back();" class="btn btn-primary">Cancelar</a>
+                </div>
+		    </div>
+			
+        {!! Form::close() !!} 
+    @endif		
+    
+@endsection

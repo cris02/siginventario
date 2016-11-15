@@ -2,62 +2,68 @@
 
 @section('content')
 
-<div class="col-md-10">
-    <div class="box-header with-border container">
-                  <h3 class="box-title">PROVEEDORES</h3>
-
-                    <br>
-                        <a href="{{route('proveedor.create')}}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Nuevo</a>
-                    <br/>
-    </div><!-- /.box-header -->
-
-    <div class="table-responsive">
+         
+        <a href="{{route('proveedor.create')}}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Nuevo</a>
+     
+<div class="panel-body table-responsive">
                    
-             @include('Msj.messages')
-             
-      
+             @include('Msj.messages')         
+             @include('Provider.detail')
 
 
-            <table class="table table-hover table-striped table-bordered table-condensed'>       
-                <tr class="danger">
-                     <div class="row">
+            <table class="table table-hover table-striped table-bordered table-condensed" id="TablaProveedores">       
+                <thead>
+               
                       
-                        <th class="col-xs-1">NUMERO</th>
-                        <th class="col-xs-3">NOMBRE</th>                    
-                        <th class="col-xs-1">TELEFONO</th>                  
-                        <th ></th>
-                      
+                        <th >NUMERO</th>
+                        <th >NOMBRE</th>                    
+                        <th >TELEFONO</th>                  
+                        <th ></th>                     
 
+                 
+                </thead>
+                <tbody>
+                   @foreach ($proveedores as $p)
+                      <tr>
+                              <td>{{$p->id}}</td>
+                              <td>{{$p->nombre}}</td>               
+                              <td>{{$p->telefono}}</td>  
+                              <td >
+ 
+ <a class="btn btn-default btn-sm" title="detalles" href="#detalles"  onClick="mostrar_provider({{$p->id}})" data-target="p-modal"><span class="glyphicon glyphicon-th-large "></span></a>
 
-                      </div>
-                </tr>
-             @foreach ($proveedores as $p)
-                <tr>
-                    <div class="row">
-                        <td class="col-xs-1">{{$p->id}}</td>
-                        <td class="col-xs-3">{{$p->name}}</td>               
-                        <td class="col-xs-1">{{$p->phone}}</td>  
-                        <td ><a class="btn btn-default" href="{{url('proveedor/detail',$p->id)}}"><span class="glyphicon glyphicon-th-large col-xs-1"></span>Detalle</a>
+                              <a class="btn btn-default btn-sm" title="editar" href="{{route('proveedor.edit',$p->id)}}"><span class="glyphicon glyphicon-pencil "></span></a>   
 
-                        <a class="btn btn-default" href="{{route('proveedor.edit',$p->id)}}"><span class="glyphicon glyphicon-pencil col-xs-1"></span>Editar</a>   
-
-                        <a class="btn btn-default" href="{{route('proveedor.show',$p->id)}}"><span class="glyphicon glyphicon-trash col-xs-1"></span>Eliminar</a>
-                        </td>
-                    </div>
-                </tr>
-             @endforeach        
-              
+                              <a class="btn btn-default btn-sm" title="eliminar" href="{{route('proveedor.show',$p->id)}}"><span class="glyphicon glyphicon-trash "></span></a>
+                              </td>
+                         
+                      </tr>
+                   @endforeach      
+                                      
+                </tbody>
             </table>
 
-             <div class="text-center">
-                 {!!$proveedores->links()!!}
-            </div>
-            <div class=" container">
-                
-            </div>
-    </div>
-
 </div>
+ @endsection
+@section('script')
+<script type="text/javascript">
+  $(document).ready(function(){
+  
+    $('#TablaProveedores').DataTable();
+  }); 
 
+var mostrar_provider= function(id){ 
+  var route = "{{url('proveedor/detail')}}/"+id;  
+  $.get(route,function(data){   
+    $("#name").replaceWith( "<span id='name'>"+data.nombre+"</span>" ); 
+    $("#num").replaceWith( "<span id='num'>"+data.id+"</span>" ); 
+    $("#dir").replaceWith( "<span id='dir'>"+data.direccion+"</span>" ); 
+    $("#tel").replaceWith( "<span id='tel'>"+data.telefono+"</span>" ); 
+    $("#mail").replaceWith( "<span id='mail'>"+data.email+"</span>" );
+    $("#vendedor").replaceWith( "<span id='vendedor'>"+data.vendedor+"</span>" );    
+    $("#p-modal").modal();
+  });
+}
+</script>
 
 @endsection

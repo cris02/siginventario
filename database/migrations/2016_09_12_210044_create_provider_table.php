@@ -13,15 +13,16 @@ class CreateProviderTable extends Migration
     public function up()
     {
         Schema::create('providers', function (Blueprint $table) {
-            $table->integer('id');
-            $table->string('name',100);
-            $table->string('direction',100);
-            $table->string('phone',100);
-            $table->string('fax',100);
-            $table->string('seller',100);
+            $table->increments('id');
+            $table->string('nombre',100);
+            $table->string('direccion',100);
+            $table->string('telefono',100);
+            $table->string('fax',100)->nullable();
+            $table->string('email',100)->nullable();
+            $table->string('vendedor',100);
 
             $table->timestamps();
-            $table->primary("id");
+          
         });
     }
 
