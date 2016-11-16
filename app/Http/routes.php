@@ -26,7 +26,9 @@ Route::get('{id}/edit','UsersController@getEdit');
 Route::get('usuario/create/{id}','UsersController@create');
 Route::resource('usuario','UsersController');
 
-
+Route::group(['middleware'=>'admin_sistema'],function(){
+	Route::resource('roles','RolesController');
+});
 //ruta hacia home
 Route::get('home', 'HomeController@index');
 
@@ -49,13 +51,15 @@ Route::get('unidad/delete/{id_unidad_medida}','UnidadMedidaController@delete')->
 Route::resource('articulo','ArticuloController');
 Route::get('articulo/delete/{codigoArticulo}','ArticuloController@delete')->name('delete_articulo');
 
-
+//rutas para ingreso
 Route::resource('ingreso','IngresoController');
 Route::get('ingreso/delete/{idIngreso}','IngresoController@delete')->name('delete_ingreso');
 
+//rutas para observacion
 Route::resource('observacion','ObservacionController');
 Route::get('observacion/delete/{idObservacion}','ObservacionController@delete')->name('delete_observacion');
 
+//rutas para roles
 Route::resource('roles','RolesController');
 
 
