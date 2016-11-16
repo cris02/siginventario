@@ -25,7 +25,20 @@ class Articulo extends Model
 		
         return $this->belongsTo('sig\Models\Especifico','id_especifico','id');
     }
-
+	
+		
+	public function existencia(){
+		return $this->hasMany('sig\Models\Existencia','codigo_articulo');
+	}
+  
+  public function ingresarExistencia($cantidad,$precio){
+	  
+		$nuevaExistencia = $cantidad + $this->existencia;
+		$nuevoPrecio = (($this->costo_unitario * $this->existencia) +($cantidad * $precio))/$nuevaExistencia;
+		$this->existencia = $nuevaExistencia;
+		$this->costo_unitario = $nuevoPrecio;
+		
+  }
 	
 	
 }
