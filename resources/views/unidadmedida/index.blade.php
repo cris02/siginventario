@@ -7,7 +7,7 @@
 <table class="table table-hover table-striped table-bordered table-condensed">
 <thead>
     <tr class="success">
-        <th>codigo</th>
+        
         <th>Unidad</th>    
 	    <th></th>
     </tr>
@@ -16,7 +16,7 @@
  
 @foreach ($unidades as $unidad)
     <tr>  
-        <td>{{$unidad->id_unidad_medida}}</td>
+        
         <td>{{$unidad->nombre_unidadmedida}}</td>    
 	    <td class="col-md-5">
 	        <a class="btn btn-default btn-sm" href="{{route('delete_unidad',$unidad->id_unidad_medida)}}"><span class="glyphicon glyphicon-trash"></span>Eliminar</a>

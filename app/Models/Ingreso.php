@@ -12,8 +12,7 @@ class Ingreso extends Model
 	//public $incrementing = true;
 	
 	protected $fillable = [
-	    'cantidad','precio_unitario','fecha_registro','id_proveedor','id_art_pres'
-	];
+	    'cantidad','precio_unitario','fecha_registro','id_proveedor','id_art_pres','precio','existencia_ant'];
 	//Relacion uno a muchos con articulo
 	public function existencia(){
         return $this->belongsTo('sig\Models\Existencia','id_art_pres','id_art_pres');
@@ -22,6 +21,14 @@ class Ingreso extends Model
 	public function proveedor(){
         return $this->belongsTo('sig\Models\Provider','id_poveedor','id');
     }
+	
+	public function monto(){
+		return ($this->cantidad * $this->precio_unitario);
+	}
+	
+	public function montoExistencia(){
+		return ($this->existencia_ant * $this->precio);
+	}
 
 
 	

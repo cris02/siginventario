@@ -35,6 +35,10 @@ class Existencia extends Model
 		$this->precio_unitario = $nuevoPrecio;
 		
   }
+  
+  public function monto(){
+	  return ($this->existencia * $this->precio_unitario);
+  }
 	
 	
 }

@@ -19,10 +19,19 @@ class IngresoController extends Controller
 		return view('ingresos.index',['ingresos'=>$ingresos]);
 	}
 	
+	public function addExistencia($codProducto,$idPresentacion){
+		$proveedores = Provider::orderBy('nombre','asc')->get();
+		$existencia =Existencia::where([
+                    ['id_pres', '=',$idPresentacion],
+                    ['codigo_articulo', '=', $codProducto],
+])->first();
+		return view('ingresos.addExistencia',['proveedores'=>$proveedores,'existencia'=>$existencia]); 
+	}
+	
 	public function create()
     {
 		
-		$proveedores = Provider::orderBy('name','asc')->get();
+		$proveedores = Provider::orderBy('nombre','asc')->get();
 		$presentaciones = Presentacion::orderBy('presentacion','asc')->get();
 		$articulos = Articulo::orderBy('nombre_articulo','asc')->get();
         return view('ingresos.create',['proveedores'=>$proveedores,'articulos'=>$articulos,'presentaciones'=>$presentaciones]);
@@ -43,7 +52,7 @@ class IngresoController extends Controller
     ['id_pres', '=',$request->input('presentacion') ],
     ['codigo_articulo', '=', $request->input('producto')],
 ])->first();
-                    
+                    if($existencia){
                     $existencia->ingresarExistencia($request->input('cantidad'),$request->input('precio'));
                      					
 				    Ingreso::create([
@@ -52,11 +61,24 @@ class IngresoController extends Controller
 				        'id_proveedor' =>$request->input('proveedor'),
 				        'cantidad' =>$request->input('cantidad'),
                         'precio_unitario' =>$request->input('precio'),
-                        'fecha_registro' =>$request->input('fecha'),						
+                        'fecha_registro' =>$request->input('fecha'),
+                        'existencia_ant' =>$existencia->existencia,
+                        'precio' => $existencia->precio_unitario,						
 				    ]);
 					$existencia->update();
 					flash('Ingreso guardado exitosamente','success');
-		            return redirect()->route('articulo.index');
+					if($request->input('mostrar')=='ingresoindex'){
+						return redirect()->route('ingreso.index');
+					}else{
+						return redirect()->route('existencia.index');
+					}
+		            
+					}else{
+						flash('Error:No existe la presentacion para este artculo,
+						revise que los datos sean correctos,Si realmente necsita agregar
+						existencia para este articulo y la presentacion puede crearla y luego agregar existencias','danger');						
+		                return redirect()->back();
+					}
 				
 		    
 	}

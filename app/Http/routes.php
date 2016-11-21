@@ -10,11 +10,14 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+/*
 Route::get('/', function () {
        return view('Auth.login');
    });
+   */
 
 	//rutas para usuarios
+/*
 Route::get('login','UsersController@showLoginForm');
 Route::post('login','UsersController@authenticate');
 Route::get('logout','UsersController@logout');
@@ -25,6 +28,7 @@ Route::post('register','UsersController@postRegister');
 Route::get('{id}/edit','UsersController@getEdit');
 Route::get('usuario/create/{id}','UsersController@create');
 Route::resource('usuario','UsersController');
+*/
 
 
 //ruta hacia home
@@ -52,12 +56,21 @@ Route::get('articulo/delete/{codigoArticulo}','ArticuloController@delete')->name
 
 Route::resource('ingreso','IngresoController');
 Route::get('ingreso/delete/{idIngreso}','IngresoController@delete')->name('delete_ingreso');
+Route::get('ingreso/addExistencia/{codProducto}/{idPresentacion}','IngresoController@addExistencia')->name('addExistencia');
 
 Route::resource('observacion','ObservacionController');
 Route::get('observacion/delete/{idObservacion}','ObservacionController@delete')->name('delete_observacion');
+/*
+Route::resource('roles','RolesController'); 
+*/
 
-Route::resource('roles','RolesController');
+Route::resource('existencia','ExistenciaController');
+Route::resource('existencia/index/{buscar?}','ExistenciaController@index');
 
+Route::resource('presentacion','PresentacionController');
+
+Route::get('presentacion/delete/{idPresentacion}','PresentacionController@delete')->name('delete_presentacion');
+Route::get('articulo/addPresentacion/{codProducto}','ArticuloController@addPresentacion')->name('addPresentacion');
 
 
 

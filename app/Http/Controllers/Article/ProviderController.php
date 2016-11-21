@@ -14,11 +14,11 @@ use sig\Http\Requests\Provider\ProviderUpdateRequest;
 use Laracasts\Flash\Flash;
 
 class ProviderController extends Controller
-{
+{  /*
     public function __construct()
     {
         $this->middleware('auth');
-    }
+    }*/
     /**
      * Display a listing of the resource.
      *
