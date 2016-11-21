@@ -115,10 +115,13 @@ class UsersController extends Controller
       
          //recuperar usuario a actualizar
         $usuario = User::FindOrFail($id);
-        $depto=Department::FindOrFail($usuario->departamento_id);
-        $depto->update([           
+        $depto=Department::where('id','=',$usuario->departamento_id);
+        if($depto){
+          $depto->update([           
             'encargado' =>$request->input('nombre'),                                 
           ]);
+        }
+        
 
          if($request->input('depto'))//if deptos
         {
@@ -183,19 +186,18 @@ class UsersController extends Controller
    public function destroy($id)
     {
       $u=User::FindOrFail($id);
-      $departamento = Department::where('usuario_id',$u->id)->get();  
-       if($departamento->count()>0)
-       {
-            flash('Error: no puede eliminarse el USUARIO porque hay Registros asociados','danger');
-            return redirect()->back();
+      $departamento = Department::where('usuario_id',$u->id)->get();        
+       
+      $u->delete();
+      if($departamento){
+          $departamento->update([           
+            'encargado' =>'No Definido',                                 
+          ]);
         }
-        else
-        {
-            $u->delete();
             flash('eliminado exitosamente','success');
             $usuarios = User::all();
             return view('auth.index')->with('usuarios',$usuarios);
-        }
+        
     }
 
      public function edit($id)
