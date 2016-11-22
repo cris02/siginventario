@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use sig\Http\Requests;
 use sig\Http\Controllers\Controller;
 use sig\Models\Department;
+use sig\User;
 use DB;
 use Session;
 use sig\Http\Requests\Department\DepartmentCreateRequest;

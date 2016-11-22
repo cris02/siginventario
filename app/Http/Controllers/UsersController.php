@@ -45,6 +45,7 @@ class UsersController extends Controller
     }
     public function logout(){
     	Auth::logout();
+      \Session::flush();
     	return redirect('/');
     }
   
@@ -114,7 +115,7 @@ class UsersController extends Controller
       
          //recuperar usuario a actualizar
         $usuario = User::FindOrFail($id);
-        $depto=Department::where('id','=',$usuario->departamento_id);
+        $depto=Department::where('id','=',$usuario->departamento_id)->get();
         if($depto){
           $depto->update([           
             'encargado' =>$request->input('nombre'),                                 

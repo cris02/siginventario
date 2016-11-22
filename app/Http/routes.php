@@ -21,6 +21,7 @@ Route::post('register','UsersController@postRegister');
 Route::get('{id}/edit','UsersController@getEdit');
 Route::get('usuario/create/{id}','UsersController@create');
 Route::resource('usuario','UsersController');
+
 Route::group(['middleware'=>'admin_sistema'],function(){
 	Route::resource('roles','RolesController');
 });
@@ -48,6 +49,47 @@ Route::resource('observacion','ObservacionController');
 Route::get('observacion/delete/{idObservacion}','ObservacionController@delete')->name('delete_observacion');
 //rutas para roles
 Route::resource('roles','RolesController');
+
+//requisicion
+//ver la requisicion que se esta creando
+Route::get('requisicion/ver',[
+		'as'=>'requisicion-show',
+		'uses'=>'RequisicionController@ver'
+	]);
+//agregar articulo a la requisicion
+Route::get('requisicion/add/{cod}/{cantidad}','RequisicionController@add');
+
+//eliminar articulo de la requisicion
+Route::get('requisicion/delete/{cod}',[
+		'as'=>'requisicion-delete',
+		'uses'=>'RequisicionController@delete'
+	]);
+//eliminar la requisicion que se esta creando
+Route::get('requisicion/trash',[
+		'as'=>'requisicion-trash',
+		'uses'=>'RequisicionController@trash'
+	]);
+//actualizar cantidad en articulo de la requisicion
+Route::get('requisicion/update/{cod}/{cantidad}','RequisicionController@update');
+//almacenar la requisicion
+Route::get('requisicion/store','RequisicionController@store');
+
+
+// detalle requisicion
+ //para todo el controlador
+Route::resource('detalle_requisicion','DetalleRequisicionController');
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -14,6 +14,11 @@ class CreateRequisicionsTable extends Migration
     {
         Schema::create('requisicions', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('estado');
+            $table->date('fecha_solicitud')->nullable();
+            $table->date('fecha_entrega')->nullable();
+            $table->integer('departamento_id');
+            $table->double('total')->default(0.00);            
             $table->timestamps();
         });
     }
