@@ -6,7 +6,7 @@
     </div>
     
     @if($department)
-	    {!! Form::open(array('route' => ['departamento.update','id' => $department->id],'class' => 'form-horizontal','method' => 'put')) !!}
+	    {!! Form::open(array('route' => ['departamento.update','id' => $department->id],'class' => 'form-horizontal','autocomplete'=>'off','method' => 'put')) !!}
         <div class="form-group">
                 {!! Form::label('numero', 'Numero', array('class' =>'control-label col-md-2' )) !!}
                 <div class="col-md-7">

@@ -7,7 +7,7 @@
 </div>
 <hr/>
       
-{!! Form::open(array('route' => 'departamento.store','class' => 'form-horizontal','method' => 'post')) !!}              
+{!! Form::open(array('route' => 'departamento.store','class' => 'form-horizontal','autocomplete'=>'off','method' => 'post')) !!}              
         
         <div class="form-group">
             {!!Form::label('Nombre', 'Nombre', array('class' =>'control-label col-md-2' )) !!}

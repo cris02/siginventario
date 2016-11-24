@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('bootstrap/css/font-awesome.css') }}">   
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.css')}}">
-    
+  
     <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.css')}}">
 
     <!-- Bootstrap 3.3.5 -->
@@ -23,8 +23,7 @@
     <link rel="stylesheet" href=" {{ asset('bootstrap/css/style.css') }}">
     <!-- estilo para datatables -->
     <link rel="stylesheet" href="{{asset('plugins/datatables/jquery.dataTables.min.css')}}">  
-    <!-- Para el calendario -->
-	<link rel="stylesheet" href=" {{ asset('bootstrap/css/jquery-ui.min.css') }}">
+
      <!-- jQuery-->
      <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
      <script src="{{asset('plugins/jQuery/jQuery.js')}}"></script>
@@ -68,13 +67,14 @@
                     <li class="dropdown user user-menu">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <!-- Nombre del usuario en barra de menu -->
                         <img src="{{asset('dist/img/icono_persona.png')}}" class="user-image" alt="User Image">
-                       
+                        <span class="hidden-xs">{{Auth::user()->name}}</span>
                       </a>
                       <ul class="dropdown-menu">            
                         <!-- Menu Footer-->
                         <li class="user-footer">                   
                           <div class="pull-right">
-						  
+                            <a href="{{route('usuario.edit',Auth::user()->id)}}" class="btn btn-default btn-flat">EditarPerfil</a>
+                            <a href="{{url('logout')}}" class="btn btn-default btn-flat">Salir</a>
                           </div>
                         </li>
                       </ul>
@@ -102,7 +102,21 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>            
             </li>
-                                       
+                @if (Auth::user()->perfil_id==2)
+                  @include('layouts.menus.admin_bodega')
+                @else
+                      @if (Auth::user()->perfil_id==4)
+                        @include('layouts.menus.depto')
+                      @else
+                          @if (Auth::user()->perfil_id==3)
+                            @include('layouts.menus.admin_financiero')
+                          @else
+                              @if (Auth::user()->perfil_id==1)
+                                @include('layouts.menus.admin_sistema')                    
+                              @endif                        
+                          @endif
+                      @endif
+                @endif                              
         
           </ul>
         </section>
@@ -146,8 +160,6 @@
 
         <!-- js de bootstrap-->
      <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
-	 <!-- Para el calendario-->
-	 <script src="{{asset('bootstrap/js/jquery-ui.min.js')}}"></script>
      <script >
        $('#msj').delay(1500).fadeOut(800);;
      </script>

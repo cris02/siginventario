@@ -116,7 +116,7 @@ class UsersController extends Controller
       
          //recuperar usuario a actualizar
         $usuario = User::FindOrFail($id);
-        $depto=Department::where('id','=',$usuario->departamento_id)->get();
+        $depto=Department::where('id','=',$usuario->departamento_id)->first();
         if($depto){
           $depto->update([           
             'encargado' =>$request->input('nombre'),                                 

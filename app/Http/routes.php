@@ -9,12 +9,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-/*
+
 Route::get('/', function () {
        return view('Auth.login');
    });
 
-   */
+   
 
 
 	//rutas para usuarios
@@ -63,7 +63,7 @@ Route::resource('roles','RolesController');
 */
 
 Route::resource('existencia','ExistenciaController');
-Route::resource('existencia/index/{buscar?}','ExistenciaController@index');
+//Route::resource('existencia/index/{buscar?}','ExistenciaController@index');
 
 Route::resource('presentacion','PresentacionController');
 
@@ -101,17 +101,6 @@ Route::get('requisicion/store','RequisicionController@store');
 // detalle requisicion
  //para todo el controlador
 Route::resource('detalle_requisicion','DetalleRequisicionController');
-
-
-
-
-
-
-
-
-
-
-
 
 
 
