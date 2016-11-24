@@ -17,6 +17,8 @@ class CreateIngresoTable extends Migration
 		   
 		   $table->integer('id_proveedor');
 		   $table->integer('id_art_pres');
+		   $table->integer('existencia_ant');
+		   $table->double('precio');
 		   $table->timestamps();
 		   
 		   //Relaciones con producto y proveedor

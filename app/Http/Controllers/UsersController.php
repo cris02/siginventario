@@ -28,7 +28,7 @@ class UsersController extends Controller
 
     public function authenticate(Request $request)
     {
-    	if (Auth::attempt(['usuario' => $request->nombre, 'password' => $request->contraseña, 'activo' => 'true'])) 
+    	if (Auth::attempt(['usuario' => $request->input('nombre'), 'password' => $request->input('contraseña'), 'activo' => 't'])) 
     	{
             return redirect()->intended('home');
 		}
@@ -41,6 +41,7 @@ class UsersController extends Controller
           'nombre'=>'Las credenciales no son validas.'
         ]);
 		}
+		
        
     }
     public function logout(){

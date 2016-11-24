@@ -9,10 +9,16 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+/*
 Route::get('/', function () {
        return view('Auth.login');
    });
+
+   */
+
+
 	//rutas para usuarios
+
 Route::get('login','UsersController@showLoginForm');
 Route::post('login','UsersController@authenticate');
 Route::get('logout','UsersController@logout');
@@ -22,9 +28,12 @@ Route::get('{id}/edit','UsersController@getEdit');
 Route::get('usuario/create/{id}','UsersController@create');
 Route::resource('usuario','UsersController');
 
+
+
 Route::group(['middleware'=>'admin_sistema'],function(){
 	Route::resource('roles','RolesController');
 });
+
 //ruta hacia home
 Route::get('home', 'HomeController@index');
 //rutas para proveedor
@@ -44,6 +53,20 @@ Route::get('articulo/delete/{codigoArticulo}','ArticuloController@delete')->name
 //rutas para ingreso
 Route::resource('ingreso','IngresoController');
 Route::get('ingreso/delete/{idIngreso}','IngresoController@delete')->name('delete_ingreso');
+
+Route::get('ingreso/addExistencia/{codProducto}/{idPresentacion}','IngresoController@addExistencia')->name('addExistencia');
+
+Route::resource('observacion','ObservacionController');
+Route::get('observacion/delete/{idObservacion}','ObservacionController@delete')->name('delete_observacion');
+/*
+Route::resource('roles','RolesController'); 
+*/
+
+Route::resource('existencia','ExistenciaController');
+Route::resource('existencia/index/{buscar?}','ExistenciaController@index');
+
+Route::resource('presentacion','PresentacionController');
+
 //rutas para observacion
 Route::resource('observacion','ObservacionController');
 Route::get('observacion/delete/{idObservacion}','ObservacionController@delete')->name('delete_observacion');
@@ -91,6 +114,9 @@ Route::resource('detalle_requisicion','DetalleRequisicionController');
 
 
 
+
+Route::get('presentacion/delete/{idPresentacion}','PresentacionController@delete')->name('delete_presentacion');
+Route::get('articulo/addPresentacion/{codProducto}','ArticuloController@addPresentacion')->name('addPresentacion');
 
 
 

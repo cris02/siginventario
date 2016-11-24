@@ -16,9 +16,9 @@ class CreateArticuloTable extends Migration
             $table->String('codigo_articulo');
             $table->integer('id_especifico');
             $table->integer('id_unidad_medida');
-            $table->integer('existencia')->default(0);
+            
             $table->string('nombre_articulo');
-            $table->double('costo_unitario')->default(0.00);
+            
             $table->timestamps();
             
             //Definicion de llave primaria

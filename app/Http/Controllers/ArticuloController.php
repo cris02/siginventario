@@ -7,17 +7,25 @@ use DB;
 use Session;
 use sig\Models\Articulo;
 use sig\Models\UnidadMedida;
+use sig\Models\Presentacion;
 
 class ArticuloController extends Controller
-{
+{ /*
 	public function __construct()
     {
         $this->middleware('auth');
     }
+	*/
     
     public function index(){
 		$articulos = Articulo::orderBy('nombre_articulo','asc')->get();		
 		return view('articulos.index',['articulos'=>$articulos]);
+	}
+	
+	public function addPresentacion($codProducto){
+		$articulo = Articulo::findOrFail($codProducto);
+		$presentaciones = Presentacion::orderBy('presentacion')->get();
+		return view('articulos.addPresentacion',['articulo'=>$articulo,'presentaciones'=>$presentaciones]);
 	}
 	
 	public function create()
