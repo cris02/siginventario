@@ -37,11 +37,11 @@ class ArticuloController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-		    'codigo' => 'required | alpha_num',
+		    'codigo' => 'required |regex: /^[a-zA-Z0-9αινσϊρ\s]*$/ ',
 			'unidad' => 'required | integer|min:1',
 			'especifico' => 'required |integer | digits:5|min:1| exists:especificos,id',
 
-			'nombre' => 'required |regex: /^[a-zA-Zαινσϊρ\s]*$/ |unique:articulo,nombre_articulo'
+			'nombre' => 'required |regex: /^[a-zA-Z0-9αινσϊρ\s\/]*$/ |unique:articulo,nombre_articulo'
 		]);	    
 											
 				    Articulo::create([
@@ -73,9 +73,9 @@ class ArticuloController extends Controller
     public function update(Request $request, $codigoArticulo)
     {
         $this->validate($request,[
-		   'nombre'=>'required |regex: /^[a-zA-Zαινσϊρ\s]*$/ |unique:articulo,nombre_articulo,'.$codigoArticulo.',codigo_articulo',
+		   'nombre'=>'required |regex: /^[a-zA-Z0-9αινσϊρ\s\/]*$/ |unique:articulo,nombre_articulo,'.$codigoArticulo.',codigo_articulo',
 		   'unidad' => 'required | integer |min:1',
-		   'especifico' => 'required |digits:4 |min:1| exists:especificos,id'
+		   'especifico' => 'required |digits:5 |min:1| exists:especificos,id'
 		]);
 		$articulo = Articulo::FindOrFail($codigoArticulo);
 		if($articulo){

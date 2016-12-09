@@ -13,18 +13,17 @@ class CreateDetalleRequisicionsTable extends Migration
     public function up()
     {
         Schema::create('detalle_requisicions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('codigo');
-            $table->string('nombre');
-            $table->string('presentacion');
-            $table->string('unidad_medida');
+            $table->increments('id');    
+           
             $table->integer('cantidad_solicitada');
             $table->integer('cantidad_entregada')->default(0);
             $table->double('precio');
             $table->integer('requisicion_id');
+            $table->string('articulo_id');
             $table->timestamps();
 
             $table->foreign('requisicion_id')->references('id')->on('requisicions'); 
+            $table->foreign('articulo_id')->references('codigo_articulo')->on('articulo'); 
         });
     }
 

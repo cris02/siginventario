@@ -1,3 +1,4 @@
+f
 @extends('layouts.template')
 
 @section('content')

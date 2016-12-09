@@ -39,7 +39,10 @@
 <script type="text/javascript">
   $(document).ready(function(){
   
-    $('#TablaDeptos').DataTable();
+    $('#TablaDeptos').DataTable(
+      {         
+          "lengthChange": false,   
+      });
   });  
 </script>
 @endsection

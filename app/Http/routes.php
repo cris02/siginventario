@@ -75,9 +75,9 @@ Route::resource('roles','RolesController');
 
 //requisicion
 //ver la requisicion que se esta creando
-Route::get('requisicion/ver',[
+Route::get('requisicion/crear',[
 		'as'=>'requisicion-show',
-		'uses'=>'RequisicionController@ver'
+		'uses'=>'RequisicionController@crear'
 	]);
 //agregar articulo a la requisicion
 Route::get('requisicion/add/{cod}/{cantidad}','RequisicionController@add');
@@ -96,12 +96,11 @@ Route::get('requisicion/trash',[
 Route::get('requisicion/update/{cod}/{cantidad}','RequisicionController@update');
 //almacenar la requisicion
 Route::get('requisicion/store','RequisicionController@store');
-
+Route::get('requisicion/listar','RequisicionController@index');
 
 // detalle requisicion
  //para todo el controlador
-Route::resource('detalle_requisicion','DetalleRequisicionController');
-
+Route::resource('requisicion/detalle','DetalleRequisicionController');
 
 
 Route::get('presentacion/delete/{idPresentacion}','PresentacionController@delete')->name('delete_presentacion');

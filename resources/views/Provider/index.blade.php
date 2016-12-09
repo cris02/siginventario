@@ -49,7 +49,11 @@
 <script type="text/javascript">
   $(document).ready(function(){
   
-    $('#TablaProveedores').DataTable();
+    $('#TablaProveedores').DataTable(
+      {         
+          "lengthChange": false,
+           "autoWidth": false  
+      });
   }); 
 
 var mostrar_provider= function(id){ 

@@ -15,10 +15,11 @@ class CreateArticuloTable extends Migration
         Schema::create('articulo', function (Blueprint $table) {
             $table->String('codigo_articulo');
             $table->integer('id_especifico');
-            $table->integer('id_unidad_medida');
-            
+            $table->integer('id_unidad_medida');            
             $table->string('nombre_articulo');
-            
+            $table->double('existencia')->default(0.0);
+            $table->double('precio_unitario')->default(0.0);
+
             $table->timestamps();
             
             //Definicion de llave primaria

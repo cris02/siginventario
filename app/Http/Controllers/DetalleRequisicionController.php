@@ -4,8 +4,11 @@ namespace sig\Http\Controllers;
 
 use Illuminate\Http\Request;
 use sig\Http\Requests;
-use sig\Models\Existencia;
+use sig\Models\Articulo;
 use Jenssegers\Date\Date;
+use sig\Models\Requisicion;
+use sig\Models\DetalleRequisicion;
+use Laracasts\Flash\Flash;
 
 class DetalleRequisicionController extends Controller
 {
@@ -16,8 +19,8 @@ class DetalleRequisicionController extends Controller
      */
     public function index()
     {
-        $detalle = Existencia::all();     
-        return view('Requisicion.agregar',['detalle'=>$detalle]);
+         $articulos = Articulo::where('existencia','>','0')->get();     
+         return view('Requisicion.agregar',['articulos'=>$articulos]);
     }
 
     /**
@@ -28,8 +31,11 @@ class DetalleRequisicionController extends Controller
     public function create()
     {
         //$var = new \DateTime();
-        echo Date::now()->format('l j F Y H:i:s'); 
-        
+        //echo Date::now()->format('l j F Y H:i:s'); 
+         
+
+        return Date::now()->format('m');  
+       
     }
 
     /**
@@ -51,7 +57,7 @@ class DetalleRequisicionController extends Controller
      */
     public function show($id)
     {
-        //
+       //
     }
 
     /**
@@ -62,7 +68,10 @@ class DetalleRequisicionController extends Controller
      */
     public function edit($id)
     {
-        //
+         $detalle = DetalleRequisicion::where('requisicion_id','=',$id)->get();
+         $req  = Requisicion::FindOrFail($id);     
+        
+        return view('Requisicion.actualizar',['detalle'=>$detalle,'requisicion'=>$req]);
     }
 
     /**
@@ -74,7 +83,23 @@ class DetalleRequisicionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $d = DetalleRequisicion::FindOrFail($id);
+         $a= Articulo::where('codigo_articulo',$d->articulo['codigo_articulo'])->first();
+        
+         if($d->articulo['existencia'] < $request->cantidad)
+         {
+            flash('No hay suficientes existencias.', 'danger');
+         }
+         else{
+             $a->update([
+                'existencia' => $a->existencia-$request->cantidad,
+                ]);
+             $d->update([
+                'cantidad_entregada' => $request->cantidad,
+                ]);
+         }
+          return back();
+         
     }
 
     /**
@@ -87,4 +112,6 @@ class DetalleRequisicionController extends Controller
     {
         //
     }
+
+   
 }

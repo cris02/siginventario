@@ -16,7 +16,11 @@ class Requisicion extends Model
 
       
    public function departamento(){
-		return $this->hasOne('sig\Models\Department','departamento_id');
+		return $this->hasOne('sig\Models\Department','id','departamento_id');
+	}
+
+	public function detalles(){
+    	return $this->hasMany('sig\Models\DetalleRequisicion','requisicion_id');		
 	}
 
 }

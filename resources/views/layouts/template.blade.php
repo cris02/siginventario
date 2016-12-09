@@ -23,6 +23,7 @@
     <link rel="stylesheet" href=" {{ asset('bootstrap/css/style.css') }}">
     <!-- estilo para datatables -->
     <link rel="stylesheet" href="{{asset('plugins/datatables/jquery.dataTables.min.css')}}">  
+    @yield('css')
 
      <!-- jQuery-->
      <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
@@ -161,7 +162,7 @@
         <!-- js de bootstrap-->
      <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
      <script >
-       $('#msj').delay(1500).fadeOut(800);;
+       $('#msj').delay(1500).fadeOut(2000);;
      </script>
      @yield('script')
    

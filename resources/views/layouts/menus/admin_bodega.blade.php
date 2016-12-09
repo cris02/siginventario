@@ -6,9 +6,23 @@
        <ul class="treeview-menu">
         <li><a href="{{url('articulo')}}"><i class="glyphicon glyphicon-chevron-right"></i>Productos</a></li>
         <li><a href="{{url('unidad')}}"><i class="glyphicon glyphicon-chevron-right"></i>Unidad de Medida</a></li>
-        <li><a href="{{url('especifico')}}"><i class="fglyphicon glyphicon-chevron-right"></i>Especificos</a></li>               
+        <li><a href="{{url('especifico')}}"><i class="glyphicon glyphicon-chevron-right"></i>Especificos</a></li>  
+        <li><a href="{{url('presentacion')}}"><i class="glyphicon glyphicon-chevron-right"></i>Presentacion</a></li>              
       </ul>          
   </li> 
+    <li class="treeview">
+    <a href="#">
+      <i class="glyphicon glyphicon-floppy-open"></i> <span>Almacenamiento</span>
+      <i class="fa fa-angle-left pull-right"></i>
+    </a>  
+       <ul class="treeview-menu">
+        <li><a href="{{url('existencia')}}"><i class="glyphicon glyphicon-chevron-right"></i>Existencia</a></li>
+        <li><a href="{{url('ingreso')}}"><i class="glyphicon glyphicon-chevron-right"></i>Agregar Existencia</a></li>
+        
+                      
+      </ul>          
+  </li>
+
 
   <li class="treeview">
     <a href="{{url('departamento')}}">
@@ -23,3 +37,10 @@
       <i class="fa fa-angle-left pull-right"></i>
     </a>             
   </li>
+  <li class="treeview">
+    <a href="{{url('requisicion/listar')}}">
+      <i class="glyphicon glyphicon-tags"></i> <span>Requisiciones</span>
+      <i class="fa fa-angle-left pull-right"></i>
+    </a>             
+  </li>
+ 

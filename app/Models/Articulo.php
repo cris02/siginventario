@@ -13,7 +13,7 @@ class Articulo extends Model
 	public $incrementing = false; 
 		
 	protected $fillable = [
-	    'codigo_articulo','id_especifico','id_unidad_medida','nombre_articulo'
+	    'codigo_articulo','id_especifico','id_unidad_medida','nombre_articulo','existencia','precio_unitario'
 	];
 	//Relacion Muchos a uno con unidad medidaret
 	public function unidad()
@@ -27,9 +27,7 @@ class Articulo extends Model
     }
 	
 		
-	public function existencia(){
-		return $this->hasMany('sig\Models\Existencia','codigo_articulo');
-	}
+	
   
   public function ingresarExistencia($cantidad,$precio){
 	  

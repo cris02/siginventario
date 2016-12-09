@@ -9,8 +9,7 @@
 <thead>
     <tr>
         <th>Codigo</th>
-        <th>Nombre del Articulo</th>
-        <th>Presentacion</th>  
+        <th>Nombre del Articulo</th>       
         <th>Unidad de Medida</th>
         <th>Cantidad</th> 
         <th>Precio</th>             
@@ -19,29 +18,28 @@
  </thead>
 <tbody>
  
-@foreach ($detalle as $d) 
+@foreach ($articulos as $a) 
 
     <tr>  
-        <td>{{$d->articulo['codigo_articulo']}}</td>
-        <td>{{$d->articulo['nombre_articulo']}}</td>
-        <td>{{$d->presentacion['presentacion']}}</td>
-        <td>{{$d->articulo['unidad']['nombre_unidadmedida']}}</td>
+        <td>{{$a->codigo_articulo}}</td>
+        <td>{{$a->nombre_articulo}}</td>        
+        <td>{{$a->unidad['nombre_unidadmedida']}}</td>
         <td>
           <input 
               type="number" 
               min="1" 
               max="100" 
               name="cantidad"
-              id="articulo_{{$d->id_art_pres}}" 
+              id="{{$a->codigo_articulo}}" 
           >
         </td>
-        <td>{{$d->precio_unitario}}</td>
+        <td>{{$a->precio_unitario}}</td>
                
       <td >
           <a 
             class="btn btn-default btn-sm" 
             href="#"
-            onClick="agregarRequisicion({{$d->id_art_pres}})"         
+            onClick='agregarArticulo("{{$a->codigo_articulo}}")'         
              
           >           
             <span class="glyphicon glyphicon-plus" title="Agregar">              
@@ -69,8 +67,9 @@
   });  
 
 
-var agregarRequisicion= function(id){ 
-  var cantidad = $("#articulo_"+id).val(); 
+var agregarArticulo= function(id){ 
+ 
+  var cantidad = $("#"+id).val(); 
   if(cantidad==""||cantidad>100)
   {
     alert("Debe ingresar un valor valido a cantidad");

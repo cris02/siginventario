@@ -56,7 +56,7 @@
 			<div class="form-group">
                 {!!Form::label('Cantidad', 'Cantidad', array('class' =>'col-md-2 control-label' )) !!}
 				<div class="col-md-7">
-                    {!!Form::number('cantidad', null, array('placeholder' => 'Escoba, Azucar','class' => 'form-control')) !!}
+                    {!!Form::number('cantidad', null, array('placeholder' => '','class' => 'form-control')) !!}
 					<div class="error">
 					    <ul>@foreach($errors->get('cantidad') as $msg)<li>{{$msg}}</li> @endforeach</ul>
 				    </div>
@@ -65,7 +65,7 @@
 			<div class="form-group">
                 {!!Form::label('Precio unitario', 'Precio', array('class' =>'col-md-2 control-label' )) !!}
 				<div class="col-md-7">
-                    {!!Form::text('precio', null, array('placeholder' => '7845','class' => 'form-control')) !!}
+                    {!!Form::text('precio', null, array('placeholder' => '','class' => 'form-control')) !!}
 					<div class="error">
 					    <ul>@foreach($errors->get('precio') as $msg)<li>{{$msg}}</li> @endforeach</ul>
 				    </div>
@@ -83,6 +83,10 @@
 {!! Form::close() !!}
 </div>
 </div>
+
+@endsection
+@section('script')
+<script src="{{asset('bootstrap/js/jquery-ui.min.js')}}"></script>
  <script>
          $(function() {
             $( ".calendario" ).datepicker({
@@ -92,4 +96,7 @@
             });
          });
  </script>
+@endsection
+@section('css')
+ <link rel="stylesheet" href=" {{ asset('bootstrap/css/jquery-ui.min.css') }}">
 @endsection

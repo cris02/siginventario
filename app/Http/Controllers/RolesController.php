@@ -74,7 +74,7 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        $rol = ROle::FindOrFail($id);
+        $rol = Role::FindOrFail($id);
         return view('Roles.actualizar')->with('rol',$rol);
     }
 
