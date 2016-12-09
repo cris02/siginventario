@@ -26,14 +26,18 @@
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
-            <div class="navbar-header">
-
-                <!-- Collapsed Hamburger -->
-            
-
-                <!-- Branding Image -->
+            <div class="navbar-header">      
+                <div class="pull-left">
+                 <img 
+                    src="{{asset('dist/img/minerva.png')}}" 
+                    class="logo" 
+                    alt="logo Image"
+                    style="width: 30%; height:30%; " 
+                    id='logo'>
+                </div>
+                  <!-- Branding Image -->
                 <div class="navbar-brand" href="{{ url('/') }}">
-                    Entrar Al Sistema
+                    Sistema De Requisiciones, Facultad de Medicina.                  
                 </div>
             </div>
 

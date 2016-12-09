@@ -9,6 +9,7 @@ use Jenssegers\Date\Date;
 use sig\Models\Requisicion;
 use sig\Models\DetalleRequisicion;
 use Laracasts\Flash\Flash;
+use Auth;
 
 class DetalleRequisicionController extends Controller
 {
@@ -68,10 +69,18 @@ class DetalleRequisicionController extends Controller
      */
     public function edit($id)
     {
-         $detalle = DetalleRequisicion::where('requisicion_id','=',$id)->get();
-         $req  = Requisicion::FindOrFail($id);     
+        $detalle = DetalleRequisicion::where('requisicion_id','=',$id)->get();
+        $req  = Requisicion::FindOrFail($id);
+
+        if(Auth::User()->perfil_id==4)
+        {
+            return view('Requisicion.departamento_ver',['detalle'=>$detalle,'requisicion'=>$req]);
+        }       
+        else
+        {
+            return view('Requisicion.actualizar',['detalle'=>$detalle,'requisicion'=>$req]);   
+        }
         
-        return view('Requisicion.actualizar',['detalle'=>$detalle,'requisicion'=>$req]);
     }
 
     /**

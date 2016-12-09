@@ -56,7 +56,7 @@
     		 
     		      <!-- Sidebar toggle button-->  		 
               <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">Toggle navigation</span>
+                <span class="sr-only">MENU</span>
               </a>
     		           
               <!-- Navbar Right Menu (menu derecho de mensajeria no estan necesario) -->

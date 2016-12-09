@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+                <div class="panel-heading">Ingresar</div>
                 <div class="panel-body">
 
 
@@ -53,7 +53,7 @@
                             <div class="col-md-6 col-md-offset-4">
                                     
 
-                            {!!form::submit('login',['name'=>'login','id'=>'login','content'=>'Login','class'=>'btn btn-primary'])!!}
+                            {!!form::submit('Ingresar',['name'=>'login','id'=>'login','content'=>'Login','class'=>'btn btn-primary'])!!}
     
 
 
