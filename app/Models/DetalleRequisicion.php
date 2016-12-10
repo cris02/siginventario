@@ -18,7 +18,7 @@ class DetalleRequisicion extends Model
     	return $this->hasOne('sig\Models\Articulo','codigo_articulo','articulo_id');		
 	}
 	 public function requisicion(){
-    	return $this->belongsTo('sig\Models\Requisicion','id','requisicion_id');		
+    	return $this->belongsTo('sig\Models\Requisicion','requisicion_id','id');		
 	}
 
      

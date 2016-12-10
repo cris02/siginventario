@@ -105,7 +105,15 @@ class DetalleRequisicionController extends Controller
          $this->validate($request,[
             'cantidad' => 'required |integer|min:1|max:1000',            
         ]); 
-         $d = DetalleRequisicion::FindOrFail($id);         
+         $d = DetalleRequisicion::FindOrFail($id); 
+         
+          if($d->requisicion['estado']=='aprobada')
+         {
+            return redirect()->route('requisicion-listar');  
+         }
+        else
+        {//inicia else si no esta aprobada
+
          $lista_detalles =  DetalleRequisicion::where('estado','actualizada');
          $cantidad_aprobada = 0.0;
          foreach ($lista_detalles as $lista)
@@ -113,17 +121,18 @@ class DetalleRequisicionController extends Controller
             $cantidad_aprobada = $cantidad_aprobada + $lista->cantidad_entregada;
          } 
         $quedan =  $d->articulo['existencia'] - $cantidad_aprobada;    
-        $cantidad_aprobada = $cantidad_aprobada + $request->cantidad;
-         if($d->articulo['existencia'] < $cantidad_aprobada)
-         {
-            flash('Unicamente '.$quedan.' Existencias', 'danger');
-         }
-         else{
-           
-             $d->update([
-                'cantidad_entregada' => $request->cantidad,
-                ]);
-         }
+        $cantidad_aprobada = $cantidad_aprobada + $request->cantidad;        
+        
+             if($d->articulo['existencia'] < $cantidad_aprobada)
+             {
+                flash('Unicamente '.$quedan.' Existencias', 'danger');
+             }
+             else{            
+                    $d->update([
+                    'cantidad_entregada' => $request->cantidad,
+                    ]);        
+             }
+        }//finaliza else si no esta aprobada
           return back();
          
     }
