@@ -20,7 +20,7 @@
         <td>{{$r->fecha_solicitud}}</td>  
         <td>{{$r->estado}}</td>     
         <td>
-          <a class="btn btn-default btn-sm" title="detalles" href="{{route('requisicion.detalle.edit',$r->id)}}"><span class="glyphicon glyphicon-th-large "></span></a>
+          <a class="btn btn-default btn-sm" title="editar" href="{{route('requisicion.detalle.edit',$r->id)}}"><span class="glyphicon glyphicon-th-large "></span></a>
         </td>
     </tr>
   

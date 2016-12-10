@@ -3,8 +3,6 @@
 @section('content')
  <h3>Departamento : {{$requisicion->departamento['name']}}</h3>
 <a href="javascript:window.history.back();" class="btn btn-primary">Regresar</a>
-
-<div class="panel-body table-responsive ">
  
 <table class="table table-hover table-striped table-bordered table-condensed" id="TablaDetalleRequesicion">
 <thead>

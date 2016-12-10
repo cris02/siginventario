@@ -58,7 +58,9 @@ class DetalleRequisicionController extends Controller
      */
     public function show($id)
     {
-       //
+        $req  = Requisicion::FindOrFail($id);
+        $detalle = DetalleRequisicion::where('requisicion_id','=',$id)->get();
+        return view('Requisicion.bodega_ver',['detalle'=>$detalle,'requisicion'=>$req]); 
     }
 
     /**
@@ -78,7 +80,15 @@ class DetalleRequisicionController extends Controller
         }       
         else
         {
-            return view('Requisicion.actualizar',['detalle'=>$detalle,'requisicion'=>$req]);   
+            if(Auth::User()->perfil_id==3)
+            {
+                $detalle = DetalleRequisicion::where('requisicion_id','=',$id)->get();
+                return view('Requisicion.financiero_ver',['detalle'=>$detalle,'requisicion'=>$req]);  
+            }
+            else
+            {
+                return view('Requisicion.actualizar',['detalle'=>$detalle,'requisicion'=>$req]);  
+            } 
         }
         
     }
@@ -92,17 +102,20 @@ class DetalleRequisicionController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $d = DetalleRequisicion::FindOrFail($id);
-         $a= Articulo::where('codigo_articulo',$d->articulo['codigo_articulo'])->first();
+         $d = DetalleRequisicion::FindOrFail($id); 
+         $lista_detalles =  DetalleRequisicion::all();
+         $cantidad_aprobada = 0.0;
+         foreach ($lista_detalles as $l)
+         {
+            $cantidad_aprobada += $l->cantidad_entregada;
+         }      
         
-         if($d->articulo['existencia'] < $request->cantidad)
+         if($d->articulo['existencia'] < $request->cantidad_aprobada)
          {
             flash('No hay suficientes existencias.', 'danger');
          }
          else{
-             $a->update([
-                'existencia' => $a->existencia-$request->cantidad,
-                ]);
+           
              $d->update([
                 'cantidad_entregada' => $request->cantidad,
                 ]);
@@ -117,9 +130,28 @@ class DetalleRequisicionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function aprobar($id)
     {
-        //
+         $detalle = DetalleRequisicion::where('requisicion_id','=',$id)->get();
+         $requisicion = Requisicion::where('id','=',$id);
+         if(Auth::User()->perfil_id==2)
+         {
+           $requisicion->update([
+                'estado' => 'actualiza',
+                ]);
+            return back(); 
+         }
+         foreach ($detalle as $d)
+         {
+            $a= Articulo::where('codigo_articulo',$d->articulo['codigo_articulo'])->first();
+            $a->update([
+                'existencia' => $a->existencia-$d->cantidad_entregada,
+                ]);
+        }
+         $requisicion->update([
+                'estado' => 'aprobada',
+                ]);
+            return back();
     }
 
    

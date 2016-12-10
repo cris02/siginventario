@@ -153,8 +153,13 @@ class RequisicionController extends Controller
         }
         else
         {
-          $requisicion = Requisicion::where('estado','!=','almacenada')->get();
-          return view('Requisicion.index',['requisicion'=>$requisicion]);
+          if(Auth::User()->perfil_id==3){
+              $requisiciones = Requisicion::where('estado','=','actualizada')->get();
+          }
+          else{
+              $requisiciones = Requisicion::where('estado','!=','almacenada')->get();             
+          }
+          return view('Requisicion.index',['requisicion'=>$requisiciones]);         
         }           
 
     }

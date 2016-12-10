@@ -101,7 +101,8 @@ Route::get('requisicion/listar','RequisicionController@index');
 // detalle requisicion
  //para todo el controlador
 Route::resource('requisicion/detalle','DetalleRequisicionController');
-
+//aprobar la requisicion (por el administrador financiero)
+Route::resource('requisicion/detalle/aprobar','DetalleRequisicionController@aprobar');
 
 Route::get('presentacion/delete/{idPresentacion}','PresentacionController@delete')->name('delete_presentacion');
 Route::get('articulo/addPresentacion/{codProducto}','ArticuloController@addPresentacion')->name('addPresentacion');
