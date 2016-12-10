@@ -38,7 +38,7 @@
           <input 
               type="number" 
               min="1" 
-              max="100" 
+              max="1000" 
               name="cantidad"
               id="articulo_{{$r->codigo_articulo}}"
               value="{{$r->cantidad}}"
@@ -90,7 +90,7 @@
 
 var actualizarCantidad= function(id){ 
   var cantidad = $("#articulo_"+id).val(); 
-  if(cantidad==""||cantidad>100)
+  if(cantidad==""||cantidad>1000||cantidad<1)
   {
     alert("Debe ingresar un valor valido a cantidad");
   }

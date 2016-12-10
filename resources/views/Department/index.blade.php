@@ -21,10 +21,10 @@
         <td>{{$d->descripcion}}</td> 
         <td>{{$d->encargado}}</td>    
       <td class="col-md-5">
-          <a class="btn btn-default btn-sm" href="{{route('departamento.show',$d->id)}}"><span class="glyphicon glyphicon-trash"></span>Eliminar</a>
-          <a class="btn btn-default btn-sm" href="{{route('departamento.edit',$d->id)}}"><span class="glyphicon glyphicon-pencil"></span>Actualizar</a>
+          <a class="btn btn-default btn-sm" href="{{route('departamento.show',$d->id)}}"><span class="glyphicon glyphicon-trash" title="Eliminar"></span></a>
+          <a class="btn btn-default btn-sm" href="{{route('departamento.edit',$d->id)}}"><span class="glyphicon glyphicon-pencil" title="Actualizar"></span></a>
           @if($d->encargado=='No Definido')
-            <a class="btn btn-default btn-sm" href="{{url('usuario/create',$d->id)}}"><span class="glyphicon glyphicon-user"></span>Añadir Usuario</a>
+            <a class="btn btn-default btn-sm" href="{{url('usuario/create',$d->id)}}"><span class="glyphicon glyphicon-user" title="Añadir Usuario"></span></a>
           @endif
       </td>   
     </tr>

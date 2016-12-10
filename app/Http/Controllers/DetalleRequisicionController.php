@@ -102,17 +102,21 @@ class DetalleRequisicionController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $d = DetalleRequisicion::FindOrFail($id); 
-         $lista_detalles =  DetalleRequisicion::all();
+         $this->validate($request,[
+            'cantidad' => 'required |integer|min:1|max:1000',            
+        ]); 
+         $d = DetalleRequisicion::FindOrFail($id);         
+         $lista_detalles =  DetalleRequisicion::where('estado','actualizada');
          $cantidad_aprobada = 0.0;
-         foreach ($lista_detalles as $l)
+         foreach ($lista_detalles as $lista)
          {
-            $cantidad_aprobada += $l->cantidad_entregada;
-         }      
-        
-         if($d->articulo['existencia'] < $request->cantidad_aprobada)
+            $cantidad_aprobada = $cantidad_aprobada + $lista->cantidad_entregada;
+         } 
+        $quedan =  $d->articulo['existencia'] - $cantidad_aprobada;    
+        $cantidad_aprobada = $cantidad_aprobada + $request->cantidad;
+         if($d->articulo['existencia'] < $cantidad_aprobada)
          {
-            flash('No hay suficientes existencias.', 'danger');
+            flash('Unicamente '.$quedan.' Existencias', 'danger');
          }
          else{
            
@@ -134,24 +138,28 @@ class DetalleRequisicionController extends Controller
     {
          $detalle = DetalleRequisicion::where('requisicion_id','=',$id)->get();
          $requisicion = Requisicion::where('id','=',$id);
-         if(Auth::User()->perfil_id==2)
-         {
+        if(Auth::User()->perfil_id==2)
+        {
            $requisicion->update([
-                'estado' => 'actualiza',
-                ]);
-            return back(); 
-         }
-         foreach ($detalle as $d)
-         {
-            $a= Articulo::where('codigo_articulo',$d->articulo['codigo_articulo'])->first();
-            $a->update([
-                'existencia' => $a->existencia-$d->cantidad_entregada,
-                ]);
+                'estado' => 'actualizada',
+                ]);            
         }
-         $requisicion->update([
+        else
+        {
+            if(Auth::User()->perfil_id==3)
+            foreach ($detalle as $d)
+            {
+                $a= Articulo::where('codigo_articulo',$d->articulo['codigo_articulo'])->first();
+                $a->update([
+                    'existencia' => $a->existencia-$d->cantidad_entregada,
+                ]);
+            }
+            $requisicion->update([
                 'estado' => 'aprobada',
                 ]);
-            return back();
+        }//fin del else
+         
+           return redirect()->route('requisicion-listar');
     }
 
    

@@ -45,6 +45,7 @@ class RequisicionController extends Controller
    }
 
    public function add($cod, $cantidad){
+
         $articulo= Articulo::where('codigo_articulo',$cod)->first();
         $articulo->cantidad = $cantidad;
         $req = \Session::get('requisicion');

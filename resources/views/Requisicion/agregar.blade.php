@@ -70,7 +70,7 @@
 var agregarArticulo= function(id){ 
  
   var cantidad = $("#"+id).val(); 
-  if(cantidad==""||cantidad>100)
+  if(cantidad==""||cantidad>1000||cantidad<1)
   {
     alert("Debe ingresar un valor valido a cantidad");
   }

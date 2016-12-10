@@ -96,7 +96,10 @@ Route::get('requisicion/trash',[
 Route::get('requisicion/update/{cod}/{cantidad}','RequisicionController@update');
 //almacenar la requisicion
 Route::get('requisicion/store','RequisicionController@store');
-Route::get('requisicion/listar','RequisicionController@index');
+Route::get('requisicion/listar',[
+	'as'=>'requisicion-listar',
+	'uses'=>'RequisicionController@index'
+	]);
 
 // detalle requisicion
  //para todo el controlador

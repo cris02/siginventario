@@ -31,7 +31,7 @@
             <input 
                 type="number" 
                 min="1" 
-                max="100" 
+                max="1000" 
                 name="cantidad"                
                 value="{{$d->cantidad_entregada}}" 
             >
