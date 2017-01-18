@@ -11,9 +11,10 @@ use sig\Models\Existencia;
 
 class ExistenciaController extends Controller
 {
-    public function index($buscar=""){
-		$articulos = Articulo::orderBy('nombre_articulo','asc')->get();		
-		return view('existencia.index',['articulos'=>$articulos,'buscar'=>$buscar]);
+    public function index(){
+		$articulos = Articulo::all();
+		//return $articulos;		
+		return view('existencia.index',['articulos'=>$articulos]);
 	}
 	
 	

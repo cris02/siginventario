@@ -17,7 +17,7 @@
     </a>  
        <ul class="treeview-menu">
         <li><a href="{{url('existencia')}}"><i class="glyphicon glyphicon-chevron-right"></i>Existencia</a></li>
-        <li><a href="{{url('ingreso')}}"><i class="glyphicon glyphicon-chevron-right"></i>Agregar Existencia</a></li>
+        <li><a href="{{ route('ingreso.create')}}"><i class="glyphicon glyphicon-chevron-right"></i>Agregar Existencia</a></li>
         
                       
       </ul>          

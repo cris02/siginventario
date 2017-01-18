@@ -39,25 +39,30 @@ class IngresoController extends Controller
 
     public function store(Request $request)
     {
-       $this->validate($request,[
-		    'presentacion' => 'required |integer | exists:presentacion,id_pres',		
-			'producto' => 'required |alpha_num | exists:articulo,codigo_articulo',
+    	 //return redirect()->intended('home');
+       $this->validate($request,[		   		
+			'producto' => 'required | exists:articulo,codigo_articulo',
 			'proveedor' => 'required |integer | exists:providers,id',
 			'fecha' => 'required',
 			'cantidad' => 'required | integer|min:1',
 			'precio' => 'required | numeric|min:0.00',
 			
 		]);	    
-					$existencia =Existencia::where([
-    ['id_pres', '=',$request->input('presentacion') ],
-    ['codigo_articulo', '=', $request->input('producto')],
-])->first();
+			$articulo =Articulo::where(
+    'codigo_articulo', '=',$request->input('producto') )->first();
+			$anterior = $articulo->existencia * $articulo->precio_unitario;
+			$entra = $request->cantidad * $request->precio;
+			$nuevo=($anterior + $entra)/($articulo->existencia+$request->cantidad);
+     $articulo->update([
+     	'existencia'=>$articulo->existencia + $request->cantidad,
+     	'precio_unitario'=>$nuevo,
+     	]);
+     return redirect()->route('existencia.index');
                     if($existencia){
-                    $existencia->ingresarExistencia($request->input('cantidad'),$request->input('precio'));
+                    //$existencia->ingresarExistencia($request->input('cantidad'),$request->input('precio'));
                      					
-				    Ingreso::create([
-				        		    
-		                'id_art_pres' =>$existencia->id_art_pres,
+				    Ingreso::create([				        		    
+		                'codigo_articulo' =>$request->input('producto'),
 				        'id_proveedor' =>$request->input('proveedor'),
 				        'cantidad' =>$request->input('cantidad'),
                         'precio_unitario' =>$request->input('precio'),

@@ -16,7 +16,7 @@ class CreateIngresoTable extends Migration
 		   $table->date('fecha_registro');
 		   
 		   $table->integer('id_proveedor');
-		   $table->integer('id_art_pres');
+		   $table->string('codigo_articulo');
 		   $table->integer('existencia_ant');
 		   $table->double('precio');
 		   $table->timestamps();
@@ -24,7 +24,7 @@ class CreateIngresoTable extends Migration
 		   //Relaciones con producto y proveedor
 		   //$table->foreign('codigo_articulo')->references('codigo_articulo')->on('articulo')->onDelete('restrict')->onUpdate('cascade');
            $table->foreign('id_proveedor')->references('id')->on('providers')->onDelete('restrict')->onUpdate('cascade');
-		   $table->foreign('id_art_pres')->references('id_art_pres')->on('art_pres')->onDelete('restrict')->onUpdate('cascade');
+		   $table->foreign('codigo_articulo')->references('codigo_articulo')->on('articulo')->onDelete('restrict')->onUpdate('cascade');
 
 		   
 	   });
