@@ -10,6 +10,7 @@ use sig\Models\Requisicion;
 use sig\Models\DetalleRequisicion;
 use Laracasts\Flash\Flash;
 use Auth;
+use PDF;
 
 class DetalleRequisicionController extends Controller
 {
@@ -47,7 +48,7 @@ class DetalleRequisicionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       //
     }
 
     /**
@@ -59,8 +60,9 @@ class DetalleRequisicionController extends Controller
     public function show($id)
     {
         $req  = Requisicion::FindOrFail($id);
-        $detalle = DetalleRequisicion::where('requisicion_id','=',$id)->get();
-        return view('Requisicion.bodega_ver',['detalle'=>$detalle,'requisicion'=>$req]); 
+        $detalle = DetalleRequisicion::where('requisicion_id','=',$id)->get();        
+
+        return view('Requisicion.bodega_ver',['detalle'=>$detalle,'requisicion'=>$req]);       
     }
 
     /**
@@ -169,6 +171,17 @@ class DetalleRequisicionController extends Controller
         }//fin del else
          
            return redirect()->route('requisicion-listar');
+    }
+    public function imprimir($id){
+        $req  = Requisicion::FindOrFail($id);
+        $detalle = DetalleRequisicion::where('requisicion_id','=',$id)->get();
+        $date = new Date($req->fecha_entrega);
+        $fecha = $date->format('l, j \d\e F \d\e Y');
+       
+        $pdf = PDF::loadView('Requisicion.imprimir',['detalle'=>$detalle,'requisicion'=>$req,'fecha'=>$fecha]);
+        return $pdf->download('archivo.pdf'); 
+
+        return view('Requisicion.imprimir',['detalle'=>$detalle,'requisicion'=>$req]);       
     }
 
    

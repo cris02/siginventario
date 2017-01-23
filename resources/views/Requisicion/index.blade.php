@@ -25,7 +25,9 @@
         <td>{{$r->estado}}</td>     
         <td>                
          <a class="btn btn-default btn-sm" title="detalles" href="{{route('requisicion.detalle.show',$r->id)}}"><span class="glyphicon glyphicon-th-large "></span></a>
-         @if($r->estado!='aprobada')  
+         @if($r->estado == 'aprobada') 
+         <a class="btn btn-default btn-sm" title="imprimir" href="{{url('requisicion/imprimir',$r->id)}}"><span class="glyphicon glyphicon-print "></span></a>
+         @else 
           <a class="btn btn-default btn-sm" title="editar" href="{{route('requisicion.detalle.edit',$r->id)}}"><span class="glyphicon glyphicon-pencil "></span></a>
           @endif
         </td>

@@ -159,8 +159,8 @@ return [
         sig\Providers\EventServiceProvider::class,
         sig\Providers\RouteServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
-       
     ],
 
     /*
@@ -210,6 +210,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class, 
         'Flash'=> Laracasts\Flash\Flash::class,
         'Date' => Jenssegers\Date\Date::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
        
 
     ],

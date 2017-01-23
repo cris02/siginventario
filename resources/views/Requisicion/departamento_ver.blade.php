@@ -27,7 +27,7 @@
         <td>{{$d->articulo['unidad']['nombre_unidadmedida']}}</td>
         <td>{{$d->cantidad_solicitada}}</td>     
         <td>{{$d->cantidad_entregada}}</td>
-        <td>{{$d->articulo['precio_unitario']}}</td>
+        <td>{{number_format($d->articulo['precio_unitario'],2,'.','')}}</td>
                
    
     </tr>
