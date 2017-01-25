@@ -13,12 +13,12 @@ class CreateArticuloTable extends Migration
     public function up()
     {
         Schema::create('articulo', function (Blueprint $table) {
-            $table->String('codigo_articulo');
+            $table->String('codigo_articulo',11);
             $table->integer('id_especifico');
             $table->integer('id_unidad_medida');            
-            $table->string('nombre_articulo');
-            $table->double('existencia')->default(0.0);
-            $table->double('precio_unitario')->default(0.0);
+            $table->string('nombre_articulo',100);
+            $table->double('existencia',10,2)->default(0.0);
+            $table->double('precio_unitario',10,2)->default(0.0);
 
             $table->timestamps();
             

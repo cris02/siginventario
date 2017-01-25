@@ -1,14 +1,5 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
+
 
 Route::get('/', function () {
        return view('Auth.login');
@@ -107,7 +98,8 @@ Route::resource('requisicion/detalle','DetalleRequisicionController');
 //aprobar la requisicion (por el administrador financiero)
 Route::resource('requisicion/detalle/aprobar','DetalleRequisicionController@aprobar');
 //imprimir requisicion
-Route::resource('requisicion/imprimir/{id}','DetalleRequisicionController@imprimir');
+Route::get('requisicion/imprimir/{id}','DetalleRequisicionController@imprimir');
+Route::get('requisicion/comentar/{id}','DetalleRequisicionController@comentar');
 
 //eliminar presentacion
 Route::get('presentacion/delete/{idPresentacion}','PresentacionController@delete')->name('delete_presentacion');

@@ -17,7 +17,7 @@ class CreateDepartmentTable extends Migration
             $table->increments('id');
             $table->string('name',100);
             $table->string('descripcion');
-            $table->string('encargado',100);
+            $table->string('encargado',60);
                     
 
             $table->timestamps();           

@@ -26,19 +26,20 @@ class RequisicionController extends Controller
    public function crear()
    {
       $req = Requisicion::whereRaw('estado = ? and departamento_id = ?',array('almacenada',\Auth::User()->departamento_id))->first();
+  
         if($req){
-            $requisicion = \Session::get('requisicion');
+            $artuculos = \Session::get('requisicion');
             $total = $this->total();
-            return view('Requisicion.crear',['requisicion'=>$requisicion,'total'=>$total]);
+            return view('Requisicion.crear',['articulos'=>$artuculos,'total'=>$total,'requisicion'=>$req]);
         }
         else{
           Requisicion::create([
                    'estado' =>'almacenada',
                    'departamento_id' =>\Auth::User()->departamento_id,                   
                   ]);
-          $requisicion = \Session::get('requisicion');
+          $artuculos = \Session::get('requisicion');
           $total = $this->total();
-          return view('Requisicion.crear',['requisicion'=>$requisicion,'total'=>$total]);
+          return view('Requisicion.crear',['articulos'=>$artuculos,'total'=>$total,'requisicion'=>$req]);
         }
 
     

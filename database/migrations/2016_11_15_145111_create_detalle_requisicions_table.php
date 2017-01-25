@@ -17,9 +17,9 @@ class CreateDetalleRequisicionsTable extends Migration
            
             $table->integer('cantidad_solicitada');
             $table->integer('cantidad_entregada')->default(0);
-            $table->double('precio');
+            $table->double('precio',10,2);
             $table->integer('requisicion_id');
-            $table->string('articulo_id');
+            $table->string('articulo_id',11);
             $table->timestamps();
 
             $table->foreign('requisicion_id')->references('id')->on('requisicions'); 

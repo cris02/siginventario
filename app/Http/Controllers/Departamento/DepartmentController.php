@@ -51,7 +51,7 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required|regex: /^[a-zA-Z0-9áéíóúñ\s]*$/ |unique:departments,name',
+            'name' => 'required|regex: /^[a-zA-Z0-9áéíóúñ\s]*$/ |unique:departments,name|max:100',
             'descripcion'=>'required',                       
         ]);
         
@@ -100,7 +100,7 @@ class DepartmentController extends Controller
     {
        
         $this->validate($request,[
-           'name'=>'required|regex: /^[a-zA-Z0-9áéíóúñ\s]*$/ |unique:departments,name,'.$id.',id',
+           'name'=>'max:100|required|regex: /^[a-zA-Z0-9áéíóúñ\s]*$/ |unique:departments,name,'.$id.',id',
            'descripcion'=>'required',
            
         ]);

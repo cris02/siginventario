@@ -30,13 +30,11 @@ class DetalleRequisicionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //$var = new \DateTime();
-        //echo Date::now()->format('l j F Y H:i:s'); 
-         
 
-        return Date::now()->format('m');  
+    // agregar un comentario si lo necesita.
+    public function comentar($id)
+    {
+        return view('Requisicion.comentario',['id'=>$id]);  
        
     }
 
@@ -48,7 +46,13 @@ class DetalleRequisicionController extends Controller
      */
     public function store(Request $request)
     {
-       //
+
+       $requisicion  = Requisicion::FindOrFail($request->id);
+       //return $requisicion;
+       $requisicion->update([
+                    'descripcion' => $request->comentario,
+                    ]);
+       return back();
     }
 
     /**

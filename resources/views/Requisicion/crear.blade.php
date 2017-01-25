@@ -5,9 +5,11 @@
 <div>
 	<h4>Departamento : <strong>{{Auth::User()->departamento['name']}}</strong></h4>
 	<h4>Jefe del Departamento : <strong>{{Auth::User()->name}}</strong></h4> 
+
 	<div>
            <a href="{{route('requisicion.detalle.index')}}" class="btn btn-success">AgregarArticulo <i class="glyphicon glyphicon-plus"></i></a>
            <a href="{{url('requisicion/store')}}" class="btn btn-success">Enviar Requisicion <i class="glyphicon glyphicon-new-window"></i></a>
+           <a href="{{url('requisicion/comentar',$requisicion->id)}}" class="btn btn-success">Agregar Comentario</a>
            <a href="{{route('requisicion-trash')}}" class="btn btn-default">Desechar</a>
     </div>    
 </div>
@@ -28,32 +30,32 @@
  </thead>
 <tbody>
  
-@foreach ($requisicion as $r) 
+@foreach ($articulos as $a) 
 
     <tr>  
-        <td>{{$r->codigo_articulo}}</td>
-        <td>{{$r->nombre_articulo}}</td>       
-        <td>{{$r->unidad['nombre_unidadmedida']}}</td>
+        <td>{{$a->codigo_articulo}}</td>
+        <td>{{$a->nombre_articulo}}</td>       
+        <td>{{$a->unidad['nombre_unidadmedida']}}</td>
         <td>
           <input 
               type="number" 
               min="1" 
               max="1000" 
               name="cantidad"
-              id="articulo_{{$r->codigo_articulo}}"
-              value="{{$r->cantidad}}"
+              id="articulo_{{$a->codigo_articulo}}"
+              value="{{$a->cantidad}}"
            >
               <a href="#" class="btn btn-warning"
-              	 onClick='actualizarCantidad("{{$r->codigo_articulo}}")' 
+              	 onClick='actualizarCantidad("{{$a->codigo_articulo}}")' 
               >
               	<i class="glyphicon glyphicon-refresh"></i>
               </a> 
           
         </td>
-        <td>{{$r->precio_unitario}}</td>
-        <td>{{$r->precio_unitario*$r->cantidad}}</td> 
+        <td>{{$a->precio_unitario}}</td>
+        <td>{{$a->precio_unitario*$a->cantidad}}</td> 
         <td>
-        	<a href="{{route('requisicion-delete',$r->codigo_articulo)}}" class="btn btn-danger">
+        	<a href="{{route('requisicion-delete',$a->codigo_articulo)}}" class="btn btn-danger">
         	    <i class="glyphicon glyphicon-remove"></i>
         	</a>
         </td>

@@ -10,7 +10,7 @@ class CreateUnidadmedidaTable extends Migration
     {
        Schema::create('unidad_medida', function (Blueprint $table) {
             $table->increments('id_unidad_medida');
-            $table->string('nombre_unidadmedida');
+            $table->string('nombre_unidadmedida',100);
             //usado por laravel para la concurrencia
 			$table->timestamps();
 			//$table->primary('id_unidad_medida');

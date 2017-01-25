@@ -9,7 +9,7 @@ class Especificos extends Migration
     {
        Schema::create('especificos', function (Blueprint $table) {
             $table->integer('id');
-            $table->string('titulo_especifico');
+            $table->string('titulo_especifico',100);
             $table->text('descripcion_epecifico');
 			//usado por laravel para la concurrencia
 			

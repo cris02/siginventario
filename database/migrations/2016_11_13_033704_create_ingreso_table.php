@@ -12,13 +12,13 @@ class CreateIngresoTable extends Migration
 		   $table->increments('id_ingreso');
 		   
 		   $table->integer('cantidad');
-		   $table->double('precio_unitario');
+		   $table->double('precio_unitario',10,2);
 		   $table->date('fecha_registro');
 		   
 		   $table->integer('id_proveedor');
-		   $table->string('codigo_articulo');
+		   $table->string('codigo_articulo',11);
 		   $table->integer('existencia_ant');
-		   $table->double('precio');
+		   $table->double('precio',10,2);
 		   $table->timestamps();
 		   
 		   //Relaciones con producto y proveedor

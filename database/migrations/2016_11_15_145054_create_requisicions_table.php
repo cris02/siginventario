@@ -14,11 +14,11 @@ class CreateRequisicionsTable extends Migration
     {
         Schema::create('requisicions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('estado');
+            $table->string('estado',20);
             $table->date('fecha_solicitud')->nullable();
             $table->date('fecha_entrega')->nullable();
             $table->integer('departamento_id');
-            $table->double('total')->default(0.00);
+            $table->double('total',10,2)->default(0.00);
             $table->string('descripcion')->nullable();           
             $table->timestamps();
         });
