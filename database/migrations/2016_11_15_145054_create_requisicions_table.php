@@ -19,7 +19,8 @@ class CreateRequisicionsTable extends Migration
             $table->date('fecha_entrega')->nullable();
             $table->integer('departamento_id');
             $table->double('total',10,2)->default(0.00);
-            $table->string('descripcion')->nullable();           
+            $table->string('descripcion')->nullable(); 
+            $table->string('comentario')->nullable();          
             $table->timestamps();
         });
     }

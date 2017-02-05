@@ -11,7 +11,7 @@ class Requisicion extends Model
  
 
     protected $fillable=[
-    	'id' ,'estado','departamento_id','fecha_solicitud','fecha_entrega','total','descripcion',
+    	'id' ,'estado','departamento_id','fecha_solicitud','fecha_entrega','total','descripcion','comentario',
     ];
 
       

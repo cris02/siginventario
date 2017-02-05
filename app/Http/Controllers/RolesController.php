@@ -9,11 +9,11 @@ use Laracasts\Flash\Flash;
 
 class RolesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $roles = Role::all();
@@ -110,6 +110,10 @@ class RolesController extends Controller
     public function destroy($id)
     {
        $r=Role::FindOrFail($id);
+       if($r->id<5){
+            flash('Error: no puede eliminarse el PERFIL ','danger');
+            return redirect()->back();
+       }
        if($r->usuarios->count()>0)
        {
             flash('Error: no puede eliminarse el PERFIL porque hay usuarios asociados','danger');

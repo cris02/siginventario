@@ -9,6 +9,11 @@ use sig\Models\Observacion;
 
 class ObservacionController extends Controller
 {
+	 public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(){
 		$observaciones = Observaciones::orderBy('create_at','asc')->get();		
 		return view('observaciones.index',['observaciones'=>$observaciones]);

@@ -10,12 +10,12 @@ use sig\Models\UnidadMedida;
 use sig\Models\Presentacion;
 
 class ArticuloController extends Controller
-{ /*
+{ 
 	public function __construct()
     {
         $this->middleware('auth');
     }
-	*/
+	
     
     public function index(){
 		$articulos = Articulo::orderBy('nombre_articulo','asc')->get();		

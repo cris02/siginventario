@@ -3,6 +3,7 @@
 @section('content')
  <h3>Departamento : {{$requisicion->departamento['name']}}</h3>
 <a href="javascript:window.history.back();" class="btn btn-primary">Regresar</a>
+<a href="{{route('requisicion-observacion',$requisicion->id)}}" class="btn btn-primary">Observaciones</a>
 <a href="{{url('requisicion/detalle/aprobar',$requisicion->id)}}" class="btn btn-primary">Aprobar</a>
 <div class="panel-body table-responsive ">
  

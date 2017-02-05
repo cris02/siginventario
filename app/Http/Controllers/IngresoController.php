@@ -14,6 +14,11 @@ use sig\Models\Existencia;
 
 class IngresoController extends Controller
 {
+	 public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(){
 		$ingresos = Ingreso::orderBy('id_ingreso','asc')->get();		
 		return view('ingresos.index',['ingresos'=>$ingresos]);

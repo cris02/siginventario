@@ -14,11 +14,11 @@ use PDF;
 
 class DetalleRequisicionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
          $articulos = Articulo::where('existencia','>','0')->get();     
@@ -34,8 +34,14 @@ class DetalleRequisicionController extends Controller
     // agregar un comentario si lo necesita.
     public function comentar($id)
     {
-        return view('Requisicion.comentario',['id'=>$id]);  
+        $requisicion  = Requisicion::FindOrFail($id);
+        return view('Requisicion.comentario',['requisicion'=>$requisicion]);  
        
+    }
+    public function observacion($id)
+    {
+        $requisicion  = Requisicion::FindOrFail($id);
+        return view('Requisicion.observacion',['requisicion'=>$requisicion]);  
     }
 
     /**
@@ -44,15 +50,29 @@ class DetalleRequisicionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //store se utilizó para almacenar el comentario sobre la requisicion de parte del depto
     public function store(Request $request)
     {
 
        $requisicion  = Requisicion::FindOrFail($request->id);
-       //return $requisicion;
-       $requisicion->update([
-                    'descripcion' => $request->comentario,
-                    ]);
-       return back();
+       
+        if(Auth::User()->perfil_id==4)
+        {
+            $requisicion->update([
+                'descripcion' => $request->comentario,
+            ]);
+            return redirect()->route('requisicion-show'); 
+        }
+        else{
+            $requisicion->update([
+                'comentario' => $request->descripcion,
+            ]);
+            flash('Observacion guardada', 'success');
+            return back();
+        }
+
+       
     }
 
     /**
@@ -171,6 +191,7 @@ class DetalleRequisicionController extends Controller
             }
             $requisicion->update([
                 'estado' => 'aprobada',
+                'fecha_entrega' =>Date::now(),            
                 ]);
         }//fin del else
          

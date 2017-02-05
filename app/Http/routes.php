@@ -96,10 +96,14 @@ Route::get('requisicion/listar',[
  //para todo el controlador
 Route::resource('requisicion/detalle','DetalleRequisicionController');
 //aprobar la requisicion (por el administrador financiero)
-Route::resource('requisicion/detalle/aprobar','DetalleRequisicionController@aprobar');
+Route::get('requisicion/detalle/aprobar/{id}','DetalleRequisicionController@aprobar');
 //imprimir requisicion
 Route::get('requisicion/imprimir/{id}','DetalleRequisicionController@imprimir');
 Route::get('requisicion/comentar/{id}','DetalleRequisicionController@comentar');
+Route::get('requisicion/observacion/{id}',[
+	'as'=>'requisicion-observacion',
+	'uses'=>'DetalleRequisicionController@observacion'
+	]);
 
 //eliminar presentacion
 Route::get('presentacion/delete/{idPresentacion}','PresentacionController@delete')->name('delete_presentacion');

@@ -19,8 +19,12 @@ class admin_middleware
         $usuario_actual = Auth::user();
         
         if($usuario_actual->perfil_id!=1){
+            return "no tienes permiso";
             return view("errors.501");
         }
-        return $next($request);
+        else{
+            return $next($request);
+        }
+        
     }
 }
