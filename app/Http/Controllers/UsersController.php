@@ -17,11 +17,7 @@ use Laracasts\Flash\Flash;
 
 class UsersController extends Controller
 {
-   public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
+     
    use AuthenticatesUsers;
    
    protected $loginView = 'auth.login';

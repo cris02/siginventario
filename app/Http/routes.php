@@ -5,8 +5,6 @@ Route::get('/', function () {
        return view('Auth.login');
    });
 
-   
-
 
 	//rutas para usuarios
 
@@ -15,14 +13,15 @@ Route::post('login','UsersController@authenticate');
 Route::get('logout','UsersController@logout');
 Route::get('register','UsersController@getRegister');
 Route::post('register','UsersController@postRegister');
-Route::get('{id}/edit','UsersController@getEdit');
 Route::get('usuario/create/{id}','UsersController@create');
-Route::resource('usuario','UsersController');
 
 
-
-Route::group(['middleware'=>'admin_sistema'],function(){
+Route::group(['middleware'=>['auth','admin_sistema']],function(){
+	//ruta para los roles
 	Route::resource('roles','RolesController');
+    //rutas de usuarios q solo puede acceder el admin
+	Route::resource('usuario','UsersController');
+	Route::get('{id}/edit','UsersController@getEdit');
 });
 
 //ruta hacia home
@@ -49,9 +48,7 @@ Route::get('ingreso/addExistencia/{codProducto}/{idPresentacion}','IngresoContro
 
 Route::resource('observacion','ObservacionController');
 Route::get('observacion/delete/{idObservacion}','ObservacionController@delete')->name('delete_observacion');
-/*
-Route::resource('roles','RolesController'); 
-*/
+
 
 Route::resource('existencia','ExistenciaController');
 //Route::resource('existencia/index/{buscar?}','ExistenciaController@index');
@@ -61,8 +58,7 @@ Route::resource('presentacion','PresentacionController');
 //rutas para observacion
 Route::resource('observacion','ObservacionController');
 Route::get('observacion/delete/{idObservacion}','ObservacionController@delete')->name('delete_observacion');
-//rutas para roles
-Route::resource('roles','RolesController');
+
 
 //requisicion
 //ver la requisicion que se esta creando

@@ -2,29 +2,8 @@
 
 namespace sig\Http\Middleware;
 
-use Closure;
-use Illuminate\Support\Facades\Auth;
-
-class admin_middleware
-{
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next)
-    {
-        $usuario_actual = Auth::user();
-        
-        if($usuario_actual->perfil_id!=1){
-            return "no tienes permiso";
-            return view("errors.501");
-        }
-        else{
-            return $next($request);
-        }
-        
-    }
+class admin_middleware extends EsPerfil{
+	public function getPerfil(){
+		return 1;
+	}
 }
