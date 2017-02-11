@@ -29,7 +29,7 @@ class DepartmentController extends Controller
     public function index()
     {
         $departamento = Department::orderBy('name','asc')->get();
-       return view('Department.index',['departamento'=>$departamento]);
+        return view('Department.index',['departamento'=>$departamento]);
     }
 
     /**

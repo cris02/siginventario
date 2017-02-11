@@ -40,3 +40,7 @@ body{
 }
 
 /* mensaje para el grupo de diseño no modificar lo anterior*/
+
+#prueba{
+	border:2px solid red;
+}

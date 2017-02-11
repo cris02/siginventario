@@ -63,6 +63,28 @@
               <div class="navbar-custom-menu">
                   <ul class="nav navbar-nav">
                    
+            @if (Auth::user()->perfil_id==2)
+             <!-- Notifications -->
+              <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-bell-o"></i>
+                  <span class="label label-warning">10</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header">Tiene 10 requisiciones pendientes</li>
+                  <li>
+                    <!-- inner menu: contains the actual data -->
+                    <ul class="menu">
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-users text-aqua"></i> Ir a requisiciones
+                        </a>
+                      </li>                    
+                    </ul>
+                  </li>                 
+                </ul>
+              </li>
+              @endif
                  
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
