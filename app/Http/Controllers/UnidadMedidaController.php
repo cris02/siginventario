@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use sig\Http\Requests;
 use DB;
 use Session;
+//importacion del modelo a usar con el ORM
 use sig\Models\UnidadMedida;
 
 class UnidadMedidaController extends Controller
@@ -29,7 +30,7 @@ class UnidadMedidaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-		    'nombre_unidadmedida' => 'required|regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:unidad_medida,nombre_unidadmedida',			
+		    'nombre_unidadmedida' => 'required|regex: /^[a-zA-Zoueai0-9\/\s]*$/ |unique:unidad_medida,nombre_unidadmedida',			
 		]);
 		
 		UnidadMedida::create([
@@ -54,8 +55,9 @@ class UnidadMedidaController extends Controller
 
     public function update(Request $request, $id)
     {
+		//Valida que el nombre de la unidad de medida sea unica, exceptuando ella misma
         $this->validate($request,[
-		   'nombre_unidadmedida'=>'required|regex: /^[a-zA-Záéíóúñ\s]*$/ |unique:unidad_medida,nombre_unidadmedida,'.$id.',id_unidad_medida'
+		   'nombre_unidadmedida'=>'required|regex: /^[a-zA-Zoueai0-9\/\s]*$/ |unique:unidad_medida,nombre_unidadmedida,'.$id.',id_unidad_medida'
 		]);
 		$unidad = UnidadMedida::FindOrFail($id);
 		if($unidad){
@@ -79,6 +81,7 @@ class UnidadMedidaController extends Controller
     public function destroy($idUnidadMedida)
     {
         $unidad = UnidadMedida::findOrFail($idUnidadMedida);
+		//Comprueba que la unidad a eliminar no esta relacionado con ningun articulo
 		if($unidad->articulo->count()>0){			
 			flash('Error: No puede eliminarse la unidad de medida porque esta siendo usada por articulos','danger');
 			return redirect()->back();

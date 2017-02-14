@@ -9,15 +9,7 @@
 
 {!! Form::open(array('route' => 'articulo.store','class' => 'form-horizontal','method' => 'post')) !!}                
         
-            <div class="form-group">
-                {!!Form::label('Codigo', 'Codigo', array('class' =>'col-md-2 control-label' )) !!}
-				<div class="col-md-7">
-                    {!!Form::text('codigo', null, array('placeholder' => 'ES001','class' => 'form-control')) !!}
-					<div class="error">
-					    <ul>@foreach($errors->get('codigo') as $msg)<li>{{$msg}}</li> @endforeach</ul>
-				    </div>
-				</div>
-            </div>
+            
 			<div class="form-group">
                 {!!Form::label('Nombre', 'Nombre', array('class' =>'col-md-2 control-label' )) !!}
 				<div class="col-md-7">
@@ -27,15 +19,23 @@
 				    </div>
 				</div>
             </div>
+						
 			<div class="form-group">
                 {!!Form::label('Especifico', 'Especifico', array('class' =>'col-md-2 control-label' )) !!}
 				<div class="col-md-7">
-                    {!!Form::number('especifico', null, array('placeholder' => '7845','class' => 'form-control')) !!}
-					<div class="error">
+				<select name="especifico" class="form-control">
+				     @foreach ($especificos as $especifico)
+					 <option value={{$especifico->id}}>
+				          {{$especifico->getEspecificoTitulo()}}
+					</option>
+				     @endforeach
+				</select>
+				<div class="error">
 					    <ul>@foreach($errors->get('especifico') as $msg)<li>{{$msg}}</li> @endforeach</ul>
 				    </div>
 				</div>
-            </div>
+            </div>  
+			
 			<div class="form-group">
                 {!!Form::label('Unidad de medida', 'Unidad de medida', array('class' =>'col-md-2 control-label' )) !!}
 				<div class="col-md-7">

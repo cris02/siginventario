@@ -1,8 +1,7 @@
-f
+
 @extends('layouts.template')
 
 @section('content')
-
 
 <div class="table-responsive">
 <table class="table table-hover table-striped table-bordered table-condensed">
@@ -30,12 +29,9 @@ f
 	    </td>
 	  @endforeach
 	    
-    </tr>
-	
+    </tr>	
 </table>
 </div> 
-
-
 
 @endsection
 

@@ -1,10 +1,14 @@
 @extends('layouts.template')
 
 @section('content')
+<div class="encabezado">
+    <h3>Unidades de medida</h3> 
+</div>
 
 <a href="{{ route('unidad.create')}}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Nuevo</a>
 <div class="table-responsive">
-<table class="table table-hover table-striped table-bordered table-condensed">
+    
+<table class="table table-hover table-striped table-bordered table-condensed" id="TablaUnidadMedida">
 <thead>
     <tr class="success">
         
@@ -28,6 +32,19 @@
 </tbody>  
 </table>
 </div>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+  $(document).ready(function(){
+  
+    $('#TablaUnidadMedida').DataTable(
+      {         
+          "lengthChange": false,
+           "autoWidth": false  
+      });
+  }); 
+</script>
 @endsection
 
 

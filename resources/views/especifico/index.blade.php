@@ -1,11 +1,14 @@
 @extends('layouts.template')
 
 @section('content')
+<div class="encabezado">
+    <h3>Especificos</h3>
+</div>
 
 <a href="{{ route('especifico.create')}}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Nuevo</a>
 
 <div class="table-responsive">
-<table class="table table-hover table-striped table-bordered table-condensed">
+<table class="table table-hover table-striped table-bordered table-condensed" id="TablaEspecifico">
 <thead>
     <tr class="success">
         <th>Numero</th>
@@ -22,9 +25,9 @@
         <td>{{$especifico->titulo_especifico}}</td>
         <td>{{$especifico->descripcion_epecifico}}</td>
 	    <td class="col-md-5">
-	        <a class="btn btn-default btn-sm" href="{{route('yes',$especifico->id)}}"><span class="glyphicon glyphicon-trash"></span>Eliminar</a>
-	        <a class="btn btn-default btn-sm" href="{{route('especifico.show',$especifico->id)}}"><span class="glyphicon glyphicon-th-large"></span>Detalle</a>
-	        <a class="btn btn-default btn-sm" href="{{route('especifico.edit',$especifico->id)}}"><span class="glyphicon glyphicon-pencil"></span>Actualizar</a>
+	        <a class="btn btn-default btn-sm" href="{{route('yes',$especifico->id)}}"><span class="glyphicon glyphicon-trash"></span></a>
+	        <a class="btn btn-default btn-sm" href="{{route('especifico.show',$especifico->id)}}"><span class="glyphicon glyphicon-th-large"></span></a>
+	        <a class="btn btn-default btn-sm" href="{{route('especifico.edit',$especifico->id)}}"><span class="glyphicon glyphicon-pencil"></span></a>
 	    </td>         
     </tr>
  @endforeach
@@ -32,6 +35,19 @@
 </table>
 </div>
 
+@endsection
+
+@section('script')
+<script type="text/javascript">
+  $(document).ready(function(){
+  
+    $('#TablaEspecifico').DataTable(
+      {         
+          "lengthChange": false,
+           "autoWidth": false  
+      });
+  }); 
+</script>
 @endsection
 
 

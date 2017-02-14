@@ -1,6 +1,7 @@
 <?php
 
 namespace sig\Models;
+use sig\Models\Articulo;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +13,14 @@ class Especifico extends Model
     protected $fillable = [
 	    'id','titulo_especifico','descripcion_epecifico',
 	];
+	
+	public function getEspecificoTitulo(){
+		$espTitulo = $this->id.", ".$this->titulo_especifico;
+		return $espTitulo;
+	}
 	//Relacion uno a muchos con articulo
+	public function articulo(){
+		return $this->hasMany('sig\Models\Articulo','id_especifico');
+	}
 	
 }
