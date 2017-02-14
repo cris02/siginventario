@@ -20,6 +20,10 @@ class UsersTableSeeder extends Seeder
 
        	//usuarios
        	DB::table('users')->insert([ 'name' => 'Administrador Del Sistema', 'email' => 'admin@gmail.com','usuario'=>'admin', 'password'=>bcrypt('123456'), 'activo'=>'true','perfil_id'=>'1']);
+
+        DB::table('users')->insert([ 'name' => 'cristian armando', 'email' => 'cristian@gmail.com','usuario'=>'cr', 'password'=>bcrypt('123456'), 'activo'=>'true','perfil_id'=>'2']);
+
+        DB::table('users')->insert([ 'name' => 'francisco alfredo', 'email' => 'francisco@gmail.com','usuario'=>'fr', 'password'=>bcrypt('123456'), 'activo'=>'true','perfil_id'=>'3']);
       
     }
 }

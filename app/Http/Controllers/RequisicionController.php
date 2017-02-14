@@ -13,13 +13,14 @@ use DB;
 
 class RequisicionController extends Controller
 {
-   
+    
   public function __construct()
    {
     if(!\Session::has('requisicion')) 
      
       \Session::put('requisicion',array());
 
+    $this->middleware('auth');
   }      
    
    //funcion para ver la requisicion que se esta creando

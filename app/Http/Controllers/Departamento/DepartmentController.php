@@ -29,7 +29,7 @@ class DepartmentController extends Controller
     public function index()
     {
         $departamento = Department::orderBy('name','asc')->get();
-       return view('Department.index',['departamento'=>$departamento]);
+        return view('Department.index',['departamento'=>$departamento]);
     }
 
     /**
@@ -51,7 +51,7 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required|regex: /^[a-zA-Z0-9áéíóúñ\s]*$/ |unique:departments,name|max:100',
+            'name' => 'max:100|required|regex: /^[a-zA-Z0-9áéíóúñ\s]*$/ |unique:departments,name',
             'descripcion'=>'required',                       
         ]);
         
@@ -137,7 +137,7 @@ class DepartmentController extends Controller
         }
         else
         {
-             $departament->delete();
+             $departamento->delete();
         flash('Departamento eliminado exitosamente','success');
         return redirect()->route('departamento.index');
         }

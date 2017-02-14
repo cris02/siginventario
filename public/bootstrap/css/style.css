@@ -41,6 +41,7 @@ body{
 
 /* mensaje para el grupo de diseño no modificar lo anterior*/
 
+
 .admin{
 	float: right;
 }
@@ -55,4 +56,7 @@ body{
 
 .encabezado>h3{	
 color: #3c8dbc;
+}
+#prueba{
+	border:2px solid red;
 }

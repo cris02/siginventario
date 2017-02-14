@@ -10,15 +10,16 @@ use sig\Models\Requisicion;
 use sig\Models\DetalleRequisicion;
 use Laracasts\Flash\Flash;
 use Auth;
+use sig\User;
 use PDF;
 
 class DetalleRequisicionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
          $articulos = Articulo::where('existencia','>','0')->get();     
@@ -34,8 +35,14 @@ class DetalleRequisicionController extends Controller
     // agregar un comentario si lo necesita.
     public function comentar($id)
     {
-        return view('Requisicion.comentario',['id'=>$id]);  
+        $requisicion  = Requisicion::FindOrFail($id);
+        return view('Requisicion.comentario',['requisicion'=>$requisicion]);  
        
+    }
+    public function observacion($id)
+    {
+        $requisicion  = Requisicion::FindOrFail($id);
+        return view('Requisicion.observacion',['requisicion'=>$requisicion]);  
     }
 
     /**
@@ -44,15 +51,29 @@ class DetalleRequisicionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //store se utilizó para almacenar el comentario sobre la requisicion de parte del depto
     public function store(Request $request)
     {
 
        $requisicion  = Requisicion::FindOrFail($request->id);
-       //return $requisicion;
-       $requisicion->update([
-                    'descripcion' => $request->comentario,
-                    ]);
-       return back();
+       
+        if(Auth::User()->perfil_id==4)
+        {
+            $requisicion->update([
+                'descripcion' => $request->comentario,
+            ]);
+            return redirect()->route('requisicion-show'); 
+        }
+        else{
+            $requisicion->update([
+                'comentario' => $request->descripcion,
+            ]);
+            flash('Observacion guardada', 'success');
+            return back();
+        }
+
+       
     }
 
     /**
@@ -171,6 +192,7 @@ class DetalleRequisicionController extends Controller
             }
             $requisicion->update([
                 'estado' => 'aprobada',
+                'fecha_entrega' =>Date::now(),            
                 ]);
         }//fin del else
          
@@ -178,14 +200,21 @@ class DetalleRequisicionController extends Controller
     }
     public function imprimir($id){
         $req  = Requisicion::FindOrFail($id);
+        $admin_financiero  = User::where('perfil_id','=',3)->first();
         $detalle = DetalleRequisicion::where('requisicion_id','=',$id)->get();
         $date = new Date($req->fecha_entrega);
-        $fecha = $date->format('l, j \d\e F \d\e Y');
-       
-        $pdf = PDF::loadView('Requisicion.imprimir',['detalle'=>$detalle,'requisicion'=>$req,'fecha'=>$fecha]);
-        return $pdf->download('archivo.pdf'); 
+        $fecha = array('fecha' => $date->format('l, j \d\e F \d\e Y'),'año'=>$date->format('Y'));
+        $usuarios = array('bodega'=>Auth::User()->name,'financiero'=>$admin_financiero->name);
 
-        return view('Requisicion.imprimir',['detalle'=>$detalle,'requisicion'=>$req]);       
+        //return view('Requisicion.imprimir',['detalle'=>$detalle,'requisicion'=>$req,'fecha'=>$fecha]); 
+        $nombre = "requisicion_".$req->id.".pdf";
+
+
+        $pdf = PDF::loadView('Requisicion.imprimir',['detalle'=>$detalle,'requisicion'=>$req,'fecha'=>$fecha,'usuarios'=>$usuarios]);
+        return $pdf->stream(); 
+        //return $pdf->download($nombre); 
+
+              
     }
 
    

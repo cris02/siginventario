@@ -211,7 +211,7 @@ return [
         'Flash'=> Laracasts\Flash\Flash::class,
         'Date' => Jenssegers\Date\Date::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-       
+              
 
     ],
 

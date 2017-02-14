@@ -12,6 +12,11 @@ use sig\Models\UnidadMedida;
 
 class UnidadMedidaController extends Controller
 {
+	 public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(){
 		$unidades = UnidadMedida::orderBy('nombre_unidadmedida','asc')->get();		
 		return view('unidadmedida.index',['unidades'=>$unidades]);

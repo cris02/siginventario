@@ -12,12 +12,12 @@ use sig\Models\GenerarCodigo;
 use sig\Models\Especifico;
 
 class ArticuloController extends Controller
-{ /*
+{ 
 	public function __construct()
     {
         $this->middleware('auth');
     }
-	*/
+	
     
     public function index(){
 		$articulos = Articulo::orderBy('nombre_articulo','asc')->get();		

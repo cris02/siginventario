@@ -17,6 +17,7 @@ use Laracasts\Flash\Flash;
 
 class UsersController extends Controller
 {
+     
    use AuthenticatesUsers;
    
    protected $loginView = 'auth.login';
@@ -28,7 +29,8 @@ class UsersController extends Controller
 
     public function authenticate(Request $request)
     {
-    	if (Auth::attempt(['usuario' => $request->input('nombre'), 'password' => $request->input('contraseña'), 'activo' => 't'])) 
+      //return $request->contraseña;
+    	if (Auth::attempt(['usuario' => $request->input('nombre'), 'password' => $request->input('contraseña'), 'activo' => 'true'])) 
     	{
             return redirect()->intended('home');
 		}
@@ -187,14 +189,19 @@ class UsersController extends Controller
    public function destroy($id)
     {
       $u=User::FindOrFail($id);
-      $departamento = Department::where('usuario_id',$u->id)->get();        
-       
-      $u->delete();
-      if($departamento){
+
+      if($u->perfil_id==4)
+      {
+        $departamento = Department::where('id',$u->departamento_id)->first(); 
+         if($departamento){
           $departamento->update([           
             'encargado' =>'No Definido',                                 
           ]);
-        }
+        }  
+      }           
+       
+      $u->delete();
+     
             flash('eliminado exitosamente','success');
             $usuarios = User::all();
             return view('auth.index')->with('usuarios',$usuarios);
