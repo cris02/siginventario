@@ -11,7 +11,7 @@ class Department extends Model
  
 
     protected $fillable=[
-    	'id' ,'name','descripcion','encargado',
+    	'id' ,'name','descripcion','encargado','enviar'
     ];
 
       //relacion con los usuarios

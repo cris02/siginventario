@@ -19,10 +19,15 @@ abstract class EsPerfil
 
     public function handle($request, Closure $next)
     {
-       if (! $this->auth->user()->is($this->getPerfil())) {
-            if ($request->ajax() || $request->wantsJson()) {
+       if ($this->auth->user()->perfil['name']!=($this->getPerfil())) 
+       {
+       
+            if ($request->ajax() || $request->wantsJson()) 
+            {
                 return response('Unauthorized.', 401);
-            } else {
+            } 
+            else 
+            {
                 return response(view('errors.501'));
             }
         }

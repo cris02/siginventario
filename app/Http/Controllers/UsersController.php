@@ -180,7 +180,7 @@ class UsersController extends Controller
         
     }//fin de update
 
-     public function show($id)
+     public function mostrar($id)
     {
         $usuario= User::FindOrFail($id);
         return view('auth.delete')->with('usuario',$usuario);

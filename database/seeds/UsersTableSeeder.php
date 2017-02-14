@@ -12,10 +12,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
     	//perfiles
-    	DB::table('roles')->insert(['name' => 'Administrador del Sistema', 'description' => 'Administrador del Sistema']);
-      DB::table('roles')->insert(['name' => 'Administrador de Bodega', 'description' => 'Administrador de Bodega']);
-      DB::table('roles')->insert(['name' => 'Administrador Financiero', 'description' => 'Administrador Financiero']);	
-      DB::table('roles')->insert(['name' => 'departamento', 'description' => 'Usuario de departamento']);
+    	DB::table('roles')->insert(['name' => 'ADMINISTRADOR SISTEMA', 'description' => 'Administrador del Sistema']);
+      DB::table('roles')->insert(['name' => 'ADMINISTRADOR BODEGA', 'description' => 'Administrador de Bodega']);
+      DB::table('roles')->insert(['name' => 'ADMINISTRADOR FINANCIERO', 'description' => 'Administrador Financiero']);	
+      DB::table('roles')->insert(['name' => 'DEPARTAMENTO', 'description' => 'Usuario de departamento']);
 
 
        	//usuarios

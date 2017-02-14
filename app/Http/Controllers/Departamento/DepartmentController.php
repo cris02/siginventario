@@ -59,6 +59,7 @@ class DepartmentController extends Controller
                    'name' =>$request->input('name'),
                    'descripcion' =>$request->input('descripcion'),
                    'encargado'=>'No Definido',
+                   'enviar'=>'true',
                             ]);
         flash('Departamento guardado exitosamente','success');     
         return redirect()->route('departamento.index');

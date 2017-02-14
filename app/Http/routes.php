@@ -14,13 +14,14 @@ Route::get('logout','UsersController@logout');
 Route::get('register','UsersController@getRegister');
 Route::post('register','UsersController@postRegister');
 Route::get('usuario/create/{id}','UsersController@create');
+Route::resource('usuario','UsersController');
 
 
 Route::group(['middleware'=>['auth','admin_sistema']],function(){
 	//ruta para los roles
 	Route::resource('roles','RolesController');
     //rutas de usuarios q solo puede acceder el admin
-	Route::resource('usuario','UsersController');
+	Route::get('user/{id}',['as'=>'usuario-eliminar','uses'=>'UsersController@mostrar']);
 	Route::get('{id}/edit','UsersController@getEdit');
 });
 
@@ -51,7 +52,6 @@ Route::get('observacion/delete/{idObservacion}','ObservacionController@delete')-
 
 
 Route::resource('existencia','ExistenciaController');
-//Route::resource('existencia/index/{buscar?}','ExistenciaController@index');
 
 Route::resource('presentacion','PresentacionController');
 
@@ -101,10 +101,7 @@ Route::get('requisicion/observacion/{id}',[
 	'uses'=>'DetalleRequisicionController@observacion'
 	]);
 
-//eliminar presentacion
-Route::get('presentacion/delete/{idPresentacion}','PresentacionController@delete')->name('delete_presentacion');
-//agregar presentacion
-Route::get('articulo/addPresentacion/{codProducto}','ArticuloController@addPresentacion')->name('addPresentacion');
+
 
 
 

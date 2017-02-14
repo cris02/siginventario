@@ -26,7 +26,8 @@ class RequisicionController extends Controller
    //funcion para ver la requisicion que se esta creando
    public function crear()
    {
-      $req = Requisicion::whereRaw('estado = ? and departamento_id = ?',array('almacenada',\Auth::User()->departamento_id))->first();
+    if(\Auth::User()->departamento['enviar']=='true'){
+        $req = Requisicion::whereRaw('estado = ? and departamento_id = ?',array('almacenada',\Auth::User()->departamento_id))->first();
   
         if($req){
             $artuculos = \Session::get('requisicion');
@@ -42,8 +43,13 @@ class RequisicionController extends Controller
           $total = $this->total();
           return view('Requisicion.crear',['articulos'=>$artuculos,'total'=>$total,'requisicion'=>$req]);
         }
-
-    
+    }
+    else{
+      flash('No es periodo de envío de Requisiciones','danger');
+      return back();
+    }
+        
+   
    }
 
    public function add($cod, $cantidad){
@@ -91,30 +97,38 @@ class RequisicionController extends Controller
 
    
     public function store()
-    {
+    {    
      
-      $requisicion = \Session::get('requisicion');     
-      $total = $this->total();
-       //obtener requisicion
-      $req = Requisicion::where(['estado'=>'almacenada','departamento_id'=>\Auth::User()->departamento_id])->first();            
-       //guardamos cada registro de articulos a pedir
-      foreach ($requisicion as $r) {
-         DetalleRequisicion::create([                
-                   'cantidad_solicitada'=>$r->cantidad,
-                   'precio'=>$r->precio_unitario,
-                   'requisicion_id'=>$req->id,
-                   'articulo_id'=>$r->codigo_articulo,
-                  ]);
+      if(\Session::has('requisicion') and !empty(\Session::get('requisicion')))
+      {
+              $requisicion = \Session::get('requisicion');
+              $total = $this->total();
+             //obtener requisicion
+            $req = Requisicion::where(['estado'=>'almacenada','departamento_id'=>\Auth::User()->departamento_id])->first();            
+             //guardamos cada registro de articulos a pedir
+            foreach ($requisicion as $r) {
+               DetalleRequisicion::create([                
+                         'cantidad_solicitada'=>$r->cantidad,
+                         'precio'=>$r->precio_unitario,
+                         'requisicion_id'=>$req->id,
+                         'articulo_id'=>$r->codigo_articulo,
+                        ]);
+            }
+            //actualizar requisicion
+            $req->update([
+                    'estado' => 'enviada',
+                    'total' => $total,
+                    'fecha_solicitud' =>Date::now(),            
+                    ]); 
+            //eliminamos la variable de sesion
+             \Session::forget('requisicion'); 
+            return redirect('home');
       }
-      //actualizar requisicion
-      $req->update([
-              'estado' => 'enviada',
-              'total' => $total,
-              'fecha_solicitud' =>Date::now(),            
-              ]); 
-      //eliminamos la variable de sesion
-       \Session::forget('requisicion'); 
-      return redirect('home');
+      else{
+        flash('No ha ingresado ningun articulo','danger');
+        return back();
+      }    
+
      
     } // fin de almacenar(store) la requisicion y sus detalles
 

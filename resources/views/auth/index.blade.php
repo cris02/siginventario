@@ -30,7 +30,7 @@
 
                               <a class="btn btn-default btn-sm" title="editar" href="{{url($u->id,'edit')}}"><span class="glyphicon glyphicon-pencil "></span></a>   
 
-                              <a class="btn btn-default btn-sm" title="eliminar" href="{{route('usuario.show',$u->id)}}"><span class="glyphicon glyphicon-trash "></span></a>
+                              <a class="btn btn-default btn-sm" title="eliminar" href="{{route('usuario-eliminar',$u->id)}}"><span class="glyphicon glyphicon-trash "></span></a>
                               </td>
                          
                       </tr>

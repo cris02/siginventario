@@ -50,5 +50,6 @@ class Kernel extends HttpKernel
         'guest' => \sig\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin_sistema'=>\sig\Http\Middleware\admin_middleware::class,
+        'admin_bodega'=>\sig\Http\Middleware\bodega_middleware::class,
     ];
 }

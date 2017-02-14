@@ -22,7 +22,4 @@ class User extends Authenticatable
     	return $this->hasOne('sig\Models\Department','id','departamento_id');		
 	}
 
-    public function is($perfil){
-        return $this->perfil===$perfil;
-    }
 }

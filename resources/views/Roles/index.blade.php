@@ -10,21 +10,15 @@
              @include('Msj.messages')                 
             
             <table class="table table-hover table-striped table-bordered table-condensed" id="TablaProveedores">       
-                <thead>                    
-                        <th >NOMBRE</th>
-                        <th >DESCRIPCION</th>              
+                <thead class="row">                    
+                        <th class="col-md-4">NOMBRE</th>
+                        <th class="col-md-8">DESCRIPCION</th>              
                 </thead>
                 <tbody>
                    @foreach ($roles as $r)
                       <tr>
                               <td>{{$r->name}}</td>
-                              <td>{{$r->description}}</td>                                
-                              <td >
-                                <a class="btn btn-default btn-sm" title="editar" href="{{route('roles.edit',$r->id)}}"><span class="glyphicon glyphicon-pencil "></span></a>   
-
-                                <a class="btn btn-default btn-sm" title="eliminar" href="{{route('roles.show',$r->id)}}" ><span class="glyphicon glyphicon-trash "></span></a>
-                              </td>
-                         
+                              <td>{{$r->description}}</td>                  
                       </tr>
                    @endforeach      
                                       

@@ -68,16 +68,16 @@
               <li class="dropdown notifications-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-bell-o"></i>
-                  <span class="label label-warning">10</span>
+                  <span class="label label-warning">{{\Session::get('num_req')}}</span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="header">Tiene 10 requisiciones pendientes</li>
+                  <li class="header">Tiene {{\Session::get('num_req')}} requisiciones pendientes</li>
                   <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li>
-                        <a href="#">
-                          <i class="fa fa-users text-aqua"></i> Ir a requisiciones
+                        <a href="{{url('requisicion/listar')}}">
+                          <i class="glyphicon glyphicon-tags"></i> Ir a requisiciones
                         </a>
                       </li>                    
                     </ul>
@@ -125,16 +125,16 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>            
             </li>
-                @if (Auth::user()->perfil_id==2)
+                @if (Auth::user()->perfil['name']=='ADMINISTRADOR BODEGA')
                   @include('layouts.menus.admin_bodega')
                 @else
-                      @if (Auth::user()->perfil_id==4)
+                      @if (Auth::user()->perfil['name']=='DEPARTAMENTO')
                         @include('layouts.menus.depto')
                       @else
-                          @if (Auth::user()->perfil_id==3)
+                          @if (Auth::user()->perfil['name']=='ADMINISTRADOR FINANCIERO')
                             @include('layouts.menus.admin_financiero')
                           @else
-                              @if (Auth::user()->perfil_id==1)
+                              @if (Auth::user()->perfil['name']=='ADMINISTRADOR SISTEMA')
                                 @include('layouts.menus.admin_sistema')                    
                               @endif                        
                           @endif
