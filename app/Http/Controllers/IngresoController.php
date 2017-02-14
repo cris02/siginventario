@@ -8,7 +8,7 @@ use sig\Http\Requests;
 use sig\Models\Ingreso;
 use sig\Models\Articulo;
 use sig\Models\Article\Provider;
-use sig\Models\Presentacion;
+
 use DB;
 use sig\Models\Existencia;
 
@@ -37,9 +37,9 @@ class IngresoController extends Controller
     {
 		
 		$proveedores = Provider::orderBy('nombre','asc')->get();
-		$presentaciones = Presentacion::orderBy('presentacion','asc')->get();
+		
 		$articulos = Articulo::orderBy('nombre_articulo','asc')->get();
-        return view('ingresos.create',['proveedores'=>$proveedores,'articulos'=>$articulos,'presentaciones'=>$presentaciones]);
+        return view('ingresos.create',['proveedores'=>$proveedores,'articulos'=>$articulos]);
     }
 
     public function store(Request $request)

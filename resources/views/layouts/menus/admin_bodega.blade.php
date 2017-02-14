@@ -7,7 +7,7 @@
         <li><a href="{{url('articulo')}}"><i class="glyphicon glyphicon-chevron-right"></i>Productos</a></li>
         <li><a href="{{url('unidad')}}"><i class="glyphicon glyphicon-chevron-right"></i>Unidad de Medida</a></li>
         <li><a href="{{url('especifico')}}"><i class="glyphicon glyphicon-chevron-right"></i>Especificos</a></li>  
-        <li><a href="{{url('presentacion')}}"><i class="glyphicon glyphicon-chevron-right"></i>Presentacion</a></li>              
+                    
       </ul>          
   </li> 
     <li class="treeview">

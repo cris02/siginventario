@@ -11,7 +11,7 @@ class GenerarCodigo
 	//que usa el formato AAespecificoNNN, donde las dos primeras son letras
 	//provenientes del nombre del articulo y NNN representa el contador para 
 	//tener ordenados los articulos de acuerdo a especificos
-	private static function maximo($articulos){
+	private tatics function maximo($articulos){
 		$max = 0;
 		$valor = 0;
 		if(count($articulos ) == 0){
