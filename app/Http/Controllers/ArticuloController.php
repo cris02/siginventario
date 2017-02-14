@@ -8,6 +8,8 @@ use Session;
 use sig\Models\Articulo;
 use sig\Models\UnidadMedida;
 use sig\Models\Presentacion;
+use sig\Models\GenerarCodigo;
+use sig\Models\Especifico;
 
 class ArticuloController extends Controller
 { /*
@@ -31,21 +33,27 @@ class ArticuloController extends Controller
 	public function create()
     {
 		$unidades = UnidadMedida::orderBy('nombre_unidadmedida','asc')->get();
-        return view('articulos.create',['unidades'=>$unidades]);
+		$especificos = Especifico::orderBy('id','asc')->get();
+        return view('articulos.create',['unidades'=>$unidades, 'especificos'=>$especificos]);
     }
 
     public function store(Request $request)
     {
         $this->validate($request,[
-		    'codigo' => 'required |regex: /^[a-zA-Z0-9αινσϊρ\s]*$/ ',
+		    
 			'unidad' => 'required | integer|min:1',
 			'especifico' => 'required |integer | digits:5|min:1| exists:especificos,id',
 
 			'nombre' => 'required |regex: /^[a-zA-Z0-9αινσϊρ\s\/]*$/ |unique:articulo,nombre_articulo'
-		]);	    
+		]);
+        
+        $articulos =Articulo::where([
+                    ['id_especifico', '=',$request->input('especifico')]               
+                    ])->get();
+        $codigo = GenerarCodigo::getCodigo($articulos,$request->input('especifico'),$request->input('nombre'));					
 											
 				    Articulo::create([
-				        'codigo_articulo' =>$request->input('codigo'),		    
+				        'codigo_articulo' =>$codigo,		    
 		                'nombre_articulo' =>$request->input('nombre'),
 				        'id_unidad_medida' =>$request->input('unidad'),
 				        'id_especifico' =>$request->input('especifico')				  				   

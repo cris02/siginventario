@@ -1,7 +1,9 @@
 @extends('layouts.template')
 
 @section('content')
-
+    <div class="encabezado">
+	    <h3>Roles</h3>
+	</div>
          
         <a href="{{route('roles.create')}}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Nuevo</a>
      

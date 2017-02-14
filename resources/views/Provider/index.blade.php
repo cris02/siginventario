@@ -1,7 +1,9 @@
 @extends('layouts.template')
 
 @section('content')
-
+<div class="encabezado">
+    <h3>Proveedores</h3>
+</div>
          
         <a href="{{route('proveedor.create')}}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Nuevo</a>
      
@@ -44,7 +46,7 @@
             </table>
 
 </div>
- @endsection
+@endsection
 @section('script')
 <script type="text/javascript">
   $(document).ready(function(){

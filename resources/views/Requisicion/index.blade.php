@@ -1,7 +1,9 @@
 @extends('layouts.template')
 
 @section('content')
-
+<div class="encabezado">
+    <h3>Requisiciones</h3>
+</div>
 <div class="panel-body table-responsive ">
 
 <table class="table table-hover table-striped table-bordered table-condensed" id="TablaRequisiciones">

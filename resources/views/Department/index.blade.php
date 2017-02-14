@@ -1,7 +1,9 @@
 @extends('layouts.template')
 
 @section('content')
-
+<div class="encabezado">
+    <h3>Departamentos</h3>
+</div>
 <a href="{{ route('departamento.create')}}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Nuevo</a>
 <div class="panel-body table-responsive ">
 <table class="table table-hover table-striped table-bordered table-condensed" id="TablaDeptos">

@@ -1,7 +1,9 @@
 @extends('layouts.template')
 
 @section('content')
-         
+    <div class="encabezado">
+	    <h3>Usuarios</h3>
+    </div>	
         <a href="{{url('register')}}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Nuevo</a>
      
 <div class="panel-body table-responsive">
