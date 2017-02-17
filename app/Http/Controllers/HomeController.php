@@ -13,16 +13,11 @@ class HomeController extends Controller
 	 public function __construct()
     {
         $this->middleware('auth');
-        if(!\Session::has('num_req')) 
-        \Session::put('num_req',array());
+       
     }
     
      public function index()
     {
-    	    	     
-       $num = Requisicion::where('estado','enviada')->get()->count();
-       \Session::put('num_req',$num);
-        return view('home');
-     
+        return view('home');     
     }
 }

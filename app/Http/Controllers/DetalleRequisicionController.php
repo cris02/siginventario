@@ -26,23 +26,12 @@ class DetalleRequisicionController extends Controller
          return view('Requisicion.agregar',['articulos'=>$articulos]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    // agregar un comentario si lo necesita.
-    public function comentar($id)
-    {
-        $requisicion  = Requisicion::FindOrFail($id);
-        return view('Requisicion.comentario',['requisicion'=>$requisicion]);  
-       
-    }
+   
+    //agregar observaciones a la requisicion
     public function observacion($id)
     {
-        $requisicion  = Requisicion::FindOrFail($id);
-        return view('Requisicion.observacion',['requisicion'=>$requisicion]);  
+       $requisicion  = Requisicion::FindOrFail($id);
+        return view('Requisicion.observaciones',['requisicion'=>$requisicion]);   
     }
 
     /**
@@ -52,7 +41,7 @@ class DetalleRequisicionController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //store se utilizó para almacenar el comentario sobre la requisicion de parte del depto
+    //store se utilizó para almacenar observaciones sobre la requisicion de parte del depto
     public function store(Request $request)
     {
 
@@ -61,13 +50,13 @@ class DetalleRequisicionController extends Controller
         if(Auth::User()->perfil_id==4)
         {
             $requisicion->update([
-                'descripcion' => $request->comentario,
+                'observacion' => $request->observaciones,
             ]);
             return redirect()->route('requisicion-show'); 
         }
         else{
             $requisicion->update([
-                'comentario' => $request->descripcion,
+                'observacion' => $request->observaciones,
             ]);
             flash('Observacion guardada', 'success');
             return back();
@@ -173,12 +162,14 @@ class DetalleRequisicionController extends Controller
     public function aprobar($id)
     {
          $detalle = DetalleRequisicion::where('requisicion_id','=',$id)->get();
-         $requisicion = Requisicion::where('id','=',$id);
+         $requisicion = Requisicion::where('id','=',$id)->first();
+  
         if(Auth::User()->perfil_id==2)
-        {
-           $requisicion->update([
-                'estado' => 'actualizada',
-                ]);            
+        {            
+            $requisicion->update([
+            'estado' => 'actualizada',
+            'bodega_id'  =>  Auth::User()->id,            
+            ]);            
         }
         else
         {
@@ -192,25 +183,33 @@ class DetalleRequisicionController extends Controller
             }
             $requisicion->update([
                 'estado' => 'aprobada',
-                'fecha_entrega' =>Date::now(),            
+                'fecha_entrega' =>Date::now(),
+                'financiero_id'  =>  Auth::User()->id,            
                 ]);
         }//fin del else
          
            return redirect()->route('requisicion-listar');
     }
     public function imprimir($id){
-        $req  = Requisicion::FindOrFail($id);
-        $admin_financiero  = User::where('perfil_id','=',3)->first();
+        $req  = Requisicion::FindOrFail($id);       
+        $admin_financiero  = User::where('id','=',$req->financiero_id)->first();
+        
+        $admin_bodega = User::where('id','=',$req->bodega_id)->first();
         $detalle = DetalleRequisicion::where('requisicion_id','=',$id)->get();
         $date = new Date($req->fecha_entrega);
         $fecha = array('fecha' => $date->format('l, j \d\e F \d\e Y'),'año'=>$date->format('Y'));
-        $usuarios = array('bodega'=>Auth::User()->name,'financiero'=>$admin_financiero->name);
+        $usuarios = array('bodega'=>$admin_bodega->name,'financiero'=>$admin_financiero->name);
 
-        //return view('Requisicion.imprimir',['detalle'=>$detalle,'requisicion'=>$req,'fecha'=>$fecha]); 
+        $total=0;
+        foreach ($detalle as $d) {
+          $total += $d->articulo['precio_unitario']*$d->cantidad_entregada;
+        }
+
+        //return view('Requisicion.imprimir',['detalle'=>$detalle,'requisicion'=>$req,'fecha'=>$fecha,'usuarios'=>$usuarios, 'total'=>$total]); 
         $nombre = "requisicion_".$req->id.".pdf";
 
 
-        $pdf = PDF::loadView('Requisicion.imprimir',['detalle'=>$detalle,'requisicion'=>$req,'fecha'=>$fecha,'usuarios'=>$usuarios]);
+        $pdf = PDF::loadView('Requisicion.imprimir',['detalle'=>$detalle,'requisicion'=>$req,'fecha'=>$fecha,'usuarios'=>$usuarios, 'total'=>$total]);
         return $pdf->stream(); 
         //return $pdf->download($nombre); 
 

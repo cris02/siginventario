@@ -95,7 +95,6 @@ Route::resource('requisicion/detalle','DetalleRequisicionController');
 Route::get('requisicion/detalle/aprobar/{id}','DetalleRequisicionController@aprobar');
 //imprimir requisicion
 Route::get('requisicion/imprimir/{id}','DetalleRequisicionController@imprimir');
-Route::get('requisicion/comentar/{id}','DetalleRequisicionController@comentar');
 Route::get('requisicion/observacion/{id}',[
 	'as'=>'requisicion-observacion',
 	'uses'=>'DetalleRequisicionController@observacion'

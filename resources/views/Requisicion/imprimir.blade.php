@@ -6,6 +6,7 @@
   <title>Requisicion</title>  
   
   {!! Html::style('bootstrap/css/bootstrap.css') !!}
+  {!! Html::style('bootstrap/css/impresion.css') !!}
   
 </head>
 <body>
@@ -70,7 +71,7 @@
     </div>
     <div class="row">
       <div class="col-xs-6">
-        <p>NOMBRE: <u>{{$requisicion->departamento['encargado']}}</u></p>
+        <p>NOMBRE: _______________________________</p>
       </div>
       <div class="col-xs-6" style="padding-left: 350px;">
         <p>FIRMA: _____________________ SELLO:</p>
@@ -89,8 +90,7 @@
               <th class="col-xs-2">VALOR UNITARIO</th>             
           </tr>
        </thead>
-      <tbody>
-       
+      <tbody>            
       @foreach ($detalle as $d) 
 
           <tr>  
@@ -105,6 +105,8 @@
       </tbody>  
       </table>
     </div>
+    
+    <p>Total : {{$total}}</p> 
 
     <p>ADMINISTRADOR DE BODEGA: {{$usuarios['bodega']}}</p>
     <p>ADMINISTRADOR FINANCIERO: {{$usuarios['financiero']}}</p>

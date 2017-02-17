@@ -10,7 +10,7 @@
            <a href="{{route('requisicion.detalle.index')}}" class="btn btn-success">AgregarArticulo <i class="glyphicon glyphicon-plus"></i></a>
            <a href="{{url('requisicion/store')}}" class="btn btn-success">Enviar Requisicion <i class="glyphicon glyphicon-new-window"></i></a>
            @if ($requisicion)
-           <a href="{{url('requisicion/comentar',$requisicion->id)}}" class="btn btn-success">Agregar Comentario</a>
+           <a href="{{route('requisicion-observacion',$requisicion->id)}}" class="btn btn-success">Observaciones</a>
            @endif
            <a href="{{route('requisicion-trash')}}" class="btn btn-default">Desechar</a>
     </div>    
