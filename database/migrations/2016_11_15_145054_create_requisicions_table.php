@@ -13,7 +13,7 @@ class CreateRequisicionsTable extends Migration
     public function up()
     {
         Schema::create('requisicions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->string('id',8);
             $table->string('estado',20);
             $table->date('fecha_solicitud')->nullable();
             $table->date('fecha_entrega')->nullable();
@@ -23,6 +23,7 @@ class CreateRequisicionsTable extends Migration
             $table->string('financiero_id')->nullable();
             $table->string('bodega_id')->nullable();          
             $table->timestamps();
+            $table->primary('id');
         });
     }
 

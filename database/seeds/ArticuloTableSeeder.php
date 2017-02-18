@@ -23,23 +23,23 @@ class ArticuloTableSeeder extends Seeder
        DB::table('unidad_medida')->insert(['nombre_unidadmedida'=>'galon']);
 
         //articulo
-       DB::table('articulo')->insert(['codigo_articulo'=>'art01','id_especifico'=>'12345','id_unidad_medida'=>'2','nombre_articulo'=>'papel bond','existencia'=>'50','precio_unitario'=>'2']);
+       DB::table('articulo')->insert(['codigo_articulo'=>'pb12345001','id_especifico'=>'12345','id_unidad_medida'=>'2','nombre_articulo'=>'papel bond','existencia'=>'50','precio_unitario'=>'2']);
 
-       DB::table('articulo')->insert(['codigo_articulo'=>'art02','id_especifico'=>'12345','id_unidad_medida'=>'4','nombre_articulo'=>'cartulina','existencia'=>'40','precio_unitario'=>'5']);
+       DB::table('articulo')->insert(['codigo_articulo'=>'ca12345002','id_especifico'=>'12345','id_unidad_medida'=>'4','nombre_articulo'=>'cartulina','existencia'=>'40','precio_unitario'=>'5']);
 
-       DB::table('articulo')->insert(['codigo_articulo'=>'art03','id_especifico'=>'12346','id_unidad_medida'=>'5','nombre_articulo'=>'desinfectante limon','existencia'=>'10','precio_unitario'=>'7']);
+       DB::table('articulo')->insert(['codigo_articulo'=>'dl12346001','id_especifico'=>'12346','id_unidad_medida'=>'5','nombre_articulo'=>'desinfectante limon','existencia'=>'10','precio_unitario'=>'7']);
 
-       DB::table('articulo')->insert(['codigo_articulo'=>'art04','id_especifico'=>'12346','id_unidad_medida'=>'1','nombre_articulo'=>'jabon liquido','existencia'=>'300','precio_unitario'=>'2.5']);
+       DB::table('articulo')->insert(['codigo_articulo'=>'jl12346002','id_especifico'=>'12346','id_unidad_medida'=>'1','nombre_articulo'=>'jabon liquido','existencia'=>'300','precio_unitario'=>'2.5']);
 
-       DB::table('articulo')->insert(['codigo_articulo'=>'7','id_especifico'=>'12346','id_unidad_medida'=>'3','nombre_articulo'=>'escoba','existencia'=>'30','precio_unitario'=>'3.0']);
+       DB::table('articulo')->insert(['codigo_articulo'=>'es12346003','id_especifico'=>'12346','id_unidad_medida'=>'3','nombre_articulo'=>'escoba','existencia'=>'30','precio_unitario'=>'3.0']);
 
-       DB::table('articulo')->insert(['codigo_articulo'=>'art05','id_especifico'=>'12346','id_unidad_medida'=>'2','nombre_articulo'=>'papel bond','existencia'=>'100','precio_unitario'=>'0.5']);
+       DB::table('articulo')->insert(['codigo_articulo'=>'pb12346003','id_especifico'=>'12345','id_unidad_medida'=>'2','nombre_articulo'=>'papel bond azul','existencia'=>'100','precio_unitario'=>'0.5']);
 
-       DB::table('articulo')->insert(['codigo_articulo'=>'art06','id_especifico'=>'12346','id_unidad_medida'=>'4','nombre_articulo'=>'tollas para trapeador','existencia'=>'50','precio_unitario'=>'1.0']);
+       DB::table('articulo')->insert(['codigo_articulo'=>'tp12346004','id_especifico'=>'12346','id_unidad_medida'=>'4','nombre_articulo'=>'tollas para trapeador','existencia'=>'50','precio_unitario'=>'1.0']);
 
-       DB::table('articulo')->insert(['codigo_articulo'=>'art08','id_especifico'=>'12346','id_unidad_medida'=>'3','nombre_articulo'=>'acetatos cg 3460 injet','existencia'=>'10','precio_unitario'=>'3.5']);
+       DB::table('articulo')->insert(['codigo_articulo'=>'ac12346005','id_especifico'=>'12346','id_unidad_medida'=>'3','nombre_articulo'=>'acetatos cg 3460 injet','existencia'=>'10','precio_unitario'=>'3.5']);
 
-       DB::table('articulo')->insert(['codigo_articulo'=>'art09','id_especifico'=>'12346','id_unidad_medida'=>'4','nombre_articulo'=>'agar base sangre','existencia'=>'20','precio_unitario'=>'2.5']);
+       DB::table('articulo')->insert(['codigo_articulo'=>'ab12346006','id_especifico'=>'12346','id_unidad_medida'=>'4','nombre_articulo'=>'agar base sangre','existencia'=>'20','precio_unitario'=>'2.5']);
 
 
     }

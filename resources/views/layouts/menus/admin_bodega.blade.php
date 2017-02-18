@@ -37,10 +37,15 @@
       <i class="fa fa-angle-left pull-right"></i>
     </a>             
   </li>
+  
   <li class="treeview">
-    <a href="{{url('requisicion/listar')}}">
+    <a href="#">
       <i class="glyphicon glyphicon-tags"></i> <span>Requisiciones</span>
       <i class="fa fa-angle-left pull-right"></i>
-    </a>             
+    </a>  
+       <ul class="treeview-menu">
+          <li><a href="{{url('requisicion/listar')}}"><i class="glyphicon glyphicon-chevron-right"></i>Requisiciones</a></li>
+          <li><a href="{{route('habilitar-envios')}}"><i class="glyphicon glyphicon-chevron-right"></i>HabilitarEnvios</a></li>    
+      </ul>          
   </li>
  

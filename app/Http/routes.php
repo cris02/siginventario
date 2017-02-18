@@ -83,10 +83,7 @@ Route::get('requisicion/trash',[
 Route::get('requisicion/update/{cod}/{cantidad}','RequisicionController@update');
 //almacenar la requisicion
 Route::get('requisicion/store','RequisicionController@store');
-Route::get('requisicion/listar',[
-	'as'=>'requisicion-listar',
-	'uses'=>'RequisicionController@index'
-	]);
+Route::get('requisicion/listar',['as'=>'requisicion-listar','uses'=>'RequisicionController@index']);
 
 // detalle requisicion
  //para todo el controlador
@@ -99,6 +96,9 @@ Route::get('requisicion/observacion/{id}',[
 	'as'=>'requisicion-observacion',
 	'uses'=>'DetalleRequisicionController@observacion'
 	]);
+//habilitar que los usuarios de departamento envien requisiciones
+Route::get('habilitarEnvios',['as'=>'habilitar-envios','uses'=>'RequisicionController@HabilitarEnvio']);
+Route::get('gestinarEnvios/{id}',['as'=>'gestionar-envios','uses'=>'RequisicionController@gestionarEnvios']);
 
 
 

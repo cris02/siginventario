@@ -7,7 +7,9 @@ use sig\Http\Requests;
 use sig\Models\Articulo;
 use sig\Models\Requisicion;
 use sig\Models\DetalleRequisicion;
+use sig\Models\Department;
 use Jenssegers\Date\Date;
+use sig\Models\CodigoRequisicion;
 use Auth;
 use DB;
 
@@ -35,9 +37,16 @@ class RequisicionController extends Controller
             return view('Requisicion.crear',['articulos'=>$artuculos,'total'=>$total,'requisicion'=>$req]);
         }
         else{
+          $date = Date::now();
+          $año = $date->format('Y');
+          $inicio = new Date($año.'-1-1');
+          $fin= new Date($año.'-12-31');
+          $requisiciones =Requisicion::whereBetween('created_at', array($inicio, $fin))->get();
+          $codigo = CodigoRequisicion::getCodigo($requisiciones, $año);
           Requisicion::create([
-                   'estado' =>'almacenada',
-                   'departamento_id' =>\Auth::User()->departamento_id,                   
+                  'id'=>$codigo,
+                  'estado' =>'almacenada',
+                  'departamento_id' =>\Auth::User()->departamento_id,                   
                   ]);
           $artuculos = \Session::get('requisicion');
           $total = $this->total();
@@ -179,5 +188,49 @@ class RequisicionController extends Controller
           return view('Requisicion.index',['requisicion'=>$requisiciones]);         
         }           
 
+    }
+    public function HabilitarEnvio(){
+       $departamentos = Department::orderBy('name','asc')->get();
+      return view('Requisicion.habilitar_envio_panel',['departamentos'=>$departamentos]);
+    }
+
+    public function gestionarEnvios($id){
+      if($id==-7){
+        $departamentos = Department::all();
+        foreach ($departamentos as $d) {
+          $d->update([
+            'enviar' => 'true',                       
+          ]);           
+        }
+      }
+      else
+      {
+        if($id==-9){
+          $departamentos = Department::all();
+            foreach ($departamentos as $d) {
+              $d->update([
+                'enviar' => 'false',                       
+              ]);           
+            }
+        }
+        else
+        {
+          $departamento = Department::where('id',$id)->first();
+          if($departamento->enviar=='true')
+          {
+            $departamento->update([
+              'enviar' => 'false',                       
+            ]);
+          }
+          else{
+             $departamento->update([
+              'enviar' => 'true',                       
+            ]);
+          }                      
+          
+        }  
+      }
+      return back();
+     
     }
 }
