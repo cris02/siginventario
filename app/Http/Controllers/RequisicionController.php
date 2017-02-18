@@ -30,7 +30,7 @@ class RequisicionController extends Controller
    {
     if(\Auth::User()->departamento['enviar']=='true'){
         $req = Requisicion::whereRaw('estado = ? and departamento_id = ?',array('almacenada',\Auth::User()->departamento_id))->first();
-  
+       
         if($req){
             $artuculos = \Session::get('requisicion');
             $total = $this->total();
@@ -42,7 +42,7 @@ class RequisicionController extends Controller
           $inicio = new Date($año.'-1-1');
           $fin= new Date($año.'-12-31');
           $requisiciones =Requisicion::whereBetween('created_at', array($inicio, $fin))->get();
-          $codigo = CodigoRequisicion::getCodigo($requisiciones, $año);
+          $codigo = CodigoRequisicion::getCodigo($requisiciones);
           Requisicion::create([
                   'id'=>$codigo,
                   'estado' =>'almacenada',
@@ -125,8 +125,7 @@ class RequisicionController extends Controller
             }
             //actualizar requisicion
             $req->update([
-                    'estado' => 'enviada',
-                    'total' => $total,
+                    'estado' => 'enviada',                    
                     'fecha_solicitud' =>Date::now(),            
                     ]); 
             //eliminamos la variable de sesion
